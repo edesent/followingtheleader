@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-fraunces);
+
+  /* ── Following the Leader brand: "Morning Light" ─────────────────────── */
+  /* A dawn-editorial palette for a devotional author. Warm cream paper,    */
+  /* deep espresso ink, a sunrise range of amber → rose, antique gold.      */
+
+  --color-paper: #ffffff;
+  --color-cream: #fbf6ec;        /* warm page background (paper) */
+  --color-cream-2: #f4ebda;      /* card / warm divider */
+  --color-cream-3: #efe3cd;      /* deeper warm wash */
+
+  --color-ink: #221d15;          /* deep espresso — headings + dark sections */
+  --color-ink-soft: #3a3327;     /* softened ink for large dark type */
+
+  --color-dawn: #e79a5f;         /* sunrise amber — glows, highlights */
+  --color-dawn-deep: #c56a38;    /* terracotta — primary buttons on light */
+  --color-rose: #dd8f7a;         /* dawn rose — warmth accent */
+  --color-gold: #b3862f;         /* antique gold — eyebrows, hairline marks */
+  --color-gold-soft: #cba24f;
+
+  --color-body: #5b5244;         /* warm taupe body text */
+  --color-muted: #8b7f6c;        /* captions / meta */
+  --color-hair: #e8dcc6;         /* hairline on cream */
+  --color-hair-2: #ded0b6;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-body);
+  background-color: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-dawn-deep);
+  color: #fff;
+}
+
+/* ── Reveal-on-scroll ─────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* ── Display type helpers ─────────────────────────────────────────────── */
+.font-display {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  letter-spacing: -0.015em;
+}
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+}
+
+/* ── Dawn atmosphere ──────────────────────────────────────────────────── */
+/* A soft sunrise glow used behind hero + dark sections. */
+.dawn-sky {
+  background:
+    radial-gradient(120% 90% at 50% 118%, rgba(231,154,95,0.55) 0%, rgba(221,143,122,0.28) 34%, rgba(251,246,236,0) 66%),
+    radial-gradient(90% 70% at 82% 8%, rgba(203,162,79,0.30) 0%, rgba(251,246,236,0) 60%);
+}
+.dawn-sky-dark {
+  background:
+    radial-gradient(120% 100% at 50% 122%, rgba(231,154,95,0.42) 0%, rgba(197,106,56,0.14) 40%, rgba(34,29,21,0) 70%),
+    radial-gradient(80% 60% at 84% -6%, rgba(203,162,79,0.22) 0%, rgba(34,29,21,0) 60%);
+}
+
+/* A thin sunrise rule/divider */
+.rule-dawn {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+/* Soft entrance for the hero */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise { opacity: 0; animation: riseIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.d1 { animation-delay: 0.1s; }
+.d2 { animation-delay: 0.25s; }
+.d3 { animation-delay: 0.4s; }
+.d4 { animation-delay: 0.55s; }
+.d5 { animation-delay: 0.7s; }
+
+/* Slow drift for the sun disc */
+@keyframes sunGlow {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+.sun-glow { animation: sunGlow 7s ease-in-out infinite; }
