@@ -51,20 +51,26 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
       />
       {/* ── Hero ─────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-cream">
-        <div className="dawn-sky pointer-events-none absolute inset-0" aria-hidden />
-        {/* rising sun */}
+      <section className="relative overflow-hidden bg-paper">
+        {/* rising sun — low, below the content so it never sits behind the logo */}
         <div
-          className="sun-glow pointer-events-none absolute left-1/2 bottom-0 h-[36rem] w-[36rem] -translate-x-1/2 translate-y-1/2 rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(231,154,95,0.55) 0%, rgba(221,143,122,0.22) 42%, rgba(231,154,95,0) 68%)" }}
+          className="sun-glow pointer-events-none absolute left-1/2 bottom-0 h-[34rem] w-[44rem] -translate-x-1/2 translate-y-[65%] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(230,196,111,0.34) 0%, rgba(90,140,190,0.14) 44%, rgba(255,255,255,0) 70%)" }}
           aria-hidden
         />
-        <div className="relative mx-auto max-w-4xl px-5 pt-24 pb-24 text-center sm:px-8 sm:pt-32 sm:pb-32">
-          <p className="eyebrow rise d1 text-dawn-deep">{HERO.eyebrow}</p>
-          <h1 className="rise d2 mx-auto mt-5 max-w-3xl font-display text-[2.9rem] font-semibold leading-[1.02] text-ink sm:text-6xl md:text-[4.4rem]">
+        <div className="relative mx-auto max-w-4xl px-5 pt-16 pb-24 text-center sm:px-8 sm:pt-20 sm:pb-32">
+          <Image
+            src="/images/logo.png"
+            alt="Following the Leader — Walking with Jesus in everyday life"
+            width={800}
+            height={380}
+            priority
+            className="rise d1 mx-auto h-auto w-full max-w-[420px] sm:max-w-[500px]"
+          />
+          <h1 className="rise d2 mx-auto mt-10 max-w-3xl font-display text-[2.9rem] font-semibold leading-[1.04] text-ink sm:text-6xl md:text-[4.2rem]">
             {HERO.title}
           </h1>
-          <p className="rise d3 mx-auto mt-6 max-w-xl text-lg leading-relaxed text-body sm:text-xl">
+          <p className="rise d3 mx-auto mt-5 max-w-xl text-lg leading-relaxed text-body sm:text-xl">
             {HERO.subtitle}
           </p>
           <div className="rise d4 mt-9 flex flex-wrap justify-center gap-3">
@@ -286,7 +292,14 @@ export default function Home() {
           <Reveal>
             <div className="relative overflow-hidden rounded-[2rem] border border-hair bg-paper px-8 py-14 text-center sm:px-16">
               <div className="dawn-sky pointer-events-none absolute inset-0 opacity-70" aria-hidden />
-              <h2 className="relative font-display text-3xl font-semibold text-ink sm:text-4xl">
+              <Image
+                src="/images/pastor-joe.jpg"
+                alt="Dr. Joe Pettigrew"
+                width={600}
+                height={800}
+                className="relative mx-auto h-28 w-28 rounded-full object-cover object-top shadow-lg shadow-ink/20 ring-4 ring-paper"
+              />
+              <h2 className="relative mt-6 font-display text-3xl font-semibold text-ink sm:text-4xl">
                 {BIO.name}
               </h2>
               <p className="relative mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-body">

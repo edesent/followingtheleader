@@ -6,7 +6,7 @@
 
 export const SITE = {
   name: "Following the Leader",
-  tagline: "Walking with Jesus, one morning at a time",
+  tagline: "Walking with Jesus in everyday life",
   shortName: "Following the Leader",
   url: "https://followingtheleader.elijahdesent.com",
   description:
@@ -22,9 +22,9 @@ export const SITE = {
     state: "TN",
     zip: "38012",
   },
-  // Brand ("Morning Light")
-  backgroundColor: "#fbf6ec",
-  themeColor: "#c56a38",
+  // Brand (matches the logo — navy + gold dawn)
+  backgroundColor: "#f6f8fb",
+  themeColor: "#1e3a5c",
 };
 
 export type NavLink = { label: string; href: string; external?: boolean };

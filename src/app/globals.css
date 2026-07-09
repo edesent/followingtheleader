@@ -2,30 +2,30 @@
 
 @theme inline {
   --font-sans: var(--font-inter);
-  --font-serif: var(--font-fraunces);
+  --font-serif: var(--font-cormorant);
 
-  /* ── Following the Leader brand: "Morning Light" ─────────────────────── */
-  /* A dawn-editorial palette for a devotional author. Warm cream paper,    */
-  /* deep espresso ink, a sunrise range of amber → rose, antique gold.      */
+  /* ── Following the Leader brand: matches the logo ────────────────────── */
+  /* Deep navy wordmark, blue hills + water, a warm gold dawn-glow behind   */
+  /* the cross. Airy near-white canvas.                                     */
 
   --color-paper: #ffffff;
-  --color-cream: #fbf6ec;        /* warm page background (paper) */
-  --color-cream-2: #f4ebda;      /* card / warm divider */
-  --color-cream-3: #efe3cd;      /* deeper warm wash */
+  --color-cream: #f6f8fb;        /* airy canvas background */
+  --color-cream-2: #e9f0f8;      /* pale blue wash — cards / bands / tags */
+  --color-cream-3: #dbe7f3;      /* deeper blue wash */
 
-  --color-ink: #221d15;          /* deep espresso — headings + dark sections */
-  --color-ink-soft: #3a3327;     /* softened ink for large dark type */
+  --color-ink: #1e3a5c;          /* deep navy — headings + dark sections (from wordmark) */
+  --color-ink-soft: #2c496e;
 
-  --color-dawn: #e79a5f;         /* sunrise amber — glows, highlights */
-  --color-dawn-deep: #c56a38;    /* terracotta — primary buttons on light */
-  --color-rose: #dd8f7a;         /* dawn rose — warmth accent */
-  --color-gold: #b3862f;         /* antique gold — eyebrows, hairline marks */
-  --color-gold-soft: #cba24f;
+  --color-dawn: #e6c46f;         /* warm gold dawn-glow (the cross light) */
+  --color-dawn-deep: #2f5f92;    /* royal blue — primary buttons on light */
+  --color-rose: #6f97c0;         /* soft mid-blue accent */
+  --color-gold: #b78d33;         /* antique gold — eyebrows, hairline marks */
+  --color-gold-soft: #d0aa55;
 
-  --color-body: #5b5244;         /* warm taupe body text */
-  --color-muted: #8b7f6c;        /* captions / meta */
-  --color-hair: #e8dcc6;         /* hairline on cream */
-  --color-hair-2: #ded0b6;
+  --color-body: #46566c;         /* navy-slate body text */
+  --color-muted: #7b8aa1;        /* captions / meta */
+  --color-hair: #e2e9f2;         /* hairline on canvas */
+  --color-hair-2: #d0dced;
 }
 
 html {
@@ -42,7 +42,7 @@ body {
 }
 
 ::selection {
-  background: var(--color-dawn-deep);
+  background: var(--color-ink);
   color: #fff;
 }
 
@@ -70,8 +70,7 @@ body {
 /* ── Display type helpers ─────────────────────────────────────────────── */
 .font-display {
   font-family: var(--font-serif);
-  font-optical-sizing: auto;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.005em;
 }
 .eyebrow {
   font-family: var(--font-sans);
@@ -82,19 +81,20 @@ body {
 }
 
 /* ── Dawn atmosphere ──────────────────────────────────────────────────── */
-/* A soft sunrise glow used behind hero + dark sections. */
+/* A blue-and-gold sunrise glow (echoing the logo) behind hero + dark      */
+/* sections.                                                                */
 .dawn-sky {
   background:
-    radial-gradient(120% 90% at 50% 118%, rgba(231,154,95,0.55) 0%, rgba(221,143,122,0.28) 34%, rgba(251,246,236,0) 66%),
-    radial-gradient(90% 70% at 82% 8%, rgba(203,162,79,0.30) 0%, rgba(251,246,236,0) 60%);
+    radial-gradient(120% 90% at 50% 118%, rgba(230,196,111,0.40) 0%, rgba(90,140,190,0.22) 32%, rgba(246,248,251,0) 64%),
+    radial-gradient(90% 70% at 82% 6%, rgba(90,140,190,0.16) 0%, rgba(246,248,251,0) 60%);
 }
 .dawn-sky-dark {
   background:
-    radial-gradient(120% 100% at 50% 122%, rgba(231,154,95,0.42) 0%, rgba(197,106,56,0.14) 40%, rgba(34,29,21,0) 70%),
-    radial-gradient(80% 60% at 84% -6%, rgba(203,162,79,0.22) 0%, rgba(34,29,21,0) 60%);
+    radial-gradient(120% 100% at 50% 122%, rgba(230,196,111,0.30) 0%, rgba(120,165,210,0.14) 42%, rgba(30,58,92,0) 72%),
+    radial-gradient(80% 60% at 84% -6%, rgba(120,165,210,0.16) 0%, rgba(30,58,92,0) 60%);
 }
 
-/* A thin sunrise rule/divider */
+/* A thin gold rule/divider */
 .rule-dawn {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--color-gold), transparent);

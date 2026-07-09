@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { BIO } from "@/config/site";
@@ -40,29 +41,52 @@ export default function AboutPage() {
 
       {/* Bio */}
       <section className="bg-cream">
-        <div className="mx-auto max-w-3xl px-5 py-20 sm:px-8 sm:py-24">
-          <Reveal>
-            <p className="eyebrow text-gold">{BIO.role}</p>
-            <div className="mt-6 space-y-5">
-              {BIO.paragraphs.map((p) => (
-                <p key={p} className="text-lg leading-relaxed text-body">
-                  {p}
-                </p>
-              ))}
-            </div>
-          </Reveal>
-
-          {/* stats */}
-          <Reveal delay={120}>
-            <div className="mt-12 grid grid-cols-3 gap-6 border-t border-hair pt-10 text-center">
-              {BIO.stats.map((s) => (
-                <div key={s.label}>
-                  <p className="font-display text-3xl font-semibold text-dawn-deep sm:text-4xl">{s.value}</p>
-                  <p className="mt-1 text-sm text-muted">{s.label}</p>
+        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
+          <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-16">
+            {/* Portrait */}
+            <Reveal>
+              <div className="mx-auto max-w-sm lg:sticky lg:top-28">
+                <div className="relative">
+                  <Image
+                    src="/images/pastor-joe.jpg"
+                    alt="Dr. Joe Pettigrew"
+                    width={600}
+                    height={800}
+                    className="w-full rounded-2xl shadow-xl shadow-ink/20 ring-1 ring-hair"
+                  />
+                  <div className="absolute -bottom-3 left-1/2 h-px w-24 -translate-x-1/2 bg-gold" aria-hidden />
                 </div>
-              ))}
-            </div>
-          </Reveal>
+                <div className="mt-6 text-center">
+                  <p className="font-display text-2xl font-semibold text-ink">{BIO.name}</p>
+                  <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-gold">
+                    {BIO.role}
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Story + stats */}
+            <Reveal delay={120}>
+              <p className="eyebrow text-gold">His Story</p>
+              <div className="mt-5 space-y-5">
+                {BIO.paragraphs.map((p) => (
+                  <p key={p} className="text-lg leading-relaxed text-body">
+                    {p}
+                  </p>
+                ))}
+              </div>
+
+              {/* stats */}
+              <div className="mt-12 grid grid-cols-3 gap-6 border-t border-hair pt-10 text-center sm:text-left">
+                {BIO.stats.map((s) => (
+                  <div key={s.label}>
+                    <p className="font-display text-3xl font-semibold text-dawn-deep sm:text-4xl">{s.value}</p>
+                    <p className="mt-1 text-sm text-muted">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 

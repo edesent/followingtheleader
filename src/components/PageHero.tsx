@@ -14,7 +14,7 @@ export default function PageHero({
       {/* sun disc low on the horizon */}
       <div
         className="pointer-events-none absolute left-1/2 top-full h-56 w-56 -translate-x-1/2 -translate-y-24 rounded-full opacity-70 blur-2xl"
-        style={{ background: "radial-gradient(circle, rgba(231,154,95,0.7) 0%, rgba(231,154,95,0) 70%)" }}
+        style={{ background: "radial-gradient(circle, rgba(230,196,111,0.6) 0%, rgba(230,196,111,0) 70%)" }}
         aria-hidden
       />
       <div className="relative mx-auto max-w-4xl px-5 py-20 text-center sm:px-8 sm:py-28">

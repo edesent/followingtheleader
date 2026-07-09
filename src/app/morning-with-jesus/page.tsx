@@ -19,7 +19,7 @@ export default function MorningWithJesusPage() {
         <div className="dawn-sky pointer-events-none absolute inset-0" aria-hidden />
         <div
           className="sun-glow pointer-events-none absolute left-1/2 bottom-0 h-[30rem] w-[30rem] -translate-x-1/2 translate-y-1/2 rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(231,154,95,0.5) 0%, rgba(231,154,95,0) 68%)" }}
+          style={{ background: "radial-gradient(circle, rgba(230,196,111,0.5) 0%, rgba(230,196,111,0) 68%)" }}
           aria-hidden
         />
         <div className="relative mx-auto max-w-4xl px-5 py-20 text-center sm:px-8 sm:py-28">
