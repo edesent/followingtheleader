@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
+import NewRelease from "@/components/NewRelease";
 import SubscribeForm from "@/components/SubscribeForm";
 import {
   HERO,
@@ -105,6 +106,15 @@ export default function Home() {
               </span>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── New release ──────────────────────────────────────────────── */}
+      <section className="bg-cream">
+        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
+          <Reveal>
+            <NewRelease />
+          </Reveal>
         </div>
       </section>
 

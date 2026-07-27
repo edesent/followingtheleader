@@ -4,6 +4,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import VideoEmbed from "@/components/VideoEmbed";
+import NewRelease from "@/components/NewRelease";
 import { BOOKS, BOOKS_INTRO_VIDEO } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -23,6 +24,13 @@ export default function BooksPage() {
 
       <section className="bg-cream">
         <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
+          {/* New release — featured at the top */}
+          <Reveal>
+            <div className="mb-16 sm:mb-20">
+              <NewRelease />
+            </div>
+          </Reveal>
+
           {/* Intro video */}
           <Reveal>
             <div className="mx-auto mb-16 max-w-3xl sm:mb-20">

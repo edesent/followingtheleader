@@ -134,6 +134,24 @@ export type Book = {
 // A short "introduction to Joe's books" video, shown on the Books page.
 export const BOOKS_INTRO_VIDEO = "efWJsx-4kxg";
 
+// ── New release ──────────────────────────────────────────────────────────────
+// Dr. Joe's newest book. Featured on the home page and atop the Books page.
+// `cta.href` is a placeholder until the book is sold directly from the site —
+// swap it for the checkout link when that's ready.
+export const NEW_RELEASE = {
+  badge: "New Release",
+  title: "Following the Leader",
+  tagline: "A Forty-Day Journey with Jesus",
+  author: "Dr. Joe Pettigrew",
+  image: "/images/follow-the-leader.jpg",
+  description: [
+    "Dr. Joe Pettigrew's newest book is a forty-day invitation to walk closely with Jesus — one day at a time. In the same warm, Scripture-rooted voice that reaches more than 60,000 readers every morning, each reading is short enough for a busy day yet meant to be carried with you long after you close the page.",
+    "Perfect for personal devotion, a small group, or a church-wide journey through the season ahead.",
+  ],
+  cta: { label: "Get your copy", href: "#" },
+  note: "Available to order directly on this site soon.",
+};
+
 export const BOOKS: Book[] = [
   {
     id: "my-daily-huddle",
