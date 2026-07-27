@@ -65,18 +65,18 @@ export default function Home() {
           fill
           priority
           sizes="100vw"
-          className="scale-110 object-cover object-center translate-y-[7%]"
+          className="object-cover object-top"
         />
         {/* white overlay — clear-ish in the center, fading to white at the edges */}
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(110% 110% at 50% 40%, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.42) 30%, rgba(255,255,255,0.88) 62%, rgba(255,255,255,1) 86%)",
+              "radial-gradient(125% 125% at 50% 34%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.32) 36%, rgba(255,255,255,0.85) 66%, rgba(255,255,255,1) 90%)",
           }}
           aria-hidden
         />
-        <div className="relative mx-auto max-w-6xl px-5 pt-24 pb-28 sm:px-8 sm:pt-36 sm:pb-40">
+        <div className="relative mx-auto max-w-6xl px-5 pt-[120px] pb-[120px] sm:px-8 sm:pt-[200px] sm:pb-[200px]">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-14">
             {/* left — brand, headline, CTAs */}
             <div className="text-center lg:text-left">
