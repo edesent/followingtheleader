@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
-import { BIO } from "@/config/site";
+import { BIO, FAQ, SITE } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "About Joe",
@@ -29,6 +29,28 @@ const HIGHLIGHTS = [
     body: "Married to his wife for fifty years, writing each morning to point readers to Christ.",
   },
 ];
+
+// Flatten one FAQ item into plain text for the FAQ structured data (SEO).
+function answerText(item: (typeof FAQ.items)[number]): string {
+  const parts = [...item.a];
+  if (item.showContact) {
+    parts.push(
+      `${SITE.address.line}, ${SITE.address.city}, ${SITE.address.state} ${SITE.address.zip}. Phone: ${SITE.phone}. Email: ${SITE.email}.`
+    );
+  }
+  item.sections?.forEach((s) => parts.push(`${s.heading}: ${s.body.join(" ")}`));
+  return parts.join(" ");
+}
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ.items.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: answerText(item) },
+  })),
+};
 
 export default function AboutPage() {
   return (
@@ -128,8 +150,97 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section id="faq" className="border-t border-hair bg-cream">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+        <div className="mx-auto max-w-3xl px-5 py-20 sm:px-8 sm:py-24">
+          <Reveal className="text-center">
+            <span className="eyebrow text-gold">{FAQ.eyebrow}</span>
+            <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-4xl">
+              {FAQ.title}
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-body">
+              Please reach Joe at{" "}
+              <a href={`mailto:${SITE.email}`} className="font-semibold text-dawn-deep hover:text-ink">
+                {SITE.email}
+              </a>{" "}
+              if you can&apos;t find the answer to your question.
+            </p>
+          </Reveal>
+
+          <div className="mt-12 space-y-4">
+            {FAQ.items.map((item, i) => (
+              <Reveal key={item.q} delay={i * 60}>
+                <details className="group rounded-2xl border border-hair bg-paper px-6 py-5 transition-shadow open:shadow-sm sm:px-7">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-semibold text-ink [&::-webkit-details-marker]:hidden">
+                    {item.q}
+                    <svg
+                      className="h-5 w-5 shrink-0 text-dawn-deep transition-transform duration-300 group-open:rotate-180"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      aria-hidden
+                    >
+                      <path d="M5 7.5 10 12.5 15 7.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </summary>
+
+                  <div className="mt-4 space-y-4 border-t border-hair pt-4">
+                    {item.a.map((p) => (
+                      <p key={p} className="leading-relaxed text-body">
+                        {p}
+                      </p>
+                    ))}
+
+                    {item.showContact && (
+                      <div className="space-y-1.5 leading-relaxed text-body">
+                        <p>
+                          {SITE.address.line} · {SITE.address.city}, {SITE.address.state}{" "}
+                          {SITE.address.zip}
+                        </p>
+                        <p>
+                          <a
+                            href={`tel:${SITE.phoneHref}`}
+                            className="font-semibold text-dawn-deep hover:text-ink"
+                          >
+                            {SITE.phone}
+                          </a>
+                        </p>
+                        <p>
+                          <a
+                            href={`mailto:${SITE.email}`}
+                            className="font-semibold text-dawn-deep hover:text-ink"
+                          >
+                            {SITE.email}
+                          </a>
+                        </p>
+                      </div>
+                    )}
+
+                    {item.sections?.map((s) => (
+                      <div key={s.heading}>
+                        <p className="font-display text-base font-semibold text-ink">{s.heading}</p>
+                        {s.body.map((b) => (
+                          <p key={b} className="mt-1.5 leading-relaxed text-body">
+                            {b}
+                          </p>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </details>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
-      <section className="bg-cream">
+      <section className="border-t border-hair bg-cream-2/50">
         <div className="mx-auto max-w-4xl px-5 py-20 text-center sm:px-8 sm:py-24">
           <Reveal>
             <h2 className="font-display text-3xl font-semibold text-ink sm:text-4xl">

@@ -291,6 +291,73 @@ export const BIO = {
   ],
 };
 
+// ── Frequently Asked Questions (shown on the About page) ──────────────────────
+//  Rendered as an accordion and also emitted as FAQ structured data for SEO.
+export type FaqItem = {
+  q: string;
+  a: string[];                                   // answer paragraphs
+  sections?: { heading: string; body: string[] }[]; // e.g. statement-of-faith blocks
+  showContact?: boolean;                         // append Joe's contact details
+};
+
+export const FAQ: { eyebrow: string; title: string; items: FaqItem[] } = {
+  eyebrow: "Frequently Asked Questions",
+  title: "Questions people often ask",
+  items: [
+    {
+      q: "What is the best way to contact Joe?",
+      a: ["Email is the best way to reach Joe. You're also welcome to write or call."],
+      showContact: true,
+    },
+    {
+      q: "What does Joe believe?",
+      a: [
+        "The mission statement of Following the Leader — the Bible-teaching ministry of Joe Pettigrew — states that he is committed to excellence in communicating the truths of Scripture and the person of Jesus Christ. And while a grace-based ministry such as this allows for freedom of interpretation and expression in many areas of Christian practice, the following essential beliefs are absolute and non-negotiable. Joe is an evangelical Christian.",
+      ],
+      sections: [
+        {
+          heading: "The Bible",
+          body: [
+            "I affirm my confidence in God's inerrant Word. I treasure its truths, and I respect its reproofs. The 66 books of the Old and New Testaments are the Word of God, inspired by the Holy Spirit, and written centuries ago by chosen men of God. The Bible is without error in its original manuscripts, is completely reliable as the final authority in all matters of doctrine and practice, and is centered on the person and work of Jesus Christ.",
+          ],
+        },
+        {
+          heading: "God the Father",
+          body: [
+            "I acknowledge the Creator-God as my heavenly Father, infinitely perfect and intimately acquainted with all our ways. As the first person of the Trinity, the Father is the source and ruler of all things and is fatherly in His relationship with creation in general and believers in particular. And although there is one eternal, all-powerful, all-knowing, holy, just, loving, true, and unchangeable God, in the unity of the one God, there are three divine persons—Father, Son, and Holy Spirit—equal in power but distinct in roles.",
+          ],
+        },
+        {
+          heading: "The Lord Jesus Christ",
+          body: [
+            "I claim Jesus Christ as our Lord—the very God who came in human flesh—the object of my worship and the subject of my praise. As the second person of the Trinity, the Son reveals the Father. According to the Father's plan, the eternal Son humbled Himself and became incarnate, inseparably uniting undiminished deity with true humanity. As fully God and fully man, Jesus Christ lived a sinless life, died to pay in full the penalty for our sin, rose bodily and miraculously from the dead, ascended into heaven, and will come again in glory.",
+          ],
+        },
+        {
+          heading: "The Holy Spirit",
+          body: [
+            "I recognize the Holy Spirit as the third member of the Godhead who is incessantly at work convicting, convincing, and comforting. As the third person of the Trinity, the Holy Spirit is the personal agent of the Father and Son for revelation and regeneration. Though pervasively present and active in creation, the Holy Spirit specially dwells among God's people and uniquely indwells individual believers, giving them new life and empowering them for lives of personal holiness.",
+          ],
+        },
+        {
+          heading: "The Family of God",
+          body: [
+            "I am grateful to be a part of the local church, which exists to proclaim God's truth, to administer the ordinances, to stimulate growth toward maturity, and to bring glory to God.",
+            "Believers are called to faithful membership in a visible, local congregation for the purpose of mutual encouragement and spiritual growth. As the family of God, a healthy local church is marked by God-glorifying worship, Scripture-centered teaching, intimate fellowship, and vivid expressions of the church's faith, hope, and love through evangelism, disciple-making, financial support, and service.",
+          ],
+        },
+      ],
+    },
+    {
+      q: "Does Joe still speak?",
+      a: [
+        "Joe does still speak, although not as much as he once did. He speaks currently in churches, at schools, and for athletic teams, and he is a frequent speaker at Mayor's Prayer Breakfasts across the country.",
+        "To check Joe's availability, send an email with your location and date to joe@joepettigrew.org.",
+      ],
+    },
+  ],
+};
+
 // ── Partner (the Founding Partner vision) ─────────────────────────────────────
 //  Adapted from the "Following the Leader" partnership portfolio — the ministry's
 //  invitation to underwrite initiatives, become a founding partner, or give.
