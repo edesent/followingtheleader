@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { PAGES, SITE, PODCAST_URL } from "@/config/site";
+import { PAGES, LEGAL, SITE, PODCAST_URL } from "@/config/site";
 
 export default function Footer() {
   const year = 2026;
@@ -72,8 +72,15 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-7 text-sm text-white/45 sm:flex-row">
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-7 text-sm text-white/45 sm:flex-row">
           <p>© {year} Following the Leader. All rights reserved.</p>
+          <nav className="flex items-center gap-5">
+            {LEGAL.map((item) => (
+              <Link key={item.href} href={item.href} className="text-white/70 transition-colors hover:text-white">
+                {item.label}
+              </Link>
+            ))}
+          </nav>
           <p>
             Site by{" "}
             <a href="https://www.elijahdesent.com" target="_blank" rel="noopener" className="text-white/70 hover:text-white">

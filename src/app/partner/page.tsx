@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
@@ -330,13 +329,6 @@ export default function PartnerPage() {
                     </a>
                   </div>
                 </div>
-
-                <p className="mt-6 text-sm text-muted">
-                  Prefer to start smaller?{" "}
-                  <Link href="/support" className="font-semibold text-dawn-deep hover:text-ink">
-                    Become a monthly supporter →
-                  </Link>
-                </p>
               </div>
             </Reveal>
           </div>

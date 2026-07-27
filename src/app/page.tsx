@@ -313,7 +313,7 @@ export default function Home() {
                   Meet Joe
                 </Link>
                 <Link
-                  href="/support"
+                  href="/partner"
                   className="rounded-full border border-ink/15 px-7 py-3.5 text-[0.98rem] font-semibold text-ink transition-colors hover:border-dawn-deep hover:text-dawn-deep"
                 >
                   Partner with the ministry

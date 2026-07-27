@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
-import { SITE, PAGES } from "@/config/site";
+import { SITE, PAGES, LEGAL } from "@/config/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
-  return PAGES.filter((n) => !n.external && !/^https?:/.test(n.href)).map((n) => ({
+  return [...PAGES, ...LEGAL].filter((n) => !n.external && !/^https?:/.test(n.href)).map((n) => ({
     url: `${SITE.url}${n.href === "/" ? "" : n.href}`,
     lastModified,
     changeFrequency: n.href === "/" ? "weekly" : "monthly",

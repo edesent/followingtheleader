@@ -37,7 +37,6 @@ export const NAV: NavItem[] = [
   { label: "Books", href: "/books" },
   { label: "Testimonials", href: "/testimonials" },
   { label: "Partner", href: "/partner" },
-  { label: "Support", href: "/support" },
 ];
 
 // Flat list of every page (used by the footer and sitemap).
@@ -48,7 +47,12 @@ export const PAGES: NavLink[] = [
   { label: "Books", href: "/books" },
   { label: "Testimonials", href: "/testimonials" },
   { label: "Partner", href: "/partner" },
-  { label: "Support", href: "/support" },
+];
+
+// Legal pages — shown in the footer + sitemap only, not in the main nav.
+export const LEGAL: NavLink[] = [
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms & Conditions", href: "/terms" },
 ];
 
 // Podcast — past devotionals, read aloud.
@@ -264,33 +268,9 @@ export const BIO = {
   ],
 };
 
-// ── Support ──────────────────────────────────────────────────────────────────
-export const SUPPORT = {
-  eyebrow: "Partner With Us",
-  title: "Keep the morning free for everyone",
-  lead:
-    "Morning With Jesus is sent to more than 60,000 people at no cost — and it always will be. Partners make that possible. What matters most is consistency, not the amount.",
-  tiers: [
-    {
-      amount: "$10",
-      cadence: "/ month",
-      body: "Helps keep the daily devotional free and landing in inboxes every morning.",
-    },
-    {
-      amount: "$25",
-      cadence: "/ month",
-      body: "Adds real stability — helping the ministry grow and reach more readers.",
-      highlight: true,
-    },
-  ],
-  note:
-    "Support is never expected or required. If giving isn't possible right now, please keep reading — your prayers and encouragement are a gift in themselves. You can also support the ministry simply by purchasing Joe's books, as a portion of each purchase helps sustain this work.",
-};
-
 // ── Partner (the Founding Partner vision) ─────────────────────────────────────
-//  Adapted from the "Following the Leader" partnership portfolio. This is the
-//  bigger vision ask (underwriting initiatives, founding partners, major gifts) —
-//  distinct from the monthly Support page above.
+//  Adapted from the "Following the Leader" partnership portfolio — the ministry's
+//  invitation to underwrite initiatives, become a founding partner, or give.
 export const PARTNER = {
   eyebrow: "Become a Founding Partner",
   title: "Join us in strengthening the Church for eternity",
