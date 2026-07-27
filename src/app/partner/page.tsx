@@ -251,8 +251,8 @@ export default function PartnerPage() {
       </section>
 
       {/* Become a Monthly Partner */}
-      <section className="bg-cream">
-        <div className="mx-auto max-w-4xl px-5 py-20 sm:px-8 sm:py-24">
+      <section className="bg-cream py-20 sm:py-24">
+        <div className="mx-auto max-w-4xl px-5 sm:px-8">
           <Reveal className="text-center">
             <h2 className="font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
               {PARTNER.monthly.title}
@@ -262,37 +262,39 @@ export default function PartnerPage() {
               {PARTNER.monthly.intro}
             </p>
           </Reveal>
+        </div>
 
-          {/* Tiers — horizontal scroll cards */}
-          <Reveal className="mt-12">
-            <div className="-mx-5 overflow-x-auto px-5 pb-4 sm:mx-0 sm:px-0">
-              <ul className="flex snap-x snap-mandatory gap-5">
-                {PARTNER.monthly.tiers.map((tier) => (
-                  <li key={tier.name} className="w-[270px] shrink-0 snap-start sm:w-[290px]">
-                    <div className="flex h-full flex-col rounded-2xl border border-hair bg-paper p-7 shadow-sm">
-                      <span className="grid h-14 w-14 place-items-center rounded-full bg-ink text-dawn">
-                        <TierIcon name={tier.icon} />
-                      </span>
-                      <h3 className="mt-5 font-display text-xl font-semibold uppercase tracking-[0.03em] text-ink">
-                        {tier.name}
-                      </h3>
-                      <p className="mt-1.5 font-display text-2xl font-semibold text-gold">
-                        {tier.price}
-                        <span className="text-sm font-normal text-muted"> {tier.cadence}</span>
-                      </p>
-                      <p className="mt-3 flex-1 text-[0.98rem] leading-relaxed text-body">{tier.body}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <p className="mt-1 text-center text-xs font-medium uppercase tracking-[0.14em] text-muted">
-              Scroll to see all levels →
-            </p>
-          </Reveal>
+        {/* Tiers — full-width horizontal scroller (pan with mouse or thumb) */}
+        <Reveal className="mt-12">
+          <div className="overflow-x-auto overscroll-x-contain pb-4">
+            <ul className="flex w-max snap-x snap-mandatory gap-5 px-5 sm:px-8 lg:px-[max(2rem,calc((100vw-56rem)/2))]">
+              {PARTNER.monthly.tiers.map((tier) => (
+                <li key={tier.name} className="w-[270px] shrink-0 snap-start sm:w-[300px]">
+                  <div className="flex h-full flex-col rounded-2xl border border-hair bg-paper p-7 shadow-sm">
+                    <span className="grid h-14 w-14 place-items-center rounded-full bg-ink text-dawn">
+                      <TierIcon name={tier.icon} />
+                    </span>
+                    <h3 className="mt-5 font-display text-xl font-semibold uppercase tracking-[0.03em] text-ink">
+                      {tier.name}
+                    </h3>
+                    <p className="mt-1.5 font-display text-2xl font-semibold text-gold">
+                      {tier.price}
+                      <span className="text-sm font-normal text-muted"> {tier.cadence}</span>
+                    </p>
+                    <p className="mt-3 flex-1 text-[0.98rem] leading-relaxed text-body">{tier.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p className="mt-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-muted">
+            Scroll or swipe to see all levels →
+          </p>
+        </Reveal>
 
+        <div className="mx-auto mt-12 max-w-4xl px-5 sm:px-8">
           {/* Stewardship commitment */}
-          <Reveal className="mt-12">
+          <Reveal>
             <div className="rounded-2xl border-2 border-dawn/30 bg-ink p-2">
               <div className="rounded-xl ring-1 ring-inset ring-dawn/40">
                 <div className="flex flex-col items-start gap-5 p-7 sm:flex-row sm:p-9">
