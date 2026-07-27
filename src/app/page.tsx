@@ -321,34 +321,36 @@ export default function Home() {
       <section className="bg-cream">
         <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
           <Reveal>
-            <div className="relative overflow-hidden rounded-[2rem] border border-hair bg-paper px-8 py-14 text-center sm:px-16">
+            <div className="relative grid items-center gap-8 overflow-hidden rounded-[2rem] border border-hair bg-paper p-8 text-center sm:grid-cols-[auto_1fr] sm:gap-12 sm:p-12 sm:text-left lg:p-16">
               <div className="dawn-sky pointer-events-none absolute inset-0 opacity-70" aria-hidden />
               <Image
                 src="/images/pastor-joe.jpg"
                 alt="Dr. Joe Pettigrew"
                 width={600}
                 height={800}
-                className="relative mx-auto h-28 w-28 rounded-full object-cover object-top shadow-lg shadow-ink/20 ring-4 ring-paper"
+                className="relative mx-auto h-auto w-48 shrink-0 rounded-2xl object-cover object-top shadow-xl shadow-ink/20 ring-1 ring-hair sm:mx-0 sm:w-56 lg:w-64"
               />
-              <h2 className="relative mt-6 font-display text-3xl font-semibold text-ink sm:text-4xl">
-                {BIO.name}
-              </h2>
-              <p className="relative mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-body">
-                {BIO.lead}
-              </p>
-              <div className="relative mt-8 flex flex-wrap justify-center gap-3">
-                <Link
-                  href="/about"
-                  className="rounded-full bg-ink px-7 py-3.5 text-[0.98rem] font-semibold text-white transition-colors hover:bg-dawn-deep"
-                >
-                  Meet Joe
-                </Link>
-                <Link
-                  href="/partner"
-                  className="rounded-full border border-ink/15 px-7 py-3.5 text-[0.98rem] font-semibold text-ink transition-colors hover:border-dawn-deep hover:text-dawn-deep"
-                >
-                  Partner with the ministry
-                </Link>
+              <div className="relative">
+                <h2 className="font-display text-3xl font-semibold text-ink sm:text-4xl">
+                  {BIO.name}
+                </h2>
+                <p className="mt-4 max-w-xl text-lg leading-relaxed text-body">
+                  {BIO.lead}
+                </p>
+                <div className="mt-8 flex flex-wrap justify-center gap-3 sm:justify-start">
+                  <Link
+                    href="/about"
+                    className="rounded-full bg-ink px-7 py-3.5 text-[0.98rem] font-semibold text-white transition-colors hover:bg-dawn-deep"
+                  >
+                    Meet Joe
+                  </Link>
+                  <Link
+                    href="/partner"
+                    className="rounded-full border border-ink/15 px-7 py-3.5 text-[0.98rem] font-semibold text-ink transition-colors hover:border-dawn-deep hover:text-dawn-deep"
+                  >
+                    Partner with the ministry
+                  </Link>
+                </div>
               </div>
             </div>
           </Reveal>
