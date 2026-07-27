@@ -541,25 +541,70 @@ export const PARTNER = {
     ],
   },
 
-  // Three ways to partner
-  ways: [
-    {
-      title: "Underwrite an initiative",
-      body: "Partner with us to fund the development of an entire ministry resource or strategic project that will strengthen the Church and reach more people.",
-      tagline: "Leave a lasting impact through a specific initiative.",
+  // Become a Monthly Partner — the giving tiers
+  monthly: {
+    title: "Become a Monthly Partner",
+    intro:
+      "Your monthly partnership provides the steady foundation that allows Following the Leader to encourage more people each day, create powerful resources for the church, and help more people faithfully follow Jesus for generations to come.",
+    tiers: [
+      {
+        icon: "cup",
+        name: "Daily Impact Partner",
+        price: "$10",
+        cadence: "/ month",
+        body: "Your gift helps provide Morning With Jesus devotionals to thousands of readers every weekday.",
+      },
+      {
+        icon: "people",
+        name: "Compassion Partner",
+        price: "$25",
+        cadence: "/ month",
+        body: "You help support daily devotionals and ministry outreach that encourage people in their walk with Jesus.",
+      },
+      {
+        icon: "book",
+        name: "Discipleship Partner",
+        price: "$50",
+        cadence: "/ month",
+        body: "Your partnership helps create Bible studies, books, and resources that equip pastors and strengthen local churches.",
+      },
+      {
+        icon: "globe",
+        name: "Kingdom Impact Partner",
+        price: "$100",
+        cadence: "/ month",
+        body: "You help expand the reach of Following the Leader into more churches, communities, and lives around the world.",
+      },
+      {
+        icon: "heart",
+        name: "Mission Advance Partner",
+        price: "$250+",
+        cadence: "/ month",
+        body: "Your leadership-level monthly giving provides vital support for new initiatives and future ministry growth.",
+      },
+    ],
+    stewardship: {
+      title: "Our Stewardship Commitment",
+      body: "We are committed to being faithful stewards of every gift entrusted to this ministry. Your monthly partnership helps us encourage believers daily, strengthen churches, and create Christ-centered resources that make a lasting impact. Every gift is received with gratitude, managed with integrity, and invested to advance God's Kingdom.",
     },
-    {
-      title: "Become a Founding Partner",
-      body: "Help establish Following the Leader through significant annual support that provides stability, expands our reach, and ensures long-term impact.",
-      tagline: "Build the foundation for a legacy that will last for generations.",
-      highlight: true,
+    giving: {
+      title: "Giving Information",
+      points: [
+        "Following the Leader is a federally recognized 501(c)(3) nonprofit ministry.",
+        "Gifts are tax-deductible as allowed by law.",
+        "Donations may be made by check, donor-advised fund, appreciated securities, or other charitable giving methods.",
+        "Receipts will be provided for all contributions.",
+      ],
     },
-    {
-      title: "Support the mission",
-      body: "Give as God leads through one-time or recurring gifts that allow us to remain flexible and faithful to the opportunities He opens.",
-      tagline: "Every gift — large or small — advances the mission.",
+    verse: {
+      text: "Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver.",
+      ref: "2 Corinthians 9:7",
     },
-  ],
+    closing: [
+      "Thank you for praying. Thank you for believing in this mission. Thank you for helping people faithfully follow Jesus every single day.",
+      "Together, we can see lives changed, churches strengthened, and the Kingdom of God advanced.",
+    ],
+  },
 
   // A personal invitation from Joe
   invitation: {
