@@ -18,17 +18,17 @@ export default function Footer() {
         aria-hidden
       />
       <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8">
-        {/* brand mark — the logo art sits on the matching royal-blue field seamlessly */}
-        <Image
-          src="/images/brand-field.jpg"
-          alt="Following the Leader — Walking with Jesus in everyday life"
-          width={960}
-          height={639}
-          className="mx-auto mb-14 h-auto w-full max-w-[360px]"
-        />
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1.1fr]">
+          {/* logo section — cropped lockup blends into the matching royal-blue field */}
           <div>
-            <p className="max-w-sm text-[0.95rem] leading-relaxed text-white/60">
+            <Image
+              src="/images/footer-logo.jpg"
+              alt="Following the Leader — Walking with Jesus in everyday life"
+              width={640}
+              height={411}
+              className="h-auto w-full max-w-[248px]"
+            />
+            <p className="mt-6 max-w-sm text-[0.95rem] leading-relaxed text-white/60">
               The ministry of Dr. Joe Pettigrew — home of <em>Morning With Jesus</em>, a daily
               devotional helping more than 60,000 readers walk with Christ in everyday life.
             </p>
