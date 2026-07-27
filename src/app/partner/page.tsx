@@ -263,36 +263,33 @@ export default function PartnerPage() {
             </p>
           </Reveal>
 
-          {/* Tiers */}
-          <ul className="mt-12">
-            {PARTNER.monthly.tiers.map((tier, i) => (
-              <Reveal
-                as="li"
-                key={tier.name}
-                delay={i * 70}
-                className="flex items-start gap-4 border-b border-gold/20 py-6 first:border-t sm:gap-5"
-              >
-                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-ink text-dawn">
-                  <TierIcon name={tier.icon} />
-                </span>
-                <div className="border-l-2 border-gold/40 pl-4 sm:pl-5">
-                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <h3 className="font-display text-xl font-semibold uppercase tracking-[0.03em] text-ink sm:text-[1.4rem]">
-                      {tier.name}
-                    </h3>
-                    <span className="hidden text-gold sm:inline" aria-hidden>
-                      |
-                    </span>
-                    <span className="font-display text-xl font-semibold text-gold">
-                      {tier.price}
-                      <span className="text-sm font-normal text-muted"> {tier.cadence}</span>
-                    </span>
-                  </div>
-                  <p className="mt-2 leading-relaxed text-body">{tier.body}</p>
-                </div>
-              </Reveal>
-            ))}
-          </ul>
+          {/* Tiers — horizontal scroll cards */}
+          <Reveal className="mt-12">
+            <div className="-mx-5 overflow-x-auto px-5 pb-4 sm:mx-0 sm:px-0">
+              <ul className="flex snap-x snap-mandatory gap-5">
+                {PARTNER.monthly.tiers.map((tier) => (
+                  <li key={tier.name} className="w-[270px] shrink-0 snap-start sm:w-[290px]">
+                    <div className="flex h-full flex-col rounded-2xl border border-hair bg-paper p-7 shadow-sm">
+                      <span className="grid h-14 w-14 place-items-center rounded-full bg-ink text-dawn">
+                        <TierIcon name={tier.icon} />
+                      </span>
+                      <h3 className="mt-5 font-display text-xl font-semibold uppercase tracking-[0.03em] text-ink">
+                        {tier.name}
+                      </h3>
+                      <p className="mt-1.5 font-display text-2xl font-semibold text-gold">
+                        {tier.price}
+                        <span className="text-sm font-normal text-muted"> {tier.cadence}</span>
+                      </p>
+                      <p className="mt-3 flex-1 text-[0.98rem] leading-relaxed text-body">{tier.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <p className="mt-1 text-center text-xs font-medium uppercase tracking-[0.14em] text-muted">
+              Scroll to see all levels →
+            </p>
+          </Reveal>
 
           {/* Stewardship commitment */}
           <Reveal className="mt-12">
