@@ -36,6 +36,7 @@ export const NAV: NavItem[] = [
   { label: "About Joe", href: "/about" },
   { label: "Books", href: "/books" },
   { label: "Testimonials", href: "/testimonials" },
+  { label: "Partner", href: "/partner" },
   { label: "Support", href: "/support" },
 ];
 
@@ -46,6 +47,7 @@ export const PAGES: NavLink[] = [
   { label: "About Joe", href: "/about" },
   { label: "Books", href: "/books" },
   { label: "Testimonials", href: "/testimonials" },
+  { label: "Partner", href: "/partner" },
   { label: "Support", href: "/support" },
 ];
 
@@ -283,4 +285,143 @@ export const SUPPORT = {
   ],
   note:
     "Support is never expected or required. If giving isn't possible right now, please keep reading — your prayers and encouragement are a gift in themselves. You can also support the ministry simply by purchasing Joe's books, as a portion of each purchase helps sustain this work.",
+};
+
+// ── Partner (the Founding Partner vision) ─────────────────────────────────────
+//  Adapted from the "Following the Leader" partnership portfolio. This is the
+//  bigger vision ask (underwriting initiatives, founding partners, major gifts) —
+//  distinct from the monthly Support page above.
+export const PARTNER = {
+  eyebrow: "Become a Founding Partner",
+  title: "Join us in strengthening the Church for eternity",
+  lead:
+    "God has given us the vision. We've seen the beginning. Now we invite you to be part of what He will do next.",
+
+  // Opening vision
+  vision: {
+    heading: "This is more than a ministry. It is a movement of discipleship.",
+    body: [
+      "Following the Leader exists to help everyday believers take their next step toward Jesus — and to strengthen the local churches that disciple them. What began as a single daily email has become a movement reaching people in all 50 states and around the world.",
+      "As a Founding Partner, you are not just making a gift — you are helping build a legacy that will last for generations.",
+    ],
+    verse: {
+      text: "For we are God's fellow workers; you are God's field, God's building.",
+      ref: "1 Corinthians 3:9",
+    },
+  },
+
+  // What God has already done
+  impact: {
+    heading: "What God has already done",
+    lead:
+      "We didn't start with a staff, a building, or a budget. We started with obedience and a surrendered heart — and God has done far more than we could have imagined.",
+    stats: [
+      { value: "60,000+", label: "Daily devotional subscribers" },
+      { value: "16,000+", label: "Pastors & church leaders encouraged" },
+      { value: "50 states", label: "& 36 countries reached" },
+      { value: "2M+", label: "Readings every year" },
+    ],
+  },
+
+  // The burden that will not let go
+  burden: {
+    heading: "The burden that will not let go",
+    lead: "The Church we love is strong in many ways — but we see what breaks Jesus' heart.",
+    items: [
+      {
+        title: "Declining engagement",
+        body: "Fewer people in the pews. Fewer volunteers. Fewer young people. Fewer new believers.",
+      },
+      {
+        title: "A weakened discipleship culture",
+        body: "Too many churches are teaching, but not equipping. Informing, but not transforming.",
+      },
+      {
+        title: "A forgotten Great Commission",
+        body: "We are called to make disciples who make disciples — not just attend church.",
+      },
+      {
+        title: "A world that is searching",
+        body: "People are hungry for hope, purpose, and truth, but many have never been invited into a real relationship with Jesus.",
+      },
+    ],
+    note:
+      "This burden is not about fixing what is broken. It is about helping the Church become everything Jesus created her to be. We cannot do it alone — we need partners who share this burden.",
+  },
+
+  // Your partnership makes the difference
+  difference: {
+    heading: "Your partnership makes the difference",
+    items: [
+      {
+        title: "You invest in eternity",
+        body: "You help provide resources that lead people to Jesus and equip the Church to make disciples who make disciples.",
+      },
+      {
+        title: "You help strengthen the Church",
+        body: "Your partnership gives pastors and leaders the tools, training, and encouragement they need to lead with confidence.",
+      },
+      {
+        title: "You multiply impact",
+        body: "Together, we can reach more people, in more places, with more resources than we ever could alone.",
+      },
+      {
+        title: "You join what God is doing",
+        body: "This is not our plan — it is His mission. He has already started it. We simply get to be part of it.",
+      },
+      {
+        title: "You leave a legacy",
+        body: "Your generosity today will help build a ministry that inspires and transforms lives for generations to come.",
+      },
+    ],
+  },
+
+  // The vision ahead
+  future: {
+    heading: "The vision ahead",
+    lead:
+      "By 2031, with a faithful community of partners who believe in this vision, here is what we are praying God will do:",
+    goals: [
+      { value: "1,000+", label: "Local churches using our resources to disciple their people" },
+      { value: "100,000+", label: "People completing the 40-day group study and growing deeper" },
+      { value: "10,000+", label: "Pastors & church leaders equipped and encouraged" },
+      { value: "Millions", label: "Reached through Morning With Jesus, books, and church partnerships" },
+      { value: "Eternity", label: "Lives changed for God's glory — for the next generation and beyond" },
+    ],
+  },
+
+  // Three ways to partner
+  ways: [
+    {
+      title: "Underwrite an initiative",
+      body: "Partner with us to fund the development of an entire ministry resource or strategic project that will strengthen the Church and reach more people.",
+      tagline: "Leave a lasting impact through a specific initiative.",
+    },
+    {
+      title: "Become a Founding Partner",
+      body: "Help establish Following the Leader through significant annual support that provides stability, expands our reach, and ensures long-term impact.",
+      tagline: "Build the foundation for a legacy that will last for generations.",
+      highlight: true,
+    },
+    {
+      title: "Support the mission",
+      body: "Give as God leads through one-time or recurring gifts that allow us to remain flexible and faithful to the opportunities He opens.",
+      tagline: "Every gift — large or small — advances the mission.",
+    },
+  ],
+
+  // A personal invitation from Joe
+  invitation: {
+    heading: "A personal invitation from Joe",
+    body: [
+      "If God has stirred your heart through this vision, I would be honored to visit with you personally. Every partnership begins with a conversation, a shared prayer, and a desire to discern where God is leading.",
+      "I'm not asking you to make a decision today. I'm asking you to pray. If, after praying, you believe God is inviting you to help establish Following the Leader for generations to come, I would be honored to continue that conversation with you.",
+    ],
+    signoff: "— Dr. Joe Pettigrew, Founder",
+    verse: {
+      text: "Where there is no vision, the people perish.",
+      ref: "Proverbs 29:18",
+    },
+    cta: "Start the conversation",
+  },
 };
