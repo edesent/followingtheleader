@@ -82,10 +82,10 @@ export default function Home() {
             {/* left — brand, headline, CTAs */}
             <div className="text-center lg:text-left">
               <p className="rise d1 eyebrow text-dawn-deep">{HERO.eyebrow}</p>
-              <h1 className="rise d2 mt-5 font-display text-4xl font-semibold leading-[1.05] text-ink sm:text-5xl lg:text-[3.5rem]">
+              <h1 className="rise d2 mt-5 font-display text-4xl font-semibold leading-[1.05] text-ink [text-shadow:0_2px_22px_rgba(255,255,255,0.6)] sm:text-5xl lg:text-[3.5rem]">
                 {HERO.title}
               </h1>
-              <p className="rise d3 mx-auto mt-5 max-w-xl text-lg leading-relaxed text-body sm:text-xl lg:mx-0">
+              <p className="rise d3 mx-auto mt-5 max-w-xl text-lg font-medium leading-relaxed text-ink/90 [text-shadow:0_1px_14px_rgba(255,255,255,0.85)] sm:text-xl lg:mx-0">
                 {HERO.subtitle}
               </p>
               <div className="rise d4 mt-9 flex flex-wrap justify-center gap-3 lg:justify-start">
