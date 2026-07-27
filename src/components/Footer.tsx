@@ -1,20 +1,34 @@
 import Link from "next/link";
+import Image from "next/image";
 import { PAGES, SITE, PODCAST_URL } from "@/config/site";
 
 export default function Footer() {
   const year = 2026;
   return (
-    <footer className="bg-ink text-white/80">
+    <footer className="relative overflow-hidden bg-ink text-white/80">
       {/* dawn glow along the top edge */}
       <div className="dawn-sky-dark h-px w-full" aria-hidden />
-      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
+      {/* warm dawn glow rising from the base, echoing the logo */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-64"
+        style={{
+          background:
+            "radial-gradient(90% 130% at 50% 140%, rgba(230,196,111,0.16) 0%, rgba(2,52,121,0) 62%)",
+        }}
+        aria-hidden
+      />
+      <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8">
+        {/* brand mark — the logo art sits on the matching royal-blue field seamlessly */}
+        <Image
+          src="/images/brand-field.jpg"
+          alt="Following the Leader — Walking with Jesus in everyday life"
+          width={960}
+          height={639}
+          className="mx-auto mb-14 h-auto w-full max-w-[360px]"
+        />
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1.1fr]">
           <div>
-            <p className="font-display text-2xl font-semibold text-white">Following the Leader</p>
-            <p className="mt-1 text-xs font-semibold uppercase tracking-[0.22em] text-dawn">
-              {SITE.tagline}
-            </p>
-            <p className="mt-5 max-w-sm text-[0.95rem] leading-relaxed text-white/60">
+            <p className="max-w-sm text-[0.95rem] leading-relaxed text-white/60">
               The ministry of Dr. Joe Pettigrew — home of <em>Morning With Jesus</em>, a daily
               devotional helping more than 60,000 readers walk with Christ in everyday life.
             </p>

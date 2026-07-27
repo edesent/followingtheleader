@@ -13,8 +13,8 @@
   --color-cream-2: #e9f0f8;      /* pale blue wash — cards / bands / tags */
   --color-cream-3: #dbe7f3;      /* deeper blue wash */
 
-  --color-ink: #1e3a5c;          /* deep navy — headings + dark sections (from wordmark) */
-  --color-ink-soft: #2c496e;
+  --color-ink: #023479;          /* royal blue — headings + dark sections (exact logo field) */
+  --color-ink-soft: #0a4791;
 
   --color-dawn: #e6c46f;         /* warm gold dawn-glow (the cross light) */
   --color-dawn-deep: #2f5f92;    /* royal blue — primary buttons on light */
@@ -90,8 +90,9 @@ body {
 }
 .dawn-sky-dark {
   background:
-    radial-gradient(120% 100% at 50% 122%, rgba(230,196,111,0.30) 0%, rgba(120,165,210,0.14) 42%, rgba(30,58,92,0) 72%),
-    radial-gradient(80% 60% at 84% -6%, rgba(120,165,210,0.16) 0%, rgba(30,58,92,0) 60%);
+    linear-gradient(180deg, rgba(255,255,255,0.045) 0%, rgba(0,0,0,0) 34%, rgba(0,0,0,0.16) 100%),
+    radial-gradient(120% 100% at 50% 122%, rgba(230,196,111,0.28) 0%, rgba(120,165,210,0.13) 42%, rgba(2,52,121,0) 72%),
+    radial-gradient(80% 60% at 84% -6%, rgba(120,165,210,0.16) 0%, rgba(2,52,121,0) 60%);
 }
 
 /* A thin gold rule/divider */
