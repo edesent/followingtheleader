@@ -54,7 +54,7 @@ export async function POST(request: Request) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "Following the Leader <onboarding@resend.dev>",
+          from: "Following the Leader <partner@elijahdesent.com>",
           to: [to],
           reply_to: email,
           subject: `New partnership inquiry: ${name}${amount ? ` (${amount}${frequency ? ` ${frequency}` : ""})` : ""}`,

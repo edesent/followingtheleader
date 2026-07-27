@@ -37,7 +37,7 @@ export async function POST(request: Request) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "Morning With Jesus <onboarding@resend.dev>",
+          from: "Morning With Jesus <no-reply@elijahdesent.com>",
           to: [to],
           subject: `New Morning With Jesus subscriber: ${name || email}`,
           text: `Name: ${name}\nEmail: ${email}\nCity/State: ${place}`,
