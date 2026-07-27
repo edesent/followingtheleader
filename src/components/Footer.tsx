@@ -81,12 +81,6 @@ export default function Footer() {
               </Link>
             ))}
           </nav>
-          <p>
-            Site by{" "}
-            <a href="https://www.elijahdesent.com" target="_blank" rel="noopener" className="text-white/70 hover:text-white">
-              Elijah Desent
-            </a>
-          </p>
         </div>
       </div>
     </footer>
