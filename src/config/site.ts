@@ -113,68 +113,86 @@ export type Book = {
   id: string;
   title: string;
   audience: string;   // short tag, e.g. "For Men"
+  subtitle: string;   // one-line description shown under the title
   blurb: string;
   image: string;
   buyUrl: string;
+  video?: string;     // YouTube video ID — Joe introduces the book (optional)
   featured?: boolean;
 };
+
+// A short "introduction to Joe's books" video, shown on the Books page.
+export const BOOKS_INTRO_VIDEO = "efWJsx-4kxg";
 
 export const BOOKS: Book[] = [
   {
     id: "my-daily-huddle",
     title: "My Daily Huddle",
     audience: "365-Day Devotional",
+    subtitle: "Start your morning off with a word from Jesus in this 365-day devotional.",
     blurb:
       "The everyday devotional at the heart of this ministry — a continuation of The Daily Huddle, read more than two million times each year. A short, Christ-centered word for every morning of the year.",
     image: "/images/book-my-daily-huddle.jpg",
     buyUrl:
       "https://www.christianbook.com/huddle-there-nothing-powerful-starting-jesus/9798303464346/pd/464346?event=AFF&p=1243999",
+    video: "9PjZHSLwFUk",
     featured: true,
   },
   {
     id: "walking-in-his-steps",
     title: "Walking In His Steps",
     audience: "40-Day Study",
+    subtitle: "A group or individual study that runs forty days.",
     blurb:
       "A forty-day journey to a stronger relationship with Jesus — perfect for individual reflection or a group and church-wide study.",
     image: "/images/book-walking-in-his-steps.jpg",
     buyUrl:
       "https://www.christianbook.com/walking-in-his-steps/9798348455736/pd/455737?event=AFF&p=1243999",
+    video: "OtMUt5gNG1w",
   },
   {
     id: "the-game-plan",
     title: "The Game Plan",
     audience: "For Men",
+    subtitle: "For men as they work to be great husbands.",
     blurb:
       "A straight-talking guide for men who want to be great husbands — practical, biblical, and built for the way men actually think.",
     image: "/images/book-the-game-plan.jpg",
     buyUrl:
       "https://www.christianbook.com/the-game-plan/9798348463601/pd/463601?event=AFF&p=1243999",
+    video: "wE8epM1iqcQ",
   },
   {
     id: "cracking-the-man-code",
     title: "Cracking the Man Code",
     audience: "For Women",
+    subtitle: "For women as they work to understand their husbands.",
     blurb:
       "A warm, honest companion for women working to understand — and love well — the man they married.",
     image: "/images/book-cracking-the-man-code.jpg",
     buyUrl:
       "https://www.christianbook.com/cracking-the-man-code/9798348501457/pd/501459?event=AFF&p=1243999",
+    video: "cNU3LGBVGuw",
   },
   {
     id: "lessons-i-hope-you-have-learned",
     title: "Lessons I Hope You Have Learned",
     audience: "For Young Adults",
+    subtitle:
+      "A great gift from parents or grandparents for young adults in high school or college.",
     blurb:
       "A great gift from parents or grandparents to young adults in high school or college — the wisdom you most want to pass on, gathered in one place.",
     image: "/images/book-lessons-i-hope.jpg",
     buyUrl:
       "https://www.christianbook.com/lessons-i-hope-you-learned/9798348457051/pd/457068?event=AFF&p=1243999",
+    video: "0omNKqYrIeU",
   },
   {
     id: "living-life-in-the-zone",
     title: "Living Life In The Zone",
     audience: "Men's Sports Study",
+    subtitle:
+      "A men's forty-day study with an emphasis on sports, featuring interviews with famous Christian athletes.",
     blurb:
       "A men's forty-day study with an emphasis on sports, featuring interviews with some of the world's most famous Christian athletes. Co-authored with Kyle Rote, Jr.",
     image: "/images/book-living-life-in-the-zone.jpg",
@@ -182,6 +200,11 @@ export const BOOKS: Book[] = [
       "https://www.christianbook.com/living-life-zone-spiritual-game-plan/kyle-rote/9780849946523/pd/946520?event=AFF&p=1243999",
   },
 ];
+
+// Look up one book by its id (used by the per-book pages).
+export function getBook(id: string): Book | undefined {
+  return BOOKS.find((b) => b.id === id);
+}
 
 // ── Testimonials ─────────────────────────────────────────────────────────────
 export type Testimonial = {
