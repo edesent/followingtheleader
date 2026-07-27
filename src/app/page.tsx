@@ -61,46 +61,53 @@ export default function Home() {
           style={{ background: "radial-gradient(circle, rgba(230,196,111,0.34) 0%, rgba(90,140,190,0.14) 44%, rgba(255,255,255,0) 70%)" }}
           aria-hidden
         />
-        <div className="relative mx-auto max-w-4xl px-5 pt-16 pb-24 text-center sm:px-8 sm:pt-20 sm:pb-32">
-          <Image
-            src="/images/logo.png"
-            alt="Following the Leader — Walking with Jesus in everyday life"
-            width={800}
-            height={380}
-            priority
-            className="rise d1 mx-auto h-auto w-full max-w-[420px] sm:max-w-[500px]"
-          />
-          <h1 className="rise d2 mx-auto mt-10 max-w-3xl font-display text-[2.9rem] font-semibold leading-[1.04] text-ink sm:text-6xl md:text-[4.2rem]">
-            {HERO.title}
-          </h1>
-          <p className="rise d3 mx-auto mt-5 max-w-xl text-lg leading-relaxed text-body sm:text-xl">
-            {HERO.subtitle}
-          </p>
-          <div className="rise d4 mt-9 flex flex-wrap justify-center gap-3">
-            <Link
-              href="#subscribe"
-              className="rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/25 transition-all hover:bg-ink hover:shadow-xl"
-            >
-              {HERO.primaryCta.label}
-            </Link>
-            <Link
-              href={HERO.secondaryCta.href}
-              className="rounded-full border border-ink/15 bg-paper/60 px-8 py-3.5 text-[0.98rem] font-semibold text-ink backdrop-blur-sm transition-colors hover:border-dawn-deep hover:text-dawn-deep"
-            >
-              {HERO.secondaryCta.label}
-            </Link>
-          </div>
+        <div className="relative mx-auto max-w-6xl px-5 pt-16 pb-24 sm:px-8 sm:pt-20 sm:pb-28">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-14">
+            {/* left — brand, headline, CTAs */}
+            <div className="text-center lg:text-left">
+              <Image
+                src="/images/logo.png"
+                alt="Following the Leader — Walking with Jesus in everyday life"
+                width={800}
+                height={380}
+                priority
+                className="rise d1 mx-auto h-auto w-full max-w-[360px] sm:max-w-[420px] lg:mx-0"
+              />
+              <h1 className="rise d2 mt-8 font-display text-4xl font-semibold leading-[1.05] text-ink sm:text-5xl lg:text-[3.5rem]">
+                {HERO.title}
+              </h1>
+              <p className="rise d3 mx-auto mt-5 max-w-xl text-lg leading-relaxed text-body sm:text-xl lg:mx-0">
+                {HERO.subtitle}
+              </p>
+              <div className="rise d4 mt-9 flex flex-wrap justify-center gap-3 lg:justify-start">
+                <Link
+                  href="#subscribe"
+                  className="rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/25 transition-all hover:bg-ink hover:shadow-xl"
+                >
+                  {HERO.primaryCta.label}
+                </Link>
+                <Link
+                  href={HERO.secondaryCta.href}
+                  className="rounded-full border border-ink/15 bg-paper/60 px-8 py-3.5 text-[0.98rem] font-semibold text-ink backdrop-blur-sm transition-colors hover:border-dawn-deep hover:text-dawn-deep"
+                >
+                  {HERO.secondaryCta.label}
+                </Link>
+              </div>
+            </div>
 
-          {/* intro video + link to the new book */}
-          <div className="rise d5 mx-auto mt-14 max-w-3xl">
-            <HeroVideo src={HERO_VIDEO.url} poster={HERO_VIDEO.poster} label={HERO_VIDEO.label} />
-            <Link
-              href={HERO_VIDEO.linkHref}
-              className="mt-5 inline-flex items-center gap-2 text-[0.98rem] font-semibold text-dawn-deep transition-colors hover:text-ink"
-            >
-              {HERO_VIDEO.linkLabel}
-              <span aria-hidden>→</span>
-            </Link>
+            {/* right — intro video + link to the new book */}
+            <div className="rise d5 mx-auto w-full max-w-xl lg:mx-0">
+              <HeroVideo src={HERO_VIDEO.url} poster={HERO_VIDEO.poster} label={HERO_VIDEO.label} />
+              <div className="mt-5 text-center lg:text-left">
+                <Link
+                  href={HERO_VIDEO.linkHref}
+                  className="inline-flex items-center gap-2 text-[0.98rem] font-semibold text-dawn-deep transition-colors hover:text-ink"
+                >
+                  {HERO_VIDEO.linkLabel}
+                  <span aria-hidden>→</span>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
         {/* horizon line */}
@@ -314,34 +321,36 @@ export default function Home() {
       <section className="bg-cream">
         <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
           <Reveal>
-            <div className="relative overflow-hidden rounded-[2rem] border border-hair bg-paper px-8 py-14 text-center sm:px-16">
+            <div className="relative grid items-center gap-8 overflow-hidden rounded-[2rem] border border-hair bg-paper p-8 text-center sm:grid-cols-[auto_1fr] sm:gap-12 sm:p-12 sm:text-left lg:p-16">
               <div className="dawn-sky pointer-events-none absolute inset-0 opacity-70" aria-hidden />
               <Image
                 src="/images/pastor-joe.jpg"
                 alt="Dr. Joe Pettigrew"
                 width={600}
                 height={800}
-                className="relative mx-auto h-28 w-28 rounded-full object-cover object-top shadow-lg shadow-ink/20 ring-4 ring-paper"
+                className="relative mx-auto h-auto w-48 shrink-0 rounded-2xl object-cover object-top shadow-xl shadow-ink/20 ring-1 ring-hair sm:mx-0 sm:w-56 lg:w-64"
               />
-              <h2 className="relative mt-6 font-display text-3xl font-semibold text-ink sm:text-4xl">
-                {BIO.name}
-              </h2>
-              <p className="relative mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-body">
-                {BIO.lead}
-              </p>
-              <div className="relative mt-8 flex flex-wrap justify-center gap-3">
-                <Link
-                  href="/about"
-                  className="rounded-full bg-ink px-7 py-3.5 text-[0.98rem] font-semibold text-white transition-colors hover:bg-dawn-deep"
-                >
-                  Meet Joe
-                </Link>
-                <Link
-                  href="/partner"
-                  className="rounded-full border border-ink/15 px-7 py-3.5 text-[0.98rem] font-semibold text-ink transition-colors hover:border-dawn-deep hover:text-dawn-deep"
-                >
-                  Partner with the ministry
-                </Link>
+              <div className="relative">
+                <h2 className="font-display text-3xl font-semibold text-ink sm:text-4xl">
+                  {BIO.name}
+                </h2>
+                <p className="mt-4 max-w-xl text-lg leading-relaxed text-body">
+                  {BIO.lead}
+                </p>
+                <div className="mt-8 flex flex-wrap justify-center gap-3 sm:justify-start">
+                  <Link
+                    href="/about"
+                    className="rounded-full bg-ink px-7 py-3.5 text-[0.98rem] font-semibold text-white transition-colors hover:bg-dawn-deep"
+                  >
+                    Meet Joe
+                  </Link>
+                  <Link
+                    href="/partner"
+                    className="rounded-full border border-ink/15 px-7 py-3.5 text-[0.98rem] font-semibold text-ink transition-colors hover:border-dawn-deep hover:text-dawn-deep"
+                  >
+                    Partner with the ministry
+                  </Link>
+                </div>
               </div>
             </div>
           </Reveal>
