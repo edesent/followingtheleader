@@ -68,6 +68,15 @@ export const HERO = {
   secondaryCta: { label: "Meet Joe", href: "/about" },
 };
 
+// Hero intro video (hosted on Vercel Blob). Click-to-play with a poster image.
+export const HERO_VIDEO = {
+  url: "https://w9ttoctwfq1uxt2q.public.blob.vercel-storage.com/follow-the-leader-intro.mp4",
+  poster: "/images/intro-video-poster.jpg",
+  label: "Watch the introduction",
+  linkLabel: "Read about the new book",
+  linkHref: "/#new-book",
+};
+
 // A short "message from Joe" on the home page.
 export const HOME_INTRO = {
   eyebrow: "A Message From Joe",

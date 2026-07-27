@@ -2,9 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import NewRelease from "@/components/NewRelease";
+import HeroVideo from "@/components/HeroVideo";
 import SubscribeForm from "@/components/SubscribeForm";
 import {
   HERO,
+  HERO_VIDEO,
   HOME_INTRO,
   STATS,
   DEVOTIONAL,
@@ -88,6 +90,18 @@ export default function Home() {
               {HERO.secondaryCta.label}
             </Link>
           </div>
+
+          {/* intro video + link to the new book */}
+          <div className="rise d5 mx-auto mt-14 max-w-3xl">
+            <HeroVideo src={HERO_VIDEO.url} poster={HERO_VIDEO.poster} label={HERO_VIDEO.label} />
+            <Link
+              href={HERO_VIDEO.linkHref}
+              className="mt-5 inline-flex items-center gap-2 text-[0.98rem] font-semibold text-dawn-deep transition-colors hover:text-ink"
+            >
+              {HERO_VIDEO.linkLabel}
+              <span aria-hidden>→</span>
+            </Link>
+          </div>
         </div>
         {/* horizon line */}
         <div className="rule-dawn relative" aria-hidden />
@@ -110,7 +124,7 @@ export default function Home() {
       </section>
 
       {/* ── New release ──────────────────────────────────────────────── */}
-      <section className="bg-cream">
+      <section id="new-book" className="scroll-mt-24 bg-cream">
         <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
           <Reveal>
             <NewRelease />
