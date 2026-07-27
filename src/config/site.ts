@@ -113,15 +113,21 @@ export const DEVOTIONAL = {
 // ── Books ────────────────────────────────────────────────────────────────────
 // image is a file in /public/images. buyUrl points to Christianbook (purchases
 // there support the ministry). To add a book, copy a block and change details.
+// A block of book content: either a paragraph (a string) or a bulleted list
+// (with an optional lead-in line).
+export type BookContentBlock = string | { heading?: string; list: string[] };
+
 export type Book = {
   id: string;
   title: string;
   audience: string;   // short tag, e.g. "For Men"
   subtitle: string;   // one-line description shown under the title
-  blurb: string;
+  blurb: string;      // short summary (used on the books index + previews)
   image: string;
   buyUrl: string;
   video?: string;     // YouTube video ID — Joe introduces the book (optional)
+  contentEyebrow: string;     // small label above the full description
+  content: BookContentBlock[]; // the full description shown on the book's page
   featured?: boolean;
 };
 
@@ -141,6 +147,14 @@ export const BOOKS: Book[] = [
       "https://www.christianbook.com/huddle-there-nothing-powerful-starting-jesus/9798303464346/pd/464346?event=AFF&p=1243999",
     video: "9PjZHSLwFUk",
     featured: true,
+    contentEyebrow: "An Independent Daily Devotional",
+    content: [
+      "Life is filled with twists and turns — days that are smooth sailing and others where the waves seem insurmountable. For Christians navigating the complexities of life, a 365-day devotional is far more than just a piece of Christian literature; it's a daily companion, a lifeline, and a gentle nudge to keep your heart and mind centered on what truly matters.",
+      "Devotionals create space in your day for quiet reflection — a sacred pause in the rhythm of life. With each passing day, they invite you to consider the deeper truths of your faith. A 365-day devotional allows you to develop a habit of turning to God consistently, even when life feels hectic. Imagine starting each day grounded in peace, equipped with encouragement, and reminded of the grace that carries you forward. Consistency builds connection.",
+      "Much like building a friendship, your relationship with God grows deeper when nurtured daily. This book is a continuation of The Daily Huddle — which is currently sent out each morning and read more than two million times each year. Several churches use it as a devotional where all members read the same thing each day. Imagine: every morning you know you are reading the same words as your friends or church members. It is also popular for families, especially when they live far apart — a way to keep them together.",
+      "While we eagerly pour into family, friends, and work, how often do we pour into our own hearts? A devotional serves as a gentle, daily reminder to tend to the garden of your faith. Whether you've just started your faith journey or have walked with God for decades, carving out a daily moment with Him can transform your perspective, priorities, and peace of mind.",
+      "The style you'll find in My Daily Huddle has been tested. For seven years, Joe has sent The Daily Huddle out to thousands, and over those years more than eight million people have read one of these devotionals. If you're looking for something relevant, tested, and most of all biblical, My Daily Huddle is for you.",
+    ],
   },
   {
     id: "walking-in-his-steps",
@@ -153,6 +167,13 @@ export const BOOKS: Book[] = [
     buyUrl:
       "https://www.christianbook.com/walking-in-his-steps/9798348455736/pd/455737?event=AFF&p=1243999",
     video: "OtMUt5gNG1w",
+    contentEyebrow: "Small Group or Church-Wide Study",
+    content: [
+      "Welcome to this 40-day study — a sacred opportunity to grow closer to Jesus and deepen your relationship with Him. Whether you feel lost, overwhelmed, or simply yearning for something more, this guide invites you to take meaningful steps toward spiritual growth, one day at a time.",
+      "Growing in faith is not about grand gestures; it's about consistency, surrender, and an open heart. It's about looking beyond the busyness of life and setting aside daily moments to connect with Jesus. Each day you'll find reflections, challenges, and encouragement to help you grow. Like a seed planted in fertile soil, your faith will deepen as you nurture it through prayer, gratitude, and quiet reflection. Throughout the 40 days, you'll uncover new dimensions of Jesus' character and see how His teachings can transform every corner of your life.",
+      "Whether you're reading at sunrise with a cup of coffee or winding down before bed, commit this time to Jesus. The most important thing is to start — not with hesitation, but with trust that He is ready to meet you right where you are. Remember, this 40-day journey isn't something you walk alone; you are part of a group. No matter where you find yourself in your faith, Jesus walks alongside you.",
+      "You may have participated in a church-wide study before; if you haven't, you are in for something special. It's designed for a church to split into small groups of around twelve members who gather each week to discuss their progress, and at the end of the 40 days all groups meet together for a closing session. Your walk in the steps of Jesus is waiting.",
+    ],
   },
   {
     id: "the-game-plan",
@@ -165,6 +186,13 @@ export const BOOKS: Book[] = [
     buyUrl:
       "https://www.christianbook.com/the-game-plan/9798348463601/pd/463601?event=AFF&p=1243999",
     video: "wE8epM1iqcQ",
+    contentEyebrow: "For Men",
+    content: [
+      "The Game Plan experience was created for the men of your church — to help them fight the cultural battles of our world while influencing their family and friends for Jesus Christ. Your men will relate to how our worldly culture tries to intimidate us into becoming politically correct instead of biblically obedient. The Game Plan empowers men of every generation to understand that God's Word is just as applicable today as it ever was.",
+      "Life is chaotic — it pulls us in a thousand directions, each competing for our time, energy, and attention. At work we're driven to succeed; at home we shoulder the responsibility to provide and protect. The pressure mounts, and many of us wrestle with one core question in the quiet moments: Am I the man God created me to be? You're not alone in asking that. It's a question millions of Christian men grapple with daily, and its beauty is found not just in the answer but in the process of becoming.",
+      "One of the greatest misconceptions about being a man is equating our value solely with what we provide. Society pushes us to measure success in numbers — zeros in bank accounts, errands checked off, milestones hit. While those things matter, God's calling is about so much more. He has a vision for you that's greater than the sum of your achievements, calling you to be present, intentional, and courageous in your faith — to lead not only in action but in character, with compassion, resilience, and humility.",
+      "Too often the world tells us strong men must handle everything on their own, but isolation erodes the spirit. God created us for community — one built on support, accountability, and shared faith. Being the man God wants you to be doesn't happen overnight; it's a daily choice to learn, grow, and lean into His grace. There will be mistakes, yes — but every fall is an opportunity to rise stronger, anchored more deeply in faith. This is a great book for men to read alone or, even better, in a men's group.",
+    ],
   },
   {
     id: "cracking-the-man-code",
@@ -177,6 +205,14 @@ export const BOOKS: Book[] = [
     buyUrl:
       "https://www.christianbook.com/cracking-the-man-code/9798348501457/pd/501459?event=AFF&p=1243999",
     video: "cNU3LGBVGuw",
+    contentEyebrow: "For Women",
+    content: [
+      "Understanding what men want in their marriage can be challenging for many women. The Word of God offers insight into both what women desire and what men seek. Numerous books have been published to help men understand what women want — but women are the primary purchasers and readers of those books, especially when it comes to Christian literature. This book stands out.",
+      "Marriage is a sacred union, designed by God to reflect His love and grace. Yet deciphering what your husband truly desires can be complex. For Christian women striving to cultivate a Christ-centered marriage, gaining insight into what men want goes beyond meeting cultural expectations. It's about strengthening your bond and partnership — fostering trust, respect, and mutual love within the divine framework God has established for marriage.",
+      "When considering what men want in a marriage, it's easy to rely on clichés or stereotypes. However, most men, much like women, long for something deeper — a spouse who truly sees, hears, and affirms them as both a partner and an individual. This doesn't imply that marriage is flawless or free of struggle; rather, it's an imperfectly beautiful space for growth.",
+      "Men crave a sense of partnership and place high value on respect — a principle deeply rooted in Scripture. Respect signifies acknowledgment of a man's efforts, leadership, and contributions to your shared life. It's less about achieving perfection and more about how he feels loved and supported in his unique role within your union.",
+      "Finally, men cherish intimacy — not only physical closeness but the emotional bond that develops from a personal, meaningful connection. This means learning how your husband best receives love and committing to express care in ways that resonate with his heart. It's not about grand gestures, but the consistency of everyday love.",
+    ],
   },
   {
     id: "lessons-i-hope-you-have-learned",
@@ -190,6 +226,12 @@ export const BOOKS: Book[] = [
     buyUrl:
       "https://www.christianbook.com/lessons-i-hope-you-learned/9798348457051/pd/457068?event=AFF&p=1243999",
     video: "0omNKqYrIeU",
+    contentEyebrow: "For Young Adults, From Grandparents",
+    content: [
+      "Grandparents are some of the greatest storytellers in our lives. Their stories are laced with lessons, wisdom, and love — tiny treasures gifted to their grandchildren to guide them through life. But have you ever wondered why they share these stories? It's because they want their grandchildren to learn from their experiences, to find the same joys that filled their hearts, and to avoid the mistakes that caused them pain. This book is inspired by that special gift grandparents aim to pass down — a deep wish for their legacy to grow into someone kind, wise, and strong.",
+      "If grandparents could pass along lessons to their grandchildren, those lessons wouldn't come from textbooks or lectures — they'd be shaped by life, faith, and experience. These are the principles you wish for them to carry as they grow, learn, and lead lives of meaning. Our hope for our grandchildren isn't that they live a perfect life. It's that they live a life full of faith, love, and courage, holding onto the truth that God is with them every step of the way.",
+      "Whether it's school, sports, or a creative hobby, the things you work hard at have the sweetest rewards. The next time you feel like giving up, picture your grandparents cheering you on, reminding you how good it feels to reach a goal you've worked hard for. They believe in you completely — and you can believe in yourself as well. Through all these lessons — kindness, hard work, resilience, love, and curiosity — there's one thing grandparents most want their grandchildren to remember: you are loved more than you can imagine.",
+    ],
   },
   {
     id: "living-life-in-the-zone",
@@ -202,6 +244,27 @@ export const BOOKS: Book[] = [
     image: "/images/book-living-life-in-the-zone.jpg",
     buyUrl:
       "https://www.christianbook.com/living-life-zone-spiritual-game-plan/kyle-rote/9780849946523/pd/946520?event=AFF&p=1243999",
+    contentEyebrow: "Men's Group Study or Individual Read",
+    content: [
+      "Living Life In The Zone was written during the peak of In The Zone Ministries. It was crafted specifically for the men attending one of the In The Zone events and is an excellent choice for anyone who enjoys sports. Each chapter highlights a different concept and features notable sports figures.",
+      "This is a fantastic read for men as young as high school, and it's particularly popular among fathers and grandfathers. Beyond private study, many churches have used Living Life In The Zone with their men's group over seven weeks. Many men still have a desire to grow in their faith but find that much of today's Christian literature doesn't resonate with them. Living in the zone represents a state of mind where everything seems to align — but how does a man navigate living in the zone as a Christian? This 40-day spiritual journey offers a sports-centric guide for today's busy man, aiming to relieve stress and instill confidence as he embraces his daily adventure.",
+      { heading: "Each chapter is:", list: [
+        "Designed to strengthen both churched and unchurched men",
+        "Brief enough to enjoy while still providing spiritual depth",
+        "Filled with real issues often overlooked in church discussions",
+        "Focused on a daily spiritual to-do list",
+      ] },
+      { heading: "Divided into four sections — Marriage, Children, Work, and Faith — each daily reading includes:", list: [
+        "Thought of the day",
+        "Words of wisdom on a particular subject",
+        "A biblical perspective",
+        "Insight for practical application",
+        "Questions to ponder",
+        "Today's call to action",
+        "Prayer requests",
+      ] },
+      "Real-life sports stories highlight the faith journeys of famous athletes, coaches, businessmen, and other public figures — encouraging men that they, too, can overcome adversity, walk in faith, and truly live in the zone. The book features insights from figures such as Tony Dungy, Lee Corso, Chris Mortensen, Bobby Bowden, and many others.",
+    ],
   },
 ];
 
