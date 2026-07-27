@@ -3,6 +3,7 @@ import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import NewRelease from "@/components/NewRelease";
 import HeroVideo from "@/components/HeroVideo";
+import PodcastPlayer from "@/components/PodcastPlayer";
 import SubscribeForm from "@/components/SubscribeForm";
 import {
   HERO,
@@ -12,6 +13,7 @@ import {
   DEVOTIONAL,
   BOOKS,
   TESTIMONIALS,
+  PODCAST,
   BIO,
   SITE,
 } from "@/config/site";
@@ -314,6 +316,44 @@ export default function Home() {
               Read more testimonials →
             </Link>
           </Reveal>
+        </div>
+      </section>
+
+      {/* ── Podcast ──────────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-ink">
+        <div className="dawn-sky-dark pointer-events-none absolute inset-0" aria-hidden />
+        <div className="relative mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-28">
+          <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr]">
+            <Reveal>
+              <span className="eyebrow text-dawn">{PODCAST.eyebrow}</span>
+              <h2 className="mt-4 font-display text-3xl font-semibold leading-tight text-white sm:text-[2.7rem]">
+                {PODCAST.title}
+              </h2>
+              <p className="mt-5 text-lg leading-relaxed text-white/75">{PODCAST.description}</p>
+              <a
+                href={PODCAST.cta.href}
+                target="_blank"
+                rel="noopener"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-[0.98rem] font-semibold text-ink transition-colors hover:bg-dawn"
+              >
+                {PODCAST.cta.label}
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </Reveal>
+
+            <Reveal delay={120}>
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-dawn">
+                Featured Episode
+              </p>
+              <PodcastPlayer
+                src={PODCAST.featured.audioUrl}
+                title={PODCAST.featured.title}
+                blurb={PODCAST.featured.blurb}
+              />
+            </Reveal>
+          </div>
         </div>
       </section>
 

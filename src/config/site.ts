@@ -58,6 +58,23 @@ export const LEGAL: NavLink[] = [
 // Podcast — past devotionals, read aloud.
 export const PODCAST_URL = "https://joei7.podbean.com";
 
+// ── Podcast section (home page) ──────────────────────────────────────────────
+// A featured episode plays inline; the button links to the full show on Podbean.
+// The audio file lives on Vercel Blob.
+export const PODCAST = {
+  eyebrow: "The Podcast",
+  title: "The Following the Leader Podcast",
+  description:
+    "Honest conversations about what it really means to follow Jesus — and why the church needs faithful followers more than it needs more leaders. It's the heart of this ministry, in Joe's own voice.",
+  featured: {
+    title: "Why We Need Followers, Not Leaders",
+    blurb: "The conviction that started Following the Leader.",
+    audioUrl:
+      "https://w9ttoctwfq1uxt2q.public.blob.vercel-storage.com/podcast/why-we-need-followers-not-leaders.m4a",
+  },
+  cta: { label: "Listen to more episodes", href: PODCAST_URL },
+};
+
 // ── Home / hero ────────────────────────────────────────────────────────────
 export const HERO = {
   eyebrow: "A Daily Devotional by Dr. Joe Pettigrew",
