@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
+import SignatureRule from "@/components/SignatureRule";
 import { PARTNER, SITE } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -24,9 +25,10 @@ export default function PartnerPage() {
       <section className="bg-cream">
         <div className="mx-auto max-w-4xl px-5 py-20 sm:px-8 sm:py-24">
           <Reveal>
-            <h2 className="font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
+            <h2 className="font-display text-[2.1rem] font-semibold leading-[1.12] text-ink sm:text-[2.85rem]">
               {PARTNER.vision.heading}
             </h2>
+            <SignatureRule align="left" className="mt-5" />
           </Reveal>
           <div className="mt-6 space-y-5">
             {PARTNER.vision.body.map((p, i) => (
@@ -53,10 +55,11 @@ export default function PartnerPage() {
         <div className="mx-auto max-w-5xl px-5 py-20 text-center sm:px-8 sm:py-24">
           <Reveal>
             <p className="eyebrow text-gold">He plants. He grows. He multiplies.</p>
-            <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-4xl">
+            <h2 className="mt-4 font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
               {PARTNER.impact.heading}
             </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-body">
+            <SignatureRule className="mt-6" />
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-body">
               {PARTNER.impact.lead}
             </p>
           </Reveal>
@@ -80,10 +83,11 @@ export default function PartnerPage() {
         <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-24">
           <Reveal>
             <div className="text-center">
-              <h2 className="font-display text-3xl font-semibold text-ink sm:text-4xl">
+              <h2 className="font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
                 {PARTNER.burden.heading}
               </h2>
-              <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-body">
+              <SignatureRule className="mt-6" />
+              <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-body">
                 {PARTNER.burden.lead}
               </p>
             </div>
@@ -110,9 +114,12 @@ export default function PartnerPage() {
       <section className="border-t border-hair bg-cream-2/50">
         <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-24">
           <Reveal>
-            <h2 className="text-center font-display text-3xl font-semibold text-ink sm:text-4xl">
-              {PARTNER.difference.heading}
-            </h2>
+            <div className="text-center">
+              <h2 className="font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
+                {PARTNER.difference.heading}
+              </h2>
+              <SignatureRule className="mt-6" />
+            </div>
           </Reveal>
           <div className="mt-12 space-y-4">
             {PARTNER.difference.items.map((item, i) => (
@@ -137,14 +144,26 @@ export default function PartnerPage() {
 
       {/* The vision ahead */}
       <section className="relative overflow-hidden bg-ink">
-        <div className="dawn-sky-dark pointer-events-none absolute inset-0" aria-hidden />
+        <Image
+          src="/images/ftl-path-sunrise.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-ink/88 via-ink/78 to-ink/93"
+          aria-hidden
+        />
         <div className="relative mx-auto max-w-5xl px-5 py-20 text-center sm:px-8 sm:py-24">
           <Reveal>
             <p className="eyebrow text-dawn">The best is yet to come</p>
-            <h2 className="mt-4 font-display text-3xl font-semibold text-white sm:text-4xl">
+            <h2 className="mt-4 font-display text-[2.1rem] font-semibold text-white sm:text-[2.85rem]">
               {PARTNER.future.heading}
             </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/75">
+            <SignatureRule className="mt-6" />
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/75">
               {PARTNER.future.lead}
             </p>
           </Reveal>
@@ -167,9 +186,10 @@ export default function PartnerPage() {
           <Reveal>
             <div className="text-center">
               <p className="eyebrow text-gold">Three ways to partner in this vision</p>
-              <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-4xl">
+              <h2 className="mt-4 font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
                 Ways you can shape the future
               </h2>
+              <SignatureRule className="mt-6" />
             </div>
           </Reveal>
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
@@ -196,6 +216,41 @@ export default function PartnerPage() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Open door — a call to walk through it */}
+      <section className="relative overflow-hidden">
+        <Image
+          src="/images/ftl-open-door.jpg"
+          alt="An open wooden door looking out over a sunrise valley with a distant cross"
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-ink/88 via-ink/78 to-ink/90"
+          aria-hidden
+        />
+        <div className="relative mx-auto max-w-3xl px-5 py-24 text-center sm:px-8 sm:py-28">
+          <Reveal>
+            <p className="eyebrow text-dawn">God is opening a door</p>
+            <h2 className="mt-4 font-display text-[2.1rem] font-semibold leading-tight text-white sm:text-[2.85rem]">
+              We&apos;re looking for people to walk through it with Him.
+            </h2>
+            <SignatureRule className="mt-6" />
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/85">
+              Every great ministry begins with men and women who choose to believe in God&apos;s vision before
+              the rest of the world can see it. We&apos;re praying God will raise up a small group of Founding
+              Partners to help establish Following the Leader for generations to come.
+            </p>
+            <a
+              href={partnerMailto}
+              className="mt-9 inline-block rounded-full bg-white px-8 py-3.5 text-[0.98rem] font-semibold text-ink shadow-lg shadow-black/25 transition-colors hover:bg-dawn"
+            >
+              Will you prayerfully consider it?
+            </a>
+          </Reveal>
         </div>
       </section>
 
@@ -228,9 +283,10 @@ export default function PartnerPage() {
             {/* Invitation */}
             <Reveal delay={120}>
               <div>
-                <h2 className="font-display text-3xl font-semibold text-ink sm:text-4xl">
+                <h2 className="font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
                   {PARTNER.invitation.heading}
                 </h2>
+                <SignatureRule align="left" className="mt-5" />
                 <div className="mt-6 space-y-5">
                   {PARTNER.invitation.body.map((p, i) => (
                     <p key={i} className="text-lg leading-relaxed text-body">
