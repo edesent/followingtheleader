@@ -57,25 +57,31 @@ export default function Home() {
       />
       {/* ── Hero ─────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-paper">
-        {/* rising sun — low, below the content so it never sits behind the logo */}
+        {/* background image — cross-at-sunrise, matching the brand */}
+        <Image
+          src="/images/hero-bg.jpg"
+          alt=""
+          aria-hidden
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* white overlay — clear-ish in the center, fading to white at the edges */}
         <div
-          className="sun-glow pointer-events-none absolute left-1/2 bottom-0 h-[34rem] w-[44rem] -translate-x-1/2 translate-y-[65%] rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(230,196,111,0.34) 0%, rgba(90,140,190,0.14) 44%, rgba(255,255,255,0) 70%)" }}
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(120% 120% at 50% 42%, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.28) 38%, rgba(255,255,255,0.70) 72%, rgba(255,255,255,0.96) 100%)",
+          }}
           aria-hidden
         />
         <div className="relative mx-auto max-w-6xl px-5 pt-16 pb-24 sm:px-8 sm:pt-20 sm:pb-28">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-14">
             {/* left — brand, headline, CTAs */}
             <div className="text-center lg:text-left">
-              <Image
-                src="/images/logo.png"
-                alt="Following the Leader — Walking with Jesus in everyday life"
-                width={800}
-                height={380}
-                priority
-                className="rise d1 mx-auto h-auto w-full max-w-[360px] sm:max-w-[420px] lg:mx-0"
-              />
-              <h1 className="rise d2 mt-8 font-display text-4xl font-semibold leading-[1.05] text-ink sm:text-5xl lg:text-[3.5rem]">
+              <p className="rise d1 eyebrow text-dawn-deep">{HERO.eyebrow}</p>
+              <h1 className="rise d2 mt-5 font-display text-4xl font-semibold leading-[1.05] text-ink sm:text-5xl lg:text-[3.5rem]">
                 {HERO.title}
               </h1>
               <p className="rise d3 mx-auto mt-5 max-w-xl text-lg leading-relaxed text-body sm:text-xl lg:mx-0">
