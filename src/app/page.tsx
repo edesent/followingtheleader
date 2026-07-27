@@ -56,7 +56,8 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
       />
       {/* ── Hero ─────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-paper">
+      {/* pulled up under the translucent 76px header so the image runs to the very top */}
+      <section className="relative -mt-[76px] overflow-hidden bg-paper">
         {/* background image — cross-at-sunrise, matching the brand */}
         <Image
           src="/images/hero-bg.jpg"
@@ -76,7 +77,7 @@ export default function Home() {
           }}
           aria-hidden
         />
-        <div className="relative mx-auto max-w-6xl px-5 pt-[120px] pb-[120px] sm:px-8 sm:pt-[200px] sm:pb-[200px]">
+        <div className="relative mx-auto max-w-6xl px-5 pt-[196px] pb-[120px] sm:px-8 sm:pt-[276px] sm:pb-[200px]">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-14">
             {/* left — brand, headline, CTAs */}
             <div className="text-center lg:text-left">
