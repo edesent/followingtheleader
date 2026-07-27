@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
-import { BIO, FAQ, SITE } from "@/config/site";
+import { BIO, FAQ, SITE, SPEAKING } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "About Joe",
@@ -131,6 +131,39 @@ export default function AboutPage() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Speaking */}
+      <section className="bg-cream">
+        <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-24">
+          <Reveal className="text-center">
+            <span className="eyebrow text-gold">{SPEAKING.eyebrow}</span>
+            <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-4xl">
+              {SPEAKING.title}
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-body">
+              {SPEAKING.body}
+            </p>
+          </Reveal>
+          <div className="mx-auto mt-12 grid max-w-3xl gap-5 sm:grid-cols-2">
+            {SPEAKING.photos.map((p, i) => (
+              <Reveal key={p.src} delay={i * 100}>
+                <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-xl shadow-ink/15 ring-1 ring-hair">
+                  <Image
+                    src={p.src}
+                    alt={p.alt}
+                    fill
+                    sizes="(min-width: 640px) 384px, 100vw"
+                    className="object-cover object-top"
+                  />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="mt-6 text-center">
+            <p className="text-sm italic text-muted">{SPEAKING.caption}</p>
+          </Reveal>
         </div>
       </section>
 

@@ -398,6 +398,24 @@ export const BIO = {
   ],
 };
 
+// ── Speaking (photo section on the About page) ────────────────────────────────
+export const SPEAKING = {
+  eyebrow: "On the Platform",
+  title: "The same message, from the platform",
+  body: "Beyond the daily devotional, Joe is a frequent speaker at churches, schools, and Mayor's Prayer Breakfasts across the country — calling people, wherever they gather, to follow Jesus faithfully.",
+  caption: "Speaking at the Mayor's Prayer Breakfast in Albany, Georgia.",
+  photos: [
+    {
+      src: "/images/joe-speaking-1.jpg",
+      alt: "Dr. Joe Pettigrew speaking at the Mayor's Prayer Breakfast in Albany, Georgia",
+    },
+    {
+      src: "/images/joe-speaking-2.jpg",
+      alt: "Dr. Joe Pettigrew addressing the audience at the Albany, Georgia Mayor's Prayer Breakfast",
+    },
+  ],
+};
+
 // ── Frequently Asked Questions (shown on the About page) ──────────────────────
 //  Rendered as an accordion and also emitted as FAQ structured data for SEO.
 export type FaqItem = {
