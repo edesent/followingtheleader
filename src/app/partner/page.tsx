@@ -3,6 +3,7 @@ import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SignatureRule from "@/components/SignatureRule";
+import PartnerForm from "@/components/PartnerForm";
 import { PARTNER, SITE } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -10,10 +11,6 @@ export const metadata: Metadata = {
   description:
     "Join Dr. Joe Pettigrew in strengthening the Church for eternity. Partner with Following the Leader to equip believers, encourage pastors, and make disciples who make disciples.",
 };
-
-const partnerMailto = `mailto:${SITE.email}?subject=${encodeURIComponent(
-  "I'd like to explore partnering with Following the Leader"
-)}`;
 
 export default function PartnerPage() {
   return (
@@ -244,7 +241,7 @@ export default function PartnerPage() {
               Partners to help establish Following the Leader for generations to come.
             </p>
             <a
-              href={partnerMailto}
+              href="#signup"
               className="mt-9 inline-block rounded-full bg-white px-8 py-3.5 text-[0.98rem] font-semibold text-ink shadow-lg shadow-black/25 transition-colors hover:bg-dawn"
             >
               Will you prayerfully consider it?
@@ -308,7 +305,7 @@ export default function PartnerPage() {
 
                 <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
                   <a
-                    href={partnerMailto}
+                    href="#signup"
                     className="rounded-full bg-dawn-deep px-7 py-3.5 text-center text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/20 transition-colors hover:bg-ink"
                   >
                     {PARTNER.invitation.cta}
@@ -332,6 +329,27 @@ export default function PartnerPage() {
               </div>
             </Reveal>
           </div>
+        </div>
+      </section>
+
+      {/* Partnership signup form */}
+      <section id="signup" className="scroll-mt-24 border-t border-hair bg-cream">
+        <div className="mx-auto max-w-2xl px-5 py-20 sm:px-8 sm:py-24">
+          <Reveal className="text-center">
+            <p className="eyebrow text-gold">Become a Partner</p>
+            <h2 className="mt-4 font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
+              Take the first step
+            </h2>
+            <SignatureRule className="mt-6" />
+            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-body">
+              Tell us a little about you and how you&apos;d like to partner, and Joe will personally
+              follow up. Gifts are made by check for now — we&apos;ll share the mailing details as soon
+              as you submit — with secure online card giving coming soon.
+            </p>
+          </Reveal>
+          <Reveal delay={120} className="mt-10">
+            <PartnerForm />
+          </Reveal>
         </div>
       </section>
     </>
