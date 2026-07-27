@@ -56,7 +56,8 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
       />
       {/* ── Hero ─────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-paper">
+      {/* pulled up under the translucent 76px header so the image runs to the very top */}
+      <section className="relative -mt-[76px] overflow-hidden bg-paper">
         {/* background image — cross-at-sunrise, matching the brand */}
         <Image
           src="/images/hero-bg.jpg"
@@ -65,18 +66,18 @@ export default function Home() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-top"
         />
         {/* white overlay — clear-ish in the center, fading to white at the edges */}
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(120% 120% at 50% 42%, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.28) 38%, rgba(255,255,255,0.70) 72%, rgba(255,255,255,0.96) 100%)",
+              "radial-gradient(125% 125% at 50% 34%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.32) 36%, rgba(255,255,255,0.85) 66%, rgba(255,255,255,1) 90%)",
           }}
           aria-hidden
         />
-        <div className="relative mx-auto max-w-6xl px-5 pt-16 pb-24 sm:px-8 sm:pt-20 sm:pb-28">
+        <div className="relative mx-auto max-w-6xl px-5 pt-[196px] pb-[120px] sm:px-8 sm:pt-[276px] sm:pb-[200px]">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-14">
             {/* left — brand, headline, CTAs */}
             <div className="text-center lg:text-left">
