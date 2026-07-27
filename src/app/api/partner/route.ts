@@ -16,6 +16,8 @@ export async function POST(request: Request) {
   let org = "";
   let interest = "";
   let amount = "";
+  let frequency = "";
+  let method = "";
   let message = "";
 
   try {
@@ -26,6 +28,8 @@ export async function POST(request: Request) {
     org = String(body.org ?? "").trim();
     interest = String(body.interest ?? "").trim();
     amount = String(body.amount ?? "").trim();
+    frequency = String(body.frequency ?? "").trim();
+    method = String(body.method ?? "").trim();
     message = String(body.message ?? "").trim();
   } catch {
     return NextResponse.json({ ok: false, error: "Invalid request" }, { status: 400 });
@@ -53,14 +57,15 @@ export async function POST(request: Request) {
           from: "Following the Leader <onboarding@resend.dev>",
           to: [to],
           reply_to: email,
-          subject: `New partnership inquiry: ${name}`,
+          subject: `New partnership inquiry: ${name}${amount ? ` (${amount}${frequency ? ` ${frequency}` : ""})` : ""}`,
           text: [
             `Name: ${name}`,
             `Email: ${email}`,
             `Phone: ${phone || "—"}`,
             `Church / Organization: ${org || "—"}`,
-            `Interested in: ${interest || "—"}`,
-            `Intended gift: ${amount || "—"}`,
+            `Partnership type: ${interest || "—"}`,
+            `Intended gift: ${amount || "—"}${frequency ? ` (${frequency})` : ""}`,
+            `Preferred giving method: ${method || "—"}`,
             ``,
             `Message:`,
             message || "—",

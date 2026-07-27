@@ -342,9 +342,8 @@ export default function PartnerPage() {
             </h2>
             <SignatureRule className="mt-6" />
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-body">
-              Tell us a little about you and how you&apos;d like to partner, and Joe will personally
-              follow up. Gifts are made by check for now — we&apos;ll share the mailing details as soon
-              as you submit — with secure online card giving coming soon.
+              A few quick steps — tell us about you, the gift you have in mind, and how you&apos;d like to
+              give. It only takes a minute, and Joe will personally follow up.
             </p>
           </Reveal>
           <Reveal delay={120} className="mt-10">
