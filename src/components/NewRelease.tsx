@@ -1,4 +1,5 @@
 import Image from "next/image";
+import BuyButton from "@/components/BuyButton";
 import { NEW_RELEASE } from "@/config/site";
 
 /**
@@ -47,13 +48,7 @@ export default function NewRelease() {
           ))}
         </div>
         <div className="mt-8">
-          <a
-            href={r.cta.href}
-            className="inline-flex items-center gap-2 rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/25 transition-colors hover:bg-ink"
-          >
-            {r.cta.label}
-            <span aria-hidden>→</span>
-          </a>
+          <BuyButton label={r.cta.label} />
           <p className="mt-3 text-sm text-muted">{r.note}</p>
         </div>
       </div>

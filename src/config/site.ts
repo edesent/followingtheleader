@@ -174,8 +174,12 @@ export const NEW_RELEASE = {
     "Dr. Joe Pettigrew's newest book is a forty-day invitation to walk closely with Jesus — one day at a time. In the same warm, Scripture-rooted voice that reaches more than 60,000 readers every morning, each reading is short enough for a busy day yet meant to be carried with you long after you close the page.",
     "Perfect for personal devotion, a small group, or a church-wide journey through the season ahead.",
   ],
-  cta: { label: "Get your copy", href: "#" },
-  note: "Available to order directly on this site soon.",
+  cta: { label: "Get your copy" },
+  note: "Ships directly to you — printed to order.",
+  // Pricing for the on-site checkout. priceCents = retail price in cents.
+  // TODO: set the real retail price once Lulu print cost is known.
+  priceCents: 1999,
+  currency: "usd",
 };
 
 export const BOOKS: Book[] = [
