@@ -169,7 +169,7 @@ export const NEW_RELEASE = {
   title: "Following the Leader",
   tagline: "A Forty-Day Journey with Jesus",
   author: "Dr. Joe Pettigrew",
-  image: "/images/follow-the-leader.jpg",
+  image: "/images/following-the-leader.png",
   description: [
     "Dr. Joe Pettigrew's newest book is a forty-day invitation to walk closely with Jesus — one day at a time. In the same warm, Scripture-rooted voice that reaches more than 60,000 readers every morning, each reading is short enough for a busy day yet meant to be carried with you long after you close the page.",
     "Perfect for personal devotion, a small group, or a church-wide journey through the season ahead.",

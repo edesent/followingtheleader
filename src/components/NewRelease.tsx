@@ -22,8 +22,8 @@ export default function NewRelease() {
         <Image
           src={r.image}
           alt={`${r.title} — ${r.tagline}, a new book by ${r.author}`}
-          width={1200}
-          height={842}
+          width={1400}
+          height={933}
           className="relative mx-auto h-auto w-full max-w-xl"
         />
       </div>
