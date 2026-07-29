@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { ccConfigured, upsertContact } from "@/lib/constant-contact";
+import { dbConfigured, recordSubscriber } from "@/lib/db";
 
 export const runtime = "nodejs";
 
@@ -25,6 +26,15 @@ export async function POST(request: Request) {
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ ok: false, error: "A valid email is required" }, { status: 400 });
+  }
+
+  // Save to our database (best-effort — never block the visitor's signup).
+  if (dbConfigured()) {
+    try {
+      await recordSubscriber({ email, name, city: place });
+    } catch {
+      // Ignore DB hiccups.
+    }
   }
 
   // Add to Constant Contact (best-effort — never block the visitor's signup).

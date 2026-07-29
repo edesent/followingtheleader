@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server";
+import { dbConfigured, recordPartner } from "@/lib/db";
+
+export const runtime = "nodejs";
 
 /**
  * Partnership inquiry endpoint.
@@ -40,6 +43,15 @@ export async function POST(request: Request) {
       { ok: false, error: "A valid name and email are required" },
       { status: 400 }
     );
+  }
+
+  // Save to our database (best-effort — never block the submission).
+  if (dbConfigured()) {
+    try {
+      await recordPartner({ name, email, phone, org, interest, amount, frequency, method, message });
+    } catch {
+      // Ignore DB hiccups.
+    }
   }
 
   const key = process.env.RESEND_API_KEY;

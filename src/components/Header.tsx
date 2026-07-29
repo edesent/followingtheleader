@@ -29,6 +29,9 @@ export default function Header() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/");
 
+  // The admin area has its own chrome — no public header there.
+  if (pathname?.startsWith("/admin")) return null;
+
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${

@@ -1,9 +1,17 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { PAGES, LEGAL, SITE, PODCAST_URL } from "@/config/site";
 
 export default function Footer() {
+  const pathname = usePathname();
   const year = 2026;
+
+  // The admin area has its own chrome — no public footer there.
+  if (pathname?.startsWith("/admin")) return null;
+
   return (
     <footer className="relative overflow-hidden bg-ink text-white/80">
       {/* dawn glow along the top edge */}
