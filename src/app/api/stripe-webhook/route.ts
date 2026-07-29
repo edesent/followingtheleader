@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { getStripe, stripeConfigured } from "@/lib/stripe";
 import { createPrintJob, luluConfigured } from "@/lib/lulu";
+import { dbConfigured, recordOrder } from "@/lib/db";
 import { NEW_RELEASE } from "@/config/site";
 
 export const runtime = "nodejs";
@@ -48,6 +49,24 @@ export async function POST(request: Request) {
       const email = full.customer_details?.email || "";
       const phone = full.customer_details?.phone || "";
       const qty = full.line_items?.data?.[0]?.quantity ?? 1;
+
+      // Record the order in our database so it shows in the admin dashboard.
+      if (dbConfigured()) {
+        try {
+          await recordOrder({
+            email,
+            name,
+            bookId: "following-the-leader",
+            bookTitle: NEW_RELEASE.title,
+            quantity: qty,
+            amountCents: full.amount_total ?? undefined,
+            status: "paid",
+            providerRef: full.id,
+          });
+        } catch (e) {
+          console.error("Order DB insert failed:", e);
+        }
+      }
 
       if (luluConfigured() && addr?.line1 && addr.country && addr.postal_code) {
         const job = await createPrintJob({
