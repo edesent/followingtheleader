@@ -6,14 +6,21 @@
  */
 import { neon, type NeonQueryFunction } from "@neondatabase/serverless";
 
+// Accept either a manually-set DATABASE_URL or the POSTGRES_URL that Vercel's
+// Postgres/Neon integration provisions automatically.
+function connectionString(): string | undefined {
+  return process.env.DATABASE_URL || process.env.POSTGRES_URL;
+}
+
 export function dbConfigured(): boolean {
-  return Boolean(process.env.DATABASE_URL);
+  return Boolean(connectionString());
 }
 
 let _sql: NeonQueryFunction<false, false> | null = null;
 function sql(): NeonQueryFunction<false, false> {
-  if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is not set");
-  if (!_sql) _sql = neon(process.env.DATABASE_URL);
+  const url = connectionString();
+  if (!url) throw new Error("DATABASE_URL / POSTGRES_URL is not set");
+  if (!_sql) _sql = neon(url);
   return _sql;
 }
 
