@@ -4,6 +4,7 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SignatureRule from "@/components/SignatureRule";
 import PartnerForm from "@/components/PartnerForm";
+import DragScroller from "@/components/DragScroller";
 import { PARTNER, SITE } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -266,7 +267,7 @@ export default function PartnerPage() {
 
         {/* Tiers — full-width horizontal scroller (pan with mouse or thumb) */}
         <Reveal className="mt-12">
-          <div className="overflow-x-auto overscroll-x-contain pb-4">
+          <DragScroller className="pb-4">
             <ul className="flex w-max snap-x snap-mandatory gap-5 px-5 sm:px-8 lg:px-[max(2rem,calc((100vw-56rem)/2))]">
               {PARTNER.monthly.tiers.map((tier) => (
                 <li key={tier.name} className="w-[270px] shrink-0 snap-start sm:w-[300px]">
@@ -286,9 +287,9 @@ export default function PartnerPage() {
                 </li>
               ))}
             </ul>
-          </div>
+          </DragScroller>
           <p className="mt-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-muted">
-            Scroll or swipe to see all levels →
+            Drag or swipe to see all levels →
           </p>
         </Reveal>
 

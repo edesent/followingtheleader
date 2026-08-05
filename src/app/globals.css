@@ -119,3 +119,12 @@ body {
   50% { opacity: 1; transform: scale(1.04); }
 }
 .sun-glow { animation: sunGlow 7s ease-in-out infinite; }
+
+/* Horizontal panning without a visible scrollbar (see DragScroller) */
+.no-scrollbar {
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* old Edge */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;                  /* Chrome, Safari */
+}
