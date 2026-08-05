@@ -7,6 +7,7 @@ import PodcastPlayer from "@/components/PodcastPlayer";
 import SubscribeButton from "@/components/SubscribeButton";
 import SubscribeForm from "@/components/SubscribeForm";
 import SignatureRule from "@/components/SignatureRule";
+import { getLatestEpisode } from "@/lib/podcast";
 import {
   HERO,
   HERO_VIDEO,
@@ -105,9 +106,17 @@ const JSON_LD = {
   ],
 };
 
-export default function Home() {
+export default async function Home() {
   const featured = BOOKS.find((b) => b.featured) ?? BOOKS[0];
   const featuredQuotes = TESTIMONIALS.filter((t) => t.featured).slice(0, 3);
+  // Newest podcast episode, live from the feed — falls back to the configured
+  // featured episode if the feed is unreachable. Only call it "today's" when it
+  // really is fresh; before Joe posts, the newest episode is yesterday's.
+  const latest = await getLatestEpisode();
+  const postedHoursAgo = latest?.publishedAt
+    ? (Date.now() - new Date(latest.publishedAt).getTime()) / 3_600_000
+    : Infinity;
+  const episodeEyebrow = postedHoursAgo <= 20 ? "Today's Episode" : "Latest Episode";
 
   return (
     <>
@@ -452,12 +461,12 @@ export default function Home() {
 
             <Reveal delay={120}>
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-dawn">
-                Featured Episode
+                {latest ? episodeEyebrow : "Featured Episode"}
               </p>
               <PodcastPlayer
-                src={PODCAST.featured.audioUrl}
-                title={PODCAST.featured.title}
-                blurb={PODCAST.featured.blurb}
+                src={latest?.audioUrl ?? PODCAST.featured.audioUrl}
+                title={latest?.title ?? PODCAST.featured.title}
+                blurb={latest?.dateLabel ?? PODCAST.featured.blurb}
               />
             </Reveal>
           </div>

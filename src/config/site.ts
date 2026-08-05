@@ -67,8 +67,12 @@ export const LEGAL: NavLink[] = [
 // fallback link if that ever needs to be pointed at CC directly again.
 export const CC_HOSTED_SIGNUP_URL = "https://lp.constantcontactpages.com/sl/60chxlI";
 
-// Podcast — past devotionals, read aloud.
+// Podcast — the devotionals, read aloud. A new episode goes up every weekday.
 export const PODCAST_URL = "https://joei7.podbean.com";
+
+// The site reads episodes live from this RSS feed (see src/lib/podcast.ts), so a
+// new morning's episode appears by itself — nothing to update here.
+export const PODCAST_FEED_URL = "https://feed.podbean.com/joei7/feed.xml";
 
 // ── Podcast section (home page) ──────────────────────────────────────────────
 // A featured episode plays inline; the button links to the full show on Podbean.

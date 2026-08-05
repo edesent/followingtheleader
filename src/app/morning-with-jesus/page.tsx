@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import SubscribeForm from "@/components/SubscribeForm";
+import EpisodeList from "@/components/EpisodeList";
+import { getEpisodes } from "@/lib/podcast";
 import { DEVOTIONAL, STATS, PODCAST_URL, TESTIMONIALS } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -9,8 +11,10 @@ export const metadata: Metadata = {
     "Morning With Jesus is a free daily devotional by Dr. Joe Pettigrew — a short, Scripture-rooted word delivered to your inbox each morning. Read by more than 60,000 people. Subscribe free.",
 };
 
-export default function MorningWithJesusPage() {
+export default async function MorningWithJesusPage() {
   const quote = TESTIMONIALS.find((t) => t.featured) ?? TESTIMONIALS[0];
+  // Read live from the podcast feed; cached for an hour (see lib/podcast.ts).
+  const episodes = await getEpisodes(10);
 
   return (
     <>
@@ -102,22 +106,51 @@ export default function MorningWithJesusPage() {
             </p>
           </Reveal>
 
-          <Reveal delay={100}>
-            <div className="mt-14 rounded-2xl border border-hair bg-paper px-6 py-8 sm:px-10">
-              <p className="font-display text-xl font-semibold text-ink">Prefer to listen?</p>
-              <p className="mx-auto mt-2 max-w-lg text-body">
-                Past devotionals are read aloud on the podcast — take the morning word with you wherever you go.
-              </p>
+        </div>
+      </section>
+
+      {/* Listen — episodes read live from the podcast feed */}
+      <section id="listen" className="scroll-mt-24 border-t border-hair bg-cream-2/50">
+        <div className="mx-auto max-w-3xl px-5 py-20 sm:px-8 sm:py-24">
+          <Reveal className="text-center">
+            <p className="eyebrow text-gold">Prefer to listen?</p>
+            <h2 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-[2.5rem]">
+              Every morning, read aloud
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-body">
+              A new episode goes up each weekday — take the morning word with you wherever you go.
+            </p>
+          </Reveal>
+
+          {episodes.length > 0 ? (
+            <>
+              <Reveal delay={100} className="mt-10">
+                <EpisodeList episodes={episodes} />
+              </Reveal>
+              <Reveal delay={140} className="mt-8 text-center">
+                <a
+                  href={PODCAST_URL}
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-flex rounded-full border border-ink/15 px-7 py-3 font-semibold text-ink transition-colors hover:border-dawn-deep hover:text-dawn-deep"
+                >
+                  Browse every episode →
+                </a>
+              </Reveal>
+            </>
+          ) : (
+            /* The feed is unreachable — send people to the show itself. */
+            <Reveal delay={100} className="mt-10 text-center">
               <a
                 href={PODCAST_URL}
                 target="_blank"
                 rel="noopener"
-                className="mt-6 inline-flex rounded-full border border-ink/15 px-7 py-3 font-semibold text-ink transition-colors hover:border-dawn-deep hover:text-dawn-deep"
+                className="inline-flex rounded-full bg-dawn-deep px-8 py-3.5 font-semibold text-white shadow-lg shadow-dawn-deep/20 transition-colors hover:bg-ink"
               >
                 Listen to the podcast →
               </a>
-            </div>
-          </Reveal>
+            </Reveal>
+          )}
         </div>
       </section>
     </>
