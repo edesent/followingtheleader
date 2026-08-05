@@ -49,6 +49,13 @@ export const PAGES: NavLink[] = [
   { label: "Partner", href: "/partner" },
 ];
 
+// Credit line at the very bottom of the footer. `rel` is deliberately just
+// "noopener" — no nofollow — so the link passes SEO value to elijahdesent.com.
+export const BUILDER_CREDIT = {
+  label: "elijahdesent.com",
+  href: "https://www.elijahdesent.com/ai-assisted-church-website-design",
+};
+
 // Legal pages — shown in the footer + sitemap only, not in the main nav.
 export const LEGAL: NavLink[] = [
   { label: "Privacy Policy", href: "/privacy" },

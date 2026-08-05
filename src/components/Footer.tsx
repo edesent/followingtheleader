@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { PAGES, LEGAL, SITE, PODCAST_URL } from "@/config/site";
+import { PAGES, LEGAL, SITE, PODCAST_URL, BUILDER_CREDIT } from "@/config/site";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -90,6 +90,19 @@ export default function Footer() {
             ))}
           </nav>
         </div>
+
+        {/* Builder credit */}
+        <p className="mt-5 text-center text-xs text-white/35 sm:text-left">
+          Church and ministry sites by{" "}
+          <a
+            href={BUILDER_CREDIT.href}
+            target="_blank"
+            rel="noopener"
+            className="font-medium text-white/55 underline decoration-white/20 underline-offset-2 transition-colors hover:text-white hover:decoration-white/50"
+          >
+            {BUILDER_CREDIT.label}
+          </a>
+        </p>
       </div>
     </footer>
   );
