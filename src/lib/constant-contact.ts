@@ -181,15 +181,29 @@ export async function findListIdByName(name: string): Promise<string | null> {
   return j.lists?.find((l) => l.name.toLowerCase() === name.toLowerCase())?.list_id ?? null;
 }
 
-/** Create or update a contact and add them to the configured list. */
+/**
+ * Create or update a contact and add them to the configured list.
+ *
+ * `city` may arrive as free text ("Brownsville, TN"), so it's split into city and
+ * state where possible — Constant Contact keeps those as separate fields.
+ */
 export async function upsertContact(input: {
   email: string;
   firstName?: string;
   lastName?: string;
+  city?: string;
 }): Promise<void> {
   const c = ccConfig();
   if (!c.listId) throw new Error("CONSTANT_CONTACT_LIST_ID is not set");
   const token = await getAccessToken();
+
+  let address: { kind: string; city?: string; state?: string } | undefined;
+  const place = input.city?.trim();
+  if (place) {
+    const [city, ...restOfPlace] = place.split(",").map((s) => s.trim());
+    address = { kind: "home", city: city || undefined, state: restOfPlace.join(", ") || undefined };
+  }
+
   const res = await fetch(`${API_BASE}/contacts/sign_up_form`, {
     method: "POST",
     headers: {
@@ -200,6 +214,7 @@ export async function upsertContact(input: {
       email_address: input.email,
       first_name: input.firstName || undefined,
       last_name: input.lastName || undefined,
+      street_address: address,
       list_memberships: [c.listId],
     }),
   });

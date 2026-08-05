@@ -1,34 +1,88 @@
 import { NextResponse } from "next/server";
-import { ccConfigured, upsertContact } from "@/lib/constant-contact";
+import { ccConfigured, ccConnected, upsertContact } from "@/lib/constant-contact";
+import { checkNonce } from "@/lib/form-nonce";
 import { dbConfigured, recordSubscriber } from "@/lib/db";
 
 export const runtime = "nodejs";
 
 /**
- * Morning With Jesus subscribe endpoint.
+ * Morning With Jesus subscribe endpoint — signs people up directly.
  *
- * Adds the subscriber to Constant Contact when it's configured + connected, and
- * (if RESEND_API_KEY + SUBSCRIBE_NOTIFY_EMAIL are set) also emails a notification
- * as a backup. Both are best-effort — the visitor's signup always succeeds.
+ * Spam is turned away first (honeypot + signed nonce; see lib/form-nonce.ts),
+ * then the subscriber is added to Joe's Constant Contact list.
+ *
+ * Once Constant Contact is configured AND connected, its result decides the
+ * response: a failure returns an error so the visitor can try again or email Joe,
+ * instead of being told "you're all set" when they aren't. Before it's connected
+ * — or if it isn't configured at all — the signup still succeeds and is captured
+ * in the database and by notification email, so nobody is lost during setup.
  */
+
+/** Bots that fill every field trip this; a person never sees it. */
+function isBot(body: Record<string, unknown>): boolean {
+  return typeof body.website === "string" && body.website.trim() !== "";
+}
+
 export async function POST(request: Request) {
-  let name = "";
-  let email = "";
-  let place = "";
+  let body: Record<string, unknown>;
   try {
-    const body = await request.json();
-    name = String(body.name ?? "").trim();
-    email = String(body.email ?? "").trim();
-    place = String(body.place ?? "").trim();
+    body = (await request.json()) as Record<string, unknown>;
   } catch {
     return NextResponse.json({ ok: false, error: "Invalid request" }, { status: 400 });
   }
 
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return NextResponse.json({ ok: false, error: "A valid email is required" }, { status: 400 });
+  const name = String(body.name ?? "").trim();
+  const email = String(body.email ?? "").trim();
+  const place = String(body.place ?? "").trim();
+
+  // ── Spam checks ──────────────────────────────────────────────────────────
+  // Answer bots with a plain 200 and no signup: a script that sees an error
+  // retries with a different shape, while one that sees success moves on.
+  if (isBot(body)) return NextResponse.json({ ok: true });
+
+  const nonce = checkNonce(body.nonce);
+  // A nonce that doesn't verify means tampering — drop it. A MISSING one can be
+  // a real person whose nonce request failed, so let them through rather than
+  // lose a subscriber to our own network hiccup.
+  if (nonce === "invalid") return NextResponse.json({ ok: true });
+  if (nonce === "missing") {
+    console.warn("Subscribe submitted without a nonce — allowing", { email });
+  }
+  if (nonce === "too-fast") {
+    return NextResponse.json(
+      { ok: false, error: "That was quick — please try once more." },
+      { status: 429 }
+    );
   }
 
-  // Save to our database (best-effort — never block the visitor's signup).
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return NextResponse.json(
+      { ok: false, error: "Please enter a valid email address." },
+      { status: 400 }
+    );
+  }
+
+  const [firstName, ...rest] = name.split(/\s+/).filter(Boolean);
+  const lastName = rest.join(" ");
+
+  // ── Constant Contact ─────────────────────────────────────────────────────
+  const connected = ccConfigured() && (await ccConnected().catch(() => false));
+  if (connected) {
+    try {
+      await upsertContact({ email, firstName, lastName, city: place });
+    } catch (err) {
+      console.error("Constant Contact signup failed", err);
+      return NextResponse.json(
+        {
+          ok: false,
+          error: "We couldn't complete your signup just now. Please try again in a moment.",
+        },
+        { status: 502 }
+      );
+    }
+  }
+
+  // ── Backups (best-effort; never block the visitor) ────────────────────────
   if (dbConfigured()) {
     try {
       await recordSubscriber({ email, name, city: place });
@@ -37,36 +91,30 @@ export async function POST(request: Request) {
     }
   }
 
-  // Add to Constant Contact (best-effort — never block the visitor's signup).
-  if (ccConfigured()) {
-    try {
-      const [firstName, ...rest] = name.split(/\s+/).filter(Boolean);
-      await upsertContact({ email, firstName, lastName: rest.join(" ") });
-    } catch {
-      // Ignore — CC may not be connected yet, or the API may hiccup.
-    }
-  }
-
+  // Until Constant Contact is connected, email each signup through so none are
+  // lost while setup is being finished.
   const key = process.env.RESEND_API_KEY;
-  const to = process.env.SUBSCRIBE_NOTIFY_EMAIL;
-
-  if (key && to) {
+  const to = process.env.SUBSCRIBE_NOTIFY_EMAIL || process.env.PARTNER_NOTIFY_EMAIL;
+  if (!connected && key && to) {
     try {
       await fetch("https://api.resend.com/emails", {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${key}`,
-          "Content-Type": "application/json",
-        },
+        headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
         body: JSON.stringify({
           from: "Morning With Jesus <no-reply@elijahdesent.com>",
           to: [to],
           subject: `New Morning With Jesus subscriber: ${name || email}`,
-          text: `Name: ${name}\nEmail: ${email}\nCity/State: ${place}`,
+          text: [
+            `Name: ${name || "—"}`,
+            `Email: ${email}`,
+            `City/State: ${place || "—"}`,
+            ``,
+            `Constant Contact isn't connected yet, so this person needs adding to the list by hand.`,
+          ].join("\n"),
         }),
       });
     } catch {
-      // Don't fail the visitor's signup if the notification email hiccups.
+      // Don't fail the visitor's signup over the notification.
     }
   }
 

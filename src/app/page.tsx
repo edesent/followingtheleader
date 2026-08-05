@@ -5,6 +5,7 @@ import NewRelease from "@/components/NewRelease";
 import HeroVideo from "@/components/HeroVideo";
 import PodcastPlayer from "@/components/PodcastPlayer";
 import SubscribeButton from "@/components/SubscribeButton";
+import SubscribeForm from "@/components/SubscribeForm";
 import SignatureRule from "@/components/SignatureRule";
 import {
   HERO,
@@ -308,12 +309,7 @@ export default function Home() {
                   {DEVOTIONAL.subscribe.heading}
                 </p>
                 <p className="mb-5 text-white/60">{DEVOTIONAL.subscribe.body}</p>
-                <SubscribeButton className="rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-black/25 transition-colors hover:bg-dawn hover:text-ink">
-                  {DEVOTIONAL.subscribe.cta}
-                </SubscribeButton>
-                <p className="mt-4 text-sm text-white/45">
-                  No cost and no catch — unsubscribe any time.
-                </p>
+                <SubscribeForm tone="dark" />
               </div>
             </Reveal>
           </div>

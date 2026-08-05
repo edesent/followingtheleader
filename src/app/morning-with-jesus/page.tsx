@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
-import SubscribeButton from "@/components/SubscribeButton";
+import SubscribeForm from "@/components/SubscribeForm";
 import { DEVOTIONAL, STATS, PODCAST_URL, TESTIMONIALS } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -71,13 +71,8 @@ export default function MorningWithJesusPage() {
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-lg text-white/70">{DEVOTIONAL.subscribe.body}</p>
           </Reveal>
-          <Reveal delay={100} className="mt-10 text-center">
-            <SubscribeButton className="rounded-full bg-dawn-deep px-9 py-4 text-[1.02rem] font-semibold text-white shadow-lg shadow-black/25 transition-colors hover:bg-dawn hover:text-ink">
-              {DEVOTIONAL.subscribe.cta}
-            </SubscribeButton>
-            <p className="mt-4 text-sm text-white/45">
-              No cost and no catch — unsubscribe any time.
-            </p>
+          <Reveal delay={100} className="mx-auto mt-10 max-w-xl">
+            <SubscribeForm tone="dark" />
           </Reveal>
 
           {/* stats under form */}

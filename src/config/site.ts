@@ -55,13 +55,10 @@ export const LEGAL: NavLink[] = [
   { label: "Terms & Conditions", href: "/terms" },
 ];
 
-// ── Morning With Jesus signup form ──────────────────────────────────────────
-//  Every "Subscribe free" button on the site opens this page in a popup window,
-//  so new subscribers land straight in Joe's Constant Contact list. To swap in a
-//  different signup form, change this one URL.
-export const SUBSCRIBE_FORM = {
-  url: "https://lp.constantcontactpages.com/sl/60chxlI",
-};
+// Constant Contact's own hosted signup page. The site no longer uses it — the
+// on-page form signs people up through the API instead — kept here as the
+// fallback link if that ever needs to be pointed at CC directly again.
+export const CC_HOSTED_SIGNUP_URL = "https://lp.constantcontactpages.com/sl/60chxlI";
 
 // Podcast — past devotionals, read aloud.
 export const PODCAST_URL = "https://joei7.podbean.com";
