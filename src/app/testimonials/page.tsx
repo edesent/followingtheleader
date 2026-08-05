@@ -7,7 +7,7 @@ import { TESTIMONIALS } from "@/config/site";
 export const metadata: Metadata = {
   title: "What People Are Saying",
   description:
-    "Pastors, authors, and leaders — including Dr. Tony Evans, Phil Robertson, Pastor Ed Young, and Pastor Ken Whitten — on Dr. Joe Pettigrew's Morning With Jesus devotional.",
+    "Pastors, authors, athletes, and executives — including Pastor Tony Evans, Phil Robertson, Pastor Ed Young, Lee Corso, Colt McCoy, and Pam Tebow — on Dr. Joe Pettigrew's Morning With Jesus devotional.",
 };
 
 export default function TestimonialsPage() {
@@ -16,7 +16,7 @@ export default function TestimonialsPage() {
       <PageHero
         eyebrow="What People Are Saying"
         title="Read by pastors, leaders, and families"
-        intro="From nationally known pastors and authors to CEOs and everyday readers, Morning With Jesus has become a trusted way to begin the day."
+        intro="From nationally known pastors and authors to coaches, athletes, CEOs, and everyday readers, Morning With Jesus has become a trusted way to begin the day."
       />
 
       <section className="bg-cream">

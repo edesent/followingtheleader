@@ -5,7 +5,7 @@ import { SITE } from "@/config/site";
 
 type Status = "idle" | "loading" | "done" | "error";
 
-const STEPS = ["Your info", "Your gift", "How to give"];
+const STEPS = ["Your info", "Your gift"];
 
 const INTEREST_OPTIONS = [
   "Become a Founding Partner",
@@ -18,7 +18,14 @@ const AMOUNT_PRESETS = ["$50", "$100", "$250", "$500", "$1,000"];
 
 const emailValid = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 
-/** Three-step partnership signup: contact → gift → giving method. */
+/**
+ * Two-step partnership signup: contact → gift.
+ *
+ * Giving is by check for now, so the form gathers intent and hands off to Joe —
+ * there is no payment step. The mailing details appear on the success screen and
+ * are repeated in the confirmation email. When online card giving is added, add a
+ * third step here for the payment method.
+ */
 export default function PartnerForm() {
   const [step, setStep] = useState(1);
   const [status, setStatus] = useState<Status>("idle");
@@ -30,7 +37,6 @@ export default function PartnerForm() {
     interest: INTEREST_OPTIONS[0],
     frequency: "One-time",
     amount: "",
-    method: "",
     message: "",
   });
 
@@ -42,7 +48,6 @@ export default function PartnerForm() {
   const patch = (v: Partial<typeof form>) => setForm((f) => ({ ...f, ...v }));
 
   const step1Ok = form.name.trim().length > 0 && emailValid(form.email);
-  const canSubmit = step1Ok && form.method !== "";
 
   async function submit() {
     setStatus("loading");
@@ -62,7 +67,6 @@ export default function PartnerForm() {
   /* ---------- Success ---------- */
   if (status === "done") {
     const firstName = form.name.trim().split(/\s+/)[0];
-    const chose = form.method;
     return (
       <div className="rounded-2xl border border-hair bg-paper p-8 text-center shadow-sm">
         <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-dawn/15 text-dawn-deep">
@@ -74,26 +78,15 @@ export default function PartnerForm() {
           Thank you{firstName ? `, ${firstName}` : ""}.
         </p>
         <p className="mt-2 text-body">
-          Your interest has been received, and Joe will personally follow up with you soon.
+          Joe has been notified personally and will follow up with you soon. A copy of these details is
+          on its way to your inbox.
         </p>
 
         <div className="mt-7 rounded-xl border border-hair bg-cream-2/50 p-6 text-left">
-          {chose === "online" ? (
-            <>
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-dawn-deep">
-                Online card giving — coming soon
-              </p>
-              <p className="mt-2 leading-relaxed text-body">
-                Secure giving by card is launching soon. We&apos;ve saved your interest and will email you
-                the moment it&apos;s ready. If you&apos;d like to give sooner, you can always mail a check:
-              </p>
-            </>
-          ) : (
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-dawn-deep">
-              To give by check
-            </p>
-          )}
-          <p className={`${chose === "online" ? "mt-3" : "mt-2"} leading-relaxed text-body`}>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-dawn-deep">
+            To send your gift
+          </p>
+          <p className="mt-2 leading-relaxed text-body">
             Make your check payable to{" "}
             <span className="font-semibold text-ink">Following the Leader</span> and mail it to:
           </p>
@@ -103,6 +96,12 @@ export default function PartnerForm() {
             {SITE.address.line}
             <br />
             {SITE.address.city}, {SITE.address.state} {SITE.address.zip}
+          </p>
+          <p className="mt-4 text-sm leading-relaxed text-muted">
+            Following the Leader is a federally recognized 501(c)(3) nonprofit ministry. Gifts are
+            tax-deductible as allowed by law, and a receipt will be provided for every contribution.
+            If you&apos;d prefer to give through a donor-advised fund or appreciated securities, just
+            mention it when Joe reaches out.
           </p>
         </div>
       </div>
@@ -273,46 +272,6 @@ export default function PartnerForm() {
                 })}
               </div>
             </div>
-          </div>
-        )}
-
-        {/* ---------- Step 3: method ---------- */}
-        {step === 3 && (
-          <div className="space-y-4">
-            <p className="text-sm font-semibold text-ink">How would you like to give?</p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <button
-                type="button"
-                onClick={() => patch({ method: "check" })}
-                className={`rounded-xl border p-5 text-left transition-colors ${
-                  form.method === "check"
-                    ? "border-dawn-deep bg-dawn-deep/[0.06]"
-                    : "border-hair-2 hover:border-dawn-deep/50"
-                }`}
-              >
-                <p className="font-display text-lg font-semibold text-ink">Mail a check</p>
-                <p className="mt-1.5 text-sm leading-relaxed text-body">
-                  We&apos;ll show you where to send it. Available now.
-                </p>
-              </button>
-              <button
-                type="button"
-                onClick={() => patch({ method: "online" })}
-                className={`relative rounded-xl border p-5 text-left transition-colors ${
-                  form.method === "online"
-                    ? "border-dawn-deep bg-dawn-deep/[0.06]"
-                    : "border-hair-2 hover:border-dawn-deep/50"
-                }`}
-              >
-                <span className="absolute right-4 top-4 rounded-full bg-dawn/15 px-2.5 py-0.5 text-[0.7rem] font-semibold uppercase tracking-[0.1em] text-dawn-deep">
-                  Coming soon
-                </span>
-                <p className="font-display text-lg font-semibold text-ink">Give online</p>
-                <p className="mt-1.5 text-sm leading-relaxed text-body">
-                  Secure card giving. We&apos;ll notify you the moment it&apos;s ready.
-                </p>
-              </button>
-            </div>
 
             <textarea
               className={`${inputClass} min-h-[90px] resize-y`}
@@ -320,6 +279,11 @@ export default function PartnerForm() {
               value={form.message}
               onChange={set("message")}
             />
+
+            <p className="rounded-xl border border-hair bg-cream-2/50 px-4 py-3 text-sm leading-relaxed text-body">
+              Gifts are given by check. Once you send this, we&apos;ll show you exactly where to mail
+              it — and Joe will follow up with you personally.
+            </p>
 
             {status === "error" && (
               <p className="text-sm text-dawn-deep">
@@ -348,11 +312,11 @@ export default function PartnerForm() {
           <span />
         )}
 
-        {step < 3 ? (
+        {step < STEPS.length ? (
           <button
             type="button"
             onClick={() => setStep((s) => s + 1)}
-            disabled={step === 1 && !step1Ok}
+            disabled={!step1Ok}
             className="rounded-full bg-dawn-deep px-8 py-3 text-[0.95rem] font-semibold text-white shadow-lg shadow-dawn-deep/20 transition-all hover:bg-ink disabled:opacity-50"
           >
             Continue
@@ -361,7 +325,7 @@ export default function PartnerForm() {
           <button
             type="button"
             onClick={submit}
-            disabled={!canSubmit || status === "loading"}
+            disabled={!step1Ok || status === "loading"}
             className="rounded-full bg-dawn-deep px-8 py-3 text-[0.95rem] font-semibold text-white shadow-lg shadow-dawn-deep/20 transition-all hover:bg-ink disabled:opacity-50"
           >
             {status === "loading" ? "Sending…" : "Send my interest to Joe"}

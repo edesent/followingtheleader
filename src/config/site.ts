@@ -329,57 +329,85 @@ export type Testimonial = {
   featured?: boolean;
 };
 
+// One quote per person, and each quote stays with the person who actually said it
+// — the Testimonials page shows this whole list on a single screen, so a repeated
+// name reads as padding. The three marked `featured: true` are the ones shown on
+// the home page.
 export const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      "No matter what stage of life you find yourself in, these devotionals will give you the perspectives you need to get the most out of everything you do.",
-    name: "Dr. Tony Evans",
+      "Joe's devotionals have been a blessing to my family and to me. I just wanted to say thank you for allowing God to use you. This is relevant and needed today.",
+    name: "Pastor Tony Evans",
     role: "Pastor & Author",
     featured: true,
   },
   {
     quote:
-      "God calls us to have faith and integrity, show sacrifice and leadership, and carry a strong legacy. This is a must-read.",
+      "I love Joe's daily devotionals. They are short and to the point, and every day is something that makes me think.",
     name: "Phil Robertson",
     role: "The Duck Commander",
-    featured: true,
   },
   {
     quote:
-      "Every day your devotional is bringing us inspiration that lifts our souls and provides direction for our best life. That is why I subscribe.",
+      "No matter what stage of life you find yourself in, these devotionals will give you the perspectives you need to get the most out of everything you do.",
     name: "Pastor Ed Young",
     role: "Pastor & Author",
     featured: true,
   },
   {
     quote:
-      "I'm excited by the power of God's message I receive in this powerful devotional. Joe takes us to the core questions of life.",
+      "Are you on a journey with your heart to ask yourself questions every person wants to ask but is afraid no one has the answers. God's Word does have the answers, and Joe talks to you about the most important issues of your life.",
     name: "Pastor Ken Whitten",
     role: "Author & Pastor",
   },
   {
     quote:
-      "I have subscribed to Dr. Joe's devotional for many years. He has always communicated his messages based on sound biblical principles and practical application. Thank you, Dr. Joe, for this wonderful gift.",
+      "Every day your devotional is bringing us inspiration that lifts our souls and provides direction for our best life. That is why I subscribe. Hope you will join us.",
+    name: "Randy Frazee",
+    role: "Author & Pastor",
+  },
+  {
+    quote:
+      "God calls us to have faith and integrity, show sacrifice and leadership, and carry a strong legacy. This is a must-read. Joe is my friend and someone who lives out his faith, and he shares it with us every morning.",
+    name: "Lee Corso",
+    role: "ESPN",
+  },
+  {
+    quote:
+      "I'm excited by the power of God's message I receive in this powerful devotional. Joe takes us to the core questions of life, presented in raw emotion and direct terms. This is a great start to my day.",
+    name: "Colt McCoy",
+    role: "NFL",
+  },
+  {
+    quote:
+      "The devotionals have been a source of strength for me as I read them every morning. They have helped me navigate through life's challenges with a renewed sense of faith and hope.",
+    name: "Hugh Freeze",
+    role: "Coach",
+    featured: true,
+  },
+  {
+    quote:
+      "I have read Joe's devotionals for a long time, and I share them with my children, especially Timmy.",
+    name: "Pam Tebow",
+    role: "Author & Speaker",
+  },
+  {
+    quote:
+      "Joe has a way of writing what Christians desire to read. His devotionals are extremely relevant for today.",
+    name: "Mike Glenn",
+    role: "Retired FedEx Executive",
+  },
+  {
+    quote:
+      "I have been subscribing to Dr. Joe's devotional for many years. Dr. Joe has always communicated his messages based on sound biblical principles and practical application. Thank you, Dr. Joe, for this wonderful gift.",
     name: "Matt Rocco",
     role: "CEO, Etech",
   },
   {
     quote:
-      "I am an everyday reader of Joe's devotional. I've even had him down to Texas to speak at my company's annual dinner. I share these with my children.",
+      "I am an everyday reader of Joe's devotional. I have even had him down to Texas to speak at my company's annual dinner.",
     name: "Rick Moore",
     role: "CEO, Oak Financial",
-  },
-  {
-    quote:
-      "Joe has a way of writing what Christians desire to read. His devotionals are extremely relevant for today — a blessing to my family and to me.",
-    name: "Dr. Tony Evans",
-    role: "Pastor & Author",
-  },
-  {
-    quote:
-      "I love Joe's daily devotionals. They are short and to the point, and every day there is something that makes me think.",
-    name: "Phil Robertson",
-    role: "The Duck Commander",
   },
 ];
 

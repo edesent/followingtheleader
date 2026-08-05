@@ -18,7 +18,18 @@ import {
   SITE,
 } from "@/config/site";
 
-const ENDORSERS = ["Dr. Tony Evans", "Phil Robertson", "Pastor Ed Young", "Pastor Ken Whitten"];
+// Names for the "Read every morning by" strip. Every one of these also has a
+// quote in TESTIMONIALS — keep the two in sync. The strip reads in the present
+// tense, so it lists current readers only (Phil Robertson's endorsement still
+// appears on the Testimonials page).
+const ENDORSERS = [
+  "Pastor Tony Evans",
+  "Hugh Freeze",
+  "Lee Corso",
+  "Colt McCoy",
+  "Pam Tebow",
+  "Pastor Ed Young",
+];
 
 const JSON_LD = {
   "@context": "https://schema.org",

@@ -490,8 +490,8 @@ export default function PartnerPage() {
             </h2>
             <SignatureRule className="mt-6" />
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-body">
-              A few quick steps — tell us about you, the gift you have in mind, and how you&apos;d like to
-              give. It only takes a minute, and Joe will personally follow up.
+              Two quick steps — tell us about you and the gift you have in mind. It only takes a minute,
+              we&apos;ll send you where to mail your check, and Joe will personally follow up.
             </p>
           </Reveal>
           <Reveal delay={120} className="mt-10">

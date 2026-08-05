@@ -7,3 +7,4 @@
 .env*
 .vercel
 /next-env.d.ts
+/tsconfig.tsbuildinfo
