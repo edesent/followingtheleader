@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import SubscribeButton from "@/components/SubscribeButton";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { TESTIMONIALS } from "@/config/site";
@@ -51,12 +51,9 @@ export default function TestimonialsPage() {
             <p className="mx-auto mt-4 max-w-xl text-lg text-white/70">
               Subscribe free and let the first word you hear each day be the Lord&apos;s.
             </p>
-            <Link
-              href="/morning-with-jesus#subscribe"
-              className="mt-8 inline-flex rounded-full bg-dawn-deep px-8 py-3.5 font-semibold text-white shadow-lg shadow-dawn-deep/25 transition-colors hover:bg-dawn"
-            >
+            <SubscribeButton className="mt-8 inline-flex rounded-full bg-dawn-deep px-8 py-3.5 font-semibold text-white shadow-lg shadow-dawn-deep/25 transition-colors hover:bg-dawn hover:text-ink">
               Subscribe free
-            </Link>
+            </SubscribeButton>
           </Reveal>
         </div>
       </section>

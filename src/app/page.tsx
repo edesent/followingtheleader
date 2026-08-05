@@ -4,11 +4,13 @@ import Reveal from "@/components/Reveal";
 import NewRelease from "@/components/NewRelease";
 import HeroVideo from "@/components/HeroVideo";
 import PodcastPlayer from "@/components/PodcastPlayer";
-import SubscribeForm from "@/components/SubscribeForm";
+import SubscribeButton from "@/components/SubscribeButton";
+import SignatureRule from "@/components/SignatureRule";
 import {
   HERO,
   HERO_VIDEO,
   HOME_INTRO,
+  MINISTRY,
   STATS,
   DEVOTIONAL,
   BOOKS,
@@ -17,6 +19,52 @@ import {
   BIO,
   SITE,
 } from "@/config/site";
+
+/** Icon for each of the four ministry pillars. */
+function PillarIcon({ name }: { name: string }) {
+  const props = {
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    className: "h-6 w-6",
+  };
+  switch (name) {
+    case "sunrise": // the daily devotional
+      return (
+        <svg {...props}>
+          <path d="M3 18h18M6.5 18a5.5 5.5 0 0 1 11 0" />
+          <path d="M12 4.5v2M5.6 7.1l1.4 1.4M18.4 7.1 17 8.5" />
+        </svg>
+      );
+    case "book":
+      return (
+        <svg {...props}>
+          <path d="M12 6.5C10.6 5.2 8.6 4.5 6 4.5H4v13h3c2 0 3.8.5 5 1.5" />
+          <path d="M12 6.5C13.4 5.2 15.4 4.5 18 4.5h2v13h-3c-2 0-3.8.5-5 1.5" />
+          <path d="M12 6.5V19" />
+        </svg>
+      );
+    case "mic":
+      return (
+        <svg {...props}>
+          <rect x="9" y="3" width="6" height="10" rx="3" />
+          <path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M9 21h6" />
+        </svg>
+      );
+    case "hands": // partnership
+      return (
+        <svg {...props}>
+          <path d="M2 15.5c2.6 0 3.1 1.8 6.2 1.8H15a2 2 0 0 0 0-4h-3.5" />
+          <path d="M14.7 6.1c-.9-.9-2.4-.9-3.3 0l-.2.2-.2-.2c-.9-.9-2.4-.9-3.3 0-.9.9-.9 2.4 0 3.3l3.5 3.4 3.5-3.4c.9-.9.9-2.4 0-3.3z" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
 
 // Names for the "Read every morning by" strip. Every one of these also has a
 // quote in TESTIMONIALS — keep the two in sync. The strip reads in the present
@@ -100,12 +148,9 @@ export default function Home() {
                 {HERO.subtitle}
               </p>
               <div className="rise d4 mt-9 flex flex-wrap justify-center gap-3 lg:justify-start">
-                <Link
-                  href="#subscribe"
-                  className="rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/25 transition-all hover:bg-ink hover:shadow-xl"
-                >
+                <SubscribeButton className="rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/25 transition-all hover:bg-ink hover:shadow-xl">
                   {HERO.primaryCta.label}
-                </Link>
+                </SubscribeButton>
                 <Link
                   href={HERO.secondaryCta.href}
                   className="rounded-full border border-ink/15 bg-paper/60 px-8 py-3.5 text-[0.98rem] font-semibold text-ink backdrop-blur-sm transition-colors hover:border-dawn-deep hover:text-dawn-deep"
@@ -145,6 +190,49 @@ export default function Home() {
               <span key={name} className="font-display text-lg font-semibold text-ink/70">
                 {name}
               </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── What the ministry is — four pillars ──────────────────────── */}
+      <section className="border-b border-hair bg-cream-2/50">
+        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
+          <Reveal className="text-center">
+            <span className="eyebrow text-gold">{MINISTRY.eyebrow}</span>
+            <h2 className="mt-4 font-display text-3xl font-semibold leading-tight text-ink sm:text-[2.6rem]">
+              {MINISTRY.heading}
+            </h2>
+            <SignatureRule className="mt-6" />
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-body">
+              {MINISTRY.intro}
+            </p>
+          </Reveal>
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {MINISTRY.pillars.map((p, i) => (
+              <Reveal key={p.title} delay={i * 80}>
+                <Link
+                  href={p.href}
+                  className="group flex h-full flex-col rounded-2xl border border-hair bg-paper p-7 shadow-sm transition-all hover:-translate-y-1 hover:border-dawn-deep/40 hover:shadow-lg"
+                >
+                  <span className="grid h-12 w-12 place-items-center rounded-full bg-ink text-dawn">
+                    <PillarIcon name={p.icon} />
+                  </span>
+                  <h3 className="mt-5 font-display text-xl font-semibold leading-snug text-ink">
+                    {p.title}
+                  </h3>
+                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-gold">
+                    {p.stat}
+                  </p>
+                  <p className="mt-3 flex-1 text-[0.98rem] leading-relaxed text-body">{p.body}</p>
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-[0.95rem] font-semibold text-dawn-deep">
+                    {p.cta}
+                    <span className="transition-transform group-hover:translate-x-1" aria-hidden>
+                      →
+                    </span>
+                  </span>
+                </Link>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -220,7 +308,12 @@ export default function Home() {
                   {DEVOTIONAL.subscribe.heading}
                 </p>
                 <p className="mb-5 text-white/60">{DEVOTIONAL.subscribe.body}</p>
-                <SubscribeForm />
+                <SubscribeButton className="rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-black/25 transition-colors hover:bg-dawn hover:text-ink">
+                  {DEVOTIONAL.subscribe.cta}
+                </SubscribeButton>
+                <p className="mt-4 text-sm text-white/45">
+                  No cost and no catch — unsubscribe any time.
+                </p>
               </div>
             </Reveal>
           </div>
@@ -338,7 +431,7 @@ export default function Home() {
       </section>
 
       {/* ── Podcast ──────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-ink">
+      <section id="podcast" className="relative overflow-hidden bg-ink scroll-mt-24">
         <div className="dawn-sky-dark pointer-events-none absolute inset-0" aria-hidden />
         <div className="relative mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-28">
           <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr]">

@@ -55,6 +55,14 @@ export const LEGAL: NavLink[] = [
   { label: "Terms & Conditions", href: "/terms" },
 ];
 
+// ── Morning With Jesus signup form ──────────────────────────────────────────
+//  Every "Subscribe free" button on the site opens this page in a popup window,
+//  so new subscribers land straight in Joe's Constant Contact list. To swap in a
+//  different signup form, change this one URL.
+export const SUBSCRIBE_FORM = {
+  url: "https://lp.constantcontactpages.com/sl/60chxlI",
+};
+
 // Podcast — past devotionals, read aloud.
 export const PODCAST_URL = "https://joei7.podbean.com";
 
@@ -76,13 +84,61 @@ export const PODCAST = {
 };
 
 // ── Home / hero ────────────────────────────────────────────────────────────
+//  The hero leads with the ministry's conviction — followers, not leaders — so a
+//  first-time visitor learns what Following the Leader IS. The daily devotional
+//  is the first way in (see MINISTRY below), not the whole identity.
 export const HERO = {
-  eyebrow: "A Daily Devotional by Dr. Joe Pettigrew",
-  title: "Begin each morning with Jesus.",
+  eyebrow: "The Ministry of Dr. Joe Pettigrew",
+  title: "The world is looking for leaders. Jesus is looking for followers.",
   subtitle:
-    "A short, Scripture-rooted word to start your day — quiet, unhurried, and pointed straight at Christ. Join more than 60,000 readers who open the morning this way.",
-  primaryCta: { label: "Subscribe free", href: "/morning-with-jesus#subscribe" },
+    "Following the Leader helps everyday believers take their next step toward Jesus — and equips the churches that disciple them. It begins with a word each morning.",
+  primaryCta: { label: "Start tomorrow morning", href: "/morning-with-jesus#subscribe" },
   secondaryCta: { label: "Meet Joe", href: "/about" },
+};
+
+// ── What the ministry is (home page, under the hero) ────────────────────────
+//  The four arms of Following the Leader. The devotional comes first because it's
+//  how most people meet the ministry, but the row exists to show it isn't the
+//  only thing here.
+export const MINISTRY = {
+  eyebrow: "Following the Leader",
+  heading: "Four ways we walk with you",
+  intro:
+    "Everything here exists for one reason: to help ordinary people follow Jesus faithfully, and to strengthen the local churches that walk with them.",
+  pillars: [
+    {
+      icon: "sunrise",
+      title: "Morning With Jesus",
+      stat: "60,000+ readers every morning",
+      body: "A short, Scripture-rooted word in your inbox before the noise of the day begins. Free, always.",
+      href: "/morning-with-jesus",
+      cta: "Subscribe free",
+    },
+    {
+      icon: "book",
+      title: "Books & church studies",
+      stat: "7 titles · 40-day group studies",
+      body: "Devotionals and studies written for men, women, young adults, small groups, and whole congregations.",
+      href: "/books",
+      cta: "Browse the books",
+    },
+    {
+      icon: "mic",
+      title: "The Podcast",
+      stat: "In Joe's own voice",
+      body: "Honest conversations about what it really means to follow Jesus — and why the Church needs followers.",
+      href: "/#podcast",
+      cta: "Listen to an episode",
+    },
+    {
+      icon: "hands",
+      title: "Partner with us",
+      stat: "Founding Partners",
+      body: "Help establish this ministry for the next generation — equipping pastors and reaching more homes each morning.",
+      href: "/partner",
+      cta: "See the vision",
+    },
+  ],
 };
 
 // Hero intro video (hosted on Vercel Blob). Click-to-play with a poster image.

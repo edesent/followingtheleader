@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { NAV } from "@/config/site";
 import Logo from "./Logo";
+import SubscribeButton from "./SubscribeButton";
 
 export default function Header() {
   const pathname = usePathname();
@@ -59,12 +60,9 @@ export default function Header() {
               </Link>
             );
           })}
-          <Link
-            href="/morning-with-jesus#subscribe"
-            className="ml-2 rounded-full bg-dawn-deep px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-ink hover:shadow"
-          >
+          <SubscribeButton className="ml-2 rounded-full bg-dawn-deep px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-ink hover:shadow">
             Subscribe Free
-          </Link>
+          </SubscribeButton>
         </nav>
 
         {/* Mobile toggle */}
@@ -100,12 +98,9 @@ export default function Header() {
               {item.label}
             </Link>
           ))}
-          <Link
-            href="/morning-with-jesus#subscribe"
-            className="mt-4 rounded-full bg-dawn-deep px-5 py-3 text-center text-base font-semibold text-white"
-          >
+          <SubscribeButton className="mt-4 rounded-full bg-dawn-deep px-5 py-3 text-center text-base font-semibold text-white">
             Subscribe Free
-          </Link>
+          </SubscribeButton>
         </nav>
       </div>
     </header>
