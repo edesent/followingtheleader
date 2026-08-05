@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getStripe, stripeConfigured } from "@/lib/stripe";
 import { NEW_RELEASE, SITE } from "@/config/site";
+import { BOOK_CURRENCY, BOOK_PRICE_CENTS } from "@/lib/book-price";
 
 export const runtime = "nodejs";
 
@@ -29,8 +30,8 @@ export async function POST(request: Request) {
           quantity: 1,
           adjustable_quantity: { enabled: true, minimum: 1, maximum: 20 },
           price_data: {
-            currency: NEW_RELEASE.currency,
-            unit_amount: NEW_RELEASE.priceCents,
+            currency: BOOK_CURRENCY,
+            unit_amount: BOOK_PRICE_CENTS,
             product_data: {
               name: `${NEW_RELEASE.title} — ${NEW_RELEASE.tagline}`,
               description: `Paperback by ${NEW_RELEASE.author}. Printed to order and shipped to you.`,
@@ -46,7 +47,7 @@ export async function POST(request: Request) {
           shipping_rate_data: {
             type: "fixed_amount",
             display_name: "Standard shipping",
-            fixed_amount: { amount: shippingFlatCents, currency: NEW_RELEASE.currency },
+            fixed_amount: { amount: shippingFlatCents, currency: BOOK_CURRENCY },
             delivery_estimate: {
               minimum: { unit: "business_day", value: 5 },
               maximum: { unit: "business_day", value: 12 },
