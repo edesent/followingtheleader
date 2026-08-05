@@ -233,10 +233,12 @@ export const NEW_RELEASE = {
     intro:
       "Reserve your copies now. There's nothing to pay today — Joe will be in touch personally with the total and how to send it.",
   },
-  // Pricing for the Stripe checkout, which the site no longer routes to while
-  // preorders are handled by hand. TODO: set the real retail price once the
-  // Lulu print cost is known, before turning card checkout back on.
-  priceCents: 1999,
+  // Retail price, in cents. Deliberately NOT shown anywhere on the site: while
+  // preorders are handled by hand, Joe quotes the total when he follows up. Only
+  // the (currently unused) Stripe checkout reads this. $29.99 is Eli's working
+  // number as of 2026-08-05 — confirm it before card checkout is turned on or
+  // before the price appears on a page.
+  priceCents: 2999,
   currency: "usd",
 };
 
