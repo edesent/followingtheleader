@@ -1,5 +1,5 @@
 import Image from "next/image";
-import BuyButton from "@/components/BuyButton";
+import PreorderButton from "@/components/PreorderButton";
 import { NEW_RELEASE } from "@/config/site";
 
 /**
@@ -48,7 +48,7 @@ export default function NewRelease() {
           ))}
         </div>
         <div className="mt-8">
-          <BuyButton label={r.cta.label} />
+          <PreorderButton label={r.cta.label} />
           <p className="mt-3 text-sm text-muted">{r.note}</p>
         </div>
       </div>

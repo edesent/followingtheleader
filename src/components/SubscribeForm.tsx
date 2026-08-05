@@ -49,7 +49,7 @@ export default function SubscribeForm({
   useEffect(() => {
     if (!touched || nonce.current) return;
     let alive = true;
-    fetch("/api/subscribe/nonce", { cache: "no-store" })
+    fetch("/api/form-nonce", { cache: "no-store" })
       .then((r) => r.json())
       .then((d) => {
         if (alive && typeof d?.nonce === "string") nonce.current = d.nonce;

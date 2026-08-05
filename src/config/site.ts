@@ -215,8 +215,8 @@ export const BOOKS_INTRO_VIDEO = "efWJsx-4kxg";
 
 // ── New release ──────────────────────────────────────────────────────────────
 // Dr. Joe's newest book. Featured on the home page and atop the Books page.
-// `cta.href` is a placeholder until the book is sold directly from the site —
-// swap it for the checkout link when that's ready.
+// The button opens the preorder form (PreorderButton → /api/preorder): there is
+// no payment step, the order is emailed to Joe and he follows up with the total.
 export const NEW_RELEASE = {
   badge: "New Release",
   title: "Following the Leader",
@@ -227,10 +227,15 @@ export const NEW_RELEASE = {
     "Dr. Joe Pettigrew's newest book is a forty-day invitation to walk closely with Jesus — one day at a time. In the same warm, Scripture-rooted voice that reaches more than 60,000 readers every morning, each reading is short enough for a busy day yet meant to be carried with you long after you close the page.",
     "Perfect for personal devotion, a small group, or a church-wide journey through the season ahead.",
   ],
-  cta: { label: "Get your copy" },
-  note: "Ships directly to you — printed to order.",
-  // Pricing for the on-site checkout. priceCents = retail price in cents.
-  // TODO: set the real retail price once Lulu print cost is known.
+  cta: { label: "Preorder your copy" },
+  note: "Nothing to pay now — Joe follows up with the total and how to send it.",
+  preorder: {
+    intro:
+      "Reserve your copies now. There's nothing to pay today — Joe will be in touch personally with the total and how to send it.",
+  },
+  // Pricing for the Stripe checkout, which the site no longer routes to while
+  // preorders are handled by hand. TODO: set the real retail price once the
+  // Lulu print cost is known, before turning card checkout back on.
   priceCents: 1999,
   currency: "usd",
 };
