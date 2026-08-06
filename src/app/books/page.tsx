@@ -3,9 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
-import VideoEmbed from "@/components/VideoEmbed";
 import NewRelease from "@/components/NewRelease";
-import { BOOKS, BOOKS_INTRO_VIDEO } from "@/config/site";
+import { BOOKS } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Books",
@@ -28,16 +27,6 @@ export default function BooksPage() {
           <Reveal>
             <div className="mb-16 sm:mb-20">
               <NewRelease />
-            </div>
-          </Reveal>
-
-          {/* Intro video */}
-          <Reveal>
-            <div className="mx-auto mb-16 max-w-3xl sm:mb-20">
-              <p className="mb-5 text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-                A short introduction to Joe&apos;s books
-              </p>
-              <VideoEmbed id={BOOKS_INTRO_VIDEO} title="An introduction to Joe's books" />
             </div>
           </Reveal>
 
