@@ -92,6 +92,140 @@ export default function PartnerPage() {
     <>
       <PageHero eyebrow={PARTNER.eyebrow} title={PARTNER.title} intro={PARTNER.lead} />
 
+      {/* Become a Monthly Partner */}
+      <section className="bg-cream py-20 sm:py-24">
+        <div className="mx-auto max-w-4xl px-5 sm:px-8">
+          <Reveal className="text-center">
+            <h2 className="font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
+              {PARTNER.monthly.title}
+            </h2>
+            <SignatureRule className="mt-6" />
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-body">
+              {PARTNER.monthly.intro}
+            </p>
+          </Reveal>
+        </div>
+
+        {/* Tiers — full-width horizontal scroller (pan with mouse or thumb) */}
+        <Reveal className="mt-12">
+          <DragScroller className="pb-4">
+            <ul className="flex w-max snap-x snap-mandatory gap-5 px-5 sm:px-8 lg:px-[max(2rem,calc((100vw-56rem)/2))]">
+              {PARTNER.monthly.tiers.map((tier) => (
+                <li key={tier.name} className="w-[270px] shrink-0 snap-start sm:w-[300px]">
+                  <div className="flex h-full flex-col rounded-2xl border border-hair bg-paper p-7 shadow-sm">
+                    <span className="grid h-14 w-14 place-items-center rounded-full bg-ink text-dawn">
+                      <TierIcon name={tier.icon} />
+                    </span>
+                    <h3 className="mt-5 font-display text-xl font-semibold uppercase tracking-[0.03em] text-ink">
+                      {tier.name}
+                    </h3>
+                    <p className="mt-1.5 font-display text-2xl font-semibold text-gold">
+                      {tier.price}
+                      <span className="text-sm font-normal text-muted"> {tier.cadence}</span>
+                    </p>
+                    <p className="mt-3 flex-1 text-[0.98rem] leading-relaxed text-body">{tier.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </DragScroller>
+          <p className="mt-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-muted">
+            Drag or swipe to see all levels →
+          </p>
+        </Reveal>
+
+        <div className="mx-auto mt-12 max-w-4xl px-5 sm:px-8">
+          {/* Stewardship commitment */}
+          <Reveal>
+            <div className="rounded-2xl border-2 border-dawn/30 bg-ink p-2">
+              <div className="rounded-xl ring-1 ring-inset ring-dawn/40">
+                <div className="flex flex-col items-start gap-5 p-7 sm:flex-row sm:p-9">
+                  <span className="shrink-0 text-dawn">
+                    <ShieldIcon />
+                  </span>
+                  <div>
+                    <h3 className="font-display text-xl font-semibold uppercase tracking-[0.04em] text-dawn">
+                      {PARTNER.monthly.stewardship.title}
+                    </h3>
+                    <p className="mt-3 leading-relaxed text-white/85">
+                      {PARTNER.monthly.stewardship.body}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Giving information */}
+          <Reveal className="mt-6">
+            <div className="rounded-2xl border border-gold/30 bg-cream-2/50 p-7 sm:p-9">
+              <div className="flex flex-col gap-5 sm:flex-row">
+                <span className="shrink-0 text-dawn-deep">
+                  <GivingIcon />
+                </span>
+                <div className="flex-1">
+                  <h3 className="font-display text-lg font-semibold uppercase tracking-[0.04em] text-ink">
+                    {PARTNER.monthly.giving.title}
+                  </h3>
+                  <ul className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+                    {PARTNER.monthly.giving.points.map((p) => (
+                      <li key={p} className="flex gap-2.5 leading-relaxed text-body">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Verse + closing */}
+          <Reveal className="mt-14 text-center">
+            <p className="mx-auto max-w-2xl font-display text-xl italic leading-relaxed text-ink">
+              &ldquo;{PARTNER.monthly.verse.text}&rdquo;
+              <span className="mt-2 block text-sm font-semibold not-italic uppercase tracking-[0.16em] text-gold">
+                {PARTNER.monthly.verse.ref}
+              </span>
+            </p>
+            <SignatureRule className="mt-7" />
+            <p className="mx-auto mt-7 max-w-2xl font-display text-lg font-semibold leading-relaxed text-ink">
+              {PARTNER.monthly.closing[0]}
+            </p>
+            <p className="mx-auto mt-2 max-w-2xl font-display text-lg italic leading-relaxed text-dawn-deep">
+              {PARTNER.monthly.closing[1]}
+            </p>
+            <a
+              href="#give"
+              className="mt-9 inline-block rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/20 transition-colors hover:bg-ink"
+            >
+              Become a partner
+            </a>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Partnership signup form */}
+      <section id="give" className="scroll-mt-24 border-t border-hair bg-cream">
+        <div className="mx-auto max-w-2xl px-5 py-20 sm:px-8 sm:py-24">
+          <Reveal className="text-center">
+            <p className="eyebrow text-gold">Become a Partner</p>
+            <h2 className="mt-4 font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
+              Take the first step
+            </h2>
+            <SignatureRule className="mt-6" />
+            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-body">
+              A few quick steps — tell us about you, choose your gift, then give securely by card or by mail.
+              Joe will personally follow up either way.
+            </p>
+          </Reveal>
+          <Reveal delay={120} className="mt-10">
+            <PartnerForm />
+          </Reveal>
+        </div>
+      </section>
+
+
       {/* Opening vision */}
       <section className="bg-cream">
         <div className="mx-auto max-w-4xl px-5 py-20 sm:px-8 sm:py-24">
@@ -251,118 +385,6 @@ export default function PartnerPage() {
         </div>
       </section>
 
-      {/* Become a Monthly Partner */}
-      <section className="bg-cream py-20 sm:py-24">
-        <div className="mx-auto max-w-4xl px-5 sm:px-8">
-          <Reveal className="text-center">
-            <h2 className="font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
-              {PARTNER.monthly.title}
-            </h2>
-            <SignatureRule className="mt-6" />
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-body">
-              {PARTNER.monthly.intro}
-            </p>
-          </Reveal>
-        </div>
-
-        {/* Tiers — full-width horizontal scroller (pan with mouse or thumb) */}
-        <Reveal className="mt-12">
-          <DragScroller className="pb-4">
-            <ul className="flex w-max snap-x snap-mandatory gap-5 px-5 sm:px-8 lg:px-[max(2rem,calc((100vw-56rem)/2))]">
-              {PARTNER.monthly.tiers.map((tier) => (
-                <li key={tier.name} className="w-[270px] shrink-0 snap-start sm:w-[300px]">
-                  <div className="flex h-full flex-col rounded-2xl border border-hair bg-paper p-7 shadow-sm">
-                    <span className="grid h-14 w-14 place-items-center rounded-full bg-ink text-dawn">
-                      <TierIcon name={tier.icon} />
-                    </span>
-                    <h3 className="mt-5 font-display text-xl font-semibold uppercase tracking-[0.03em] text-ink">
-                      {tier.name}
-                    </h3>
-                    <p className="mt-1.5 font-display text-2xl font-semibold text-gold">
-                      {tier.price}
-                      <span className="text-sm font-normal text-muted"> {tier.cadence}</span>
-                    </p>
-                    <p className="mt-3 flex-1 text-[0.98rem] leading-relaxed text-body">{tier.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </DragScroller>
-          <p className="mt-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-muted">
-            Drag or swipe to see all levels →
-          </p>
-        </Reveal>
-
-        <div className="mx-auto mt-12 max-w-4xl px-5 sm:px-8">
-          {/* Stewardship commitment */}
-          <Reveal>
-            <div className="rounded-2xl border-2 border-dawn/30 bg-ink p-2">
-              <div className="rounded-xl ring-1 ring-inset ring-dawn/40">
-                <div className="flex flex-col items-start gap-5 p-7 sm:flex-row sm:p-9">
-                  <span className="shrink-0 text-dawn">
-                    <ShieldIcon />
-                  </span>
-                  <div>
-                    <h3 className="font-display text-xl font-semibold uppercase tracking-[0.04em] text-dawn">
-                      {PARTNER.monthly.stewardship.title}
-                    </h3>
-                    <p className="mt-3 leading-relaxed text-white/85">
-                      {PARTNER.monthly.stewardship.body}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Giving information */}
-          <Reveal className="mt-6">
-            <div className="rounded-2xl border border-gold/30 bg-cream-2/50 p-7 sm:p-9">
-              <div className="flex flex-col gap-5 sm:flex-row">
-                <span className="shrink-0 text-dawn-deep">
-                  <GivingIcon />
-                </span>
-                <div className="flex-1">
-                  <h3 className="font-display text-lg font-semibold uppercase tracking-[0.04em] text-ink">
-                    {PARTNER.monthly.giving.title}
-                  </h3>
-                  <ul className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
-                    {PARTNER.monthly.giving.points.map((p) => (
-                      <li key={p} className="flex gap-2.5 leading-relaxed text-body">
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden />
-                        {p}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Verse + closing */}
-          <Reveal className="mt-14 text-center">
-            <p className="mx-auto max-w-2xl font-display text-xl italic leading-relaxed text-ink">
-              &ldquo;{PARTNER.monthly.verse.text}&rdquo;
-              <span className="mt-2 block text-sm font-semibold not-italic uppercase tracking-[0.16em] text-gold">
-                {PARTNER.monthly.verse.ref}
-              </span>
-            </p>
-            <SignatureRule className="mt-7" />
-            <p className="mx-auto mt-7 max-w-2xl font-display text-lg font-semibold leading-relaxed text-ink">
-              {PARTNER.monthly.closing[0]}
-            </p>
-            <p className="mx-auto mt-2 max-w-2xl font-display text-lg italic leading-relaxed text-dawn-deep">
-              {PARTNER.monthly.closing[1]}
-            </p>
-            <a
-              href="#signup"
-              className="mt-9 inline-block rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/20 transition-colors hover:bg-ink"
-            >
-              Become a partner
-            </a>
-          </Reveal>
-        </div>
-      </section>
 
       {/* Open door — a call to walk through it */}
       <section className="relative overflow-hidden">
@@ -390,7 +412,7 @@ export default function PartnerPage() {
               Partners to help establish Following the Leader for generations to come.
             </p>
             <a
-              href="#signup"
+              href="#give"
               className="mt-9 inline-block rounded-full bg-white px-8 py-3.5 text-[0.98rem] font-semibold text-ink shadow-lg shadow-black/25 transition-colors hover:bg-dawn"
             >
               Will you prayerfully consider it?
@@ -454,7 +476,7 @@ export default function PartnerPage() {
 
                 <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
                   <a
-                    href="#signup"
+                    href="#give"
                     className="rounded-full bg-dawn-deep px-7 py-3.5 text-center text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/20 transition-colors hover:bg-ink"
                   >
                     {PARTNER.invitation.cta}
@@ -481,25 +503,6 @@ export default function PartnerPage() {
         </div>
       </section>
 
-      {/* Partnership signup form */}
-      <section id="signup" className="scroll-mt-24 border-t border-hair bg-cream">
-        <div className="mx-auto max-w-2xl px-5 py-20 sm:px-8 sm:py-24">
-          <Reveal className="text-center">
-            <p className="eyebrow text-gold">Become a Partner</p>
-            <h2 className="mt-4 font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
-              Take the first step
-            </h2>
-            <SignatureRule className="mt-6" />
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-body">
-              Two quick steps — tell us about you and the gift you have in mind. It only takes a minute,
-              we&apos;ll send you where to mail your check, and Joe will personally follow up.
-            </p>
-          </Reveal>
-          <Reveal delay={120} className="mt-10">
-            <PartnerForm />
-          </Reveal>
-        </div>
-      </section>
     </>
   );
 }

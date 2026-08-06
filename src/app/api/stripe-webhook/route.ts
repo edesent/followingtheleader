@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { getStripe, stripeConfigured } from "@/lib/stripe";
 import { createPrintJob, luluConfigured } from "@/lib/lulu";
-import { dbConfigured, recordOrder } from "@/lib/db";
-import { NEW_RELEASE } from "@/config/site";
+import { dbConfigured, recordOrder, recordPartner } from "@/lib/db";
+import { NEW_RELEASE, SITE } from "@/config/site";
 
 export const runtime = "nodejs";
 
@@ -33,6 +33,17 @@ export async function POST(request: Request) {
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
+
+    // Card gift to the ministry — record it and notify Joe. No shipping/print.
+    if (session.metadata?.type === "partner") {
+      try {
+        await handlePartnerGift(session);
+      } catch (err) {
+        console.error("Partner gift handling error:", err);
+      }
+      return NextResponse.json({ received: true });
+    }
+
     try {
       const full = await stripe.checkout.sessions.retrieve(session.id, {
         expand: ["line_items"],
@@ -116,4 +127,63 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.json({ received: true });
+}
+
+/** Record a completed card gift and notify the ministry. */
+async function handlePartnerGift(session: Stripe.Checkout.Session) {
+  const m = session.metadata || {};
+  const name = m.name || session.customer_details?.name || "";
+  const email = m.email || session.customer_details?.email || "";
+  const monthly = (m.frequency || "").toLowerCase() === "monthly";
+  const amountLabel =
+    m.amount_label ||
+    (session.amount_total != null ? `$${(session.amount_total / 100).toFixed(2)}` : "");
+  const method = monthly ? "Card — monthly" : "Card — one-time";
+
+  if (dbConfigured()) {
+    try {
+      await recordPartner({
+        name,
+        email,
+        phone: m.phone || "",
+        org: m.org || "",
+        interest: m.interest || "",
+        amount: amountLabel,
+        frequency: m.frequency || "",
+        method,
+        message: m.message || "",
+      });
+    } catch (e) {
+      console.error("Partner gift DB insert failed:", e);
+    }
+  }
+
+  const key = process.env.RESEND_API_KEY;
+  const to = process.env.PARTNER_NOTIFY_EMAIL || SITE.email;
+  if (key) {
+    await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: "Following the Leader <partner@elijahdesent.com>",
+        to: [to],
+        ...(email ? { reply_to: email } : {}),
+        subject: `New card gift: ${amountLabel}${monthly ? " (monthly)" : ""} — ${name}`,
+        text: [
+          "A card gift was just completed on the website.",
+          "",
+          `Name: ${name}`,
+          `Email: ${email}`,
+          `Phone: ${m.phone || "—"}`,
+          `Church / organization: ${m.org || "—"}`,
+          `Partnership type: ${m.interest || "—"}`,
+          `Gift: ${amountLabel}${monthly ? " — monthly (recurring subscription)" : " — one-time"}`,
+          `Method: ${method}`,
+          "",
+          "Message:",
+          m.message || "—",
+        ].join("\n"),
+      }),
+    }).catch((e) => console.error("Partner gift notify failed:", e));
+  }
 }

@@ -5,7 +5,7 @@ import { SITE } from "@/config/site";
 
 type Status = "idle" | "loading" | "done" | "error";
 
-const STEPS = ["Your info", "Your gift"];
+const STEPS = ["Your info", "Your gift", "How to give"];
 
 const INTEREST_OPTIONS = [
   "Become a Founding Partner",
@@ -14,29 +14,28 @@ const INTEREST_OPTIONS = [
   "I'm not sure yet — let's talk",
 ];
 
-const AMOUNT_PRESETS = ["$50", "$100", "$250", "$500", "$1,000"];
+const AMOUNT_PRESETS = ["$25", "$50", "$100", "$250", "$500"];
 
 const emailValid = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+const amountCents = (a: string) => Math.round(parseFloat(a.replace(/[^0-9.]/g, "")) * 100) || 0;
 
 /**
- * Two-step partnership signup: contact → gift.
- *
- * Giving is by check for now, so the form gathers intent and hands off to Joe —
- * there is no payment step. The mailing details appear on the success screen and
- * are repeated in the confirmation email. When online card giving is added, add a
- * third step here for the payment method.
+ * Three-step partnership form: contact → gift → how to give.
+ * Card gifts go to Stripe (monthly = recurring); checks show mailing details.
  */
 export default function PartnerForm() {
   const [step, setStep] = useState(1);
   const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
     org: "",
     interest: INTEREST_OPTIONS[0],
-    frequency: "One-time",
+    frequency: "Monthly",
     amount: "",
+    method: "" as "" | "card" | "check",
     message: "",
   });
 
@@ -44,12 +43,43 @@ export default function PartnerForm() {
     (k: keyof typeof form) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
       setForm((f) => ({ ...f, [k]: e.target.value }));
-
   const patch = (v: Partial<typeof form>) => setForm((f) => ({ ...f, ...v }));
 
   const step1Ok = form.name.trim().length > 0 && emailValid(form.email);
+  const hasAmount = amountCents(form.amount) >= 100;
 
   async function submit() {
+    setErrorMsg("");
+    if (!form.method) return;
+
+    // Card → Stripe Checkout (requires an amount).
+    if (form.method === "card") {
+      if (!hasAmount) {
+        setErrorMsg("Please choose an amount to give by card.");
+        return;
+      }
+      setStatus("loading");
+      try {
+        const res = await fetch("/api/partner-checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        });
+        const data = await res.json();
+        if (res.ok && data.url) {
+          window.location.href = data.url;
+          return;
+        }
+        setErrorMsg(data.error || "Could not start card giving. Please try again.");
+        setStatus("idle");
+      } catch {
+        setErrorMsg("Something went wrong. Please try again.");
+        setStatus("idle");
+      }
+      return;
+    }
+
+    // Check → email Joe + show mailing details.
     setStatus("loading");
     try {
       const res = await fetch("/api/partner", {
@@ -64,7 +94,7 @@ export default function PartnerForm() {
     }
   }
 
-  /* ---------- Success ---------- */
+  /* ---------- Success (check) ---------- */
   if (status === "done") {
     const firstName = form.name.trim().split(/\s+/)[0];
     return (
@@ -77,18 +107,11 @@ export default function PartnerForm() {
         <p className="mt-4 font-display text-2xl font-semibold text-ink">
           Thank you{firstName ? `, ${firstName}` : ""}.
         </p>
-        <p className="mt-2 text-body">
-          Joe has been notified personally and will follow up with you soon. A copy of these details is
-          on its way to your inbox.
-        </p>
-
+        <p className="mt-2 text-body">Joe has been notified and will follow up with you personally.</p>
         <div className="mt-7 rounded-xl border border-hair bg-cream-2/50 p-6 text-left">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-dawn-deep">
-            To send your gift
-          </p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-dawn-deep">To send your gift</p>
           <p className="mt-2 leading-relaxed text-body">
-            Make your check payable to{" "}
-            <span className="font-semibold text-ink">Following the Leader</span> and mail it to:
+            Make your check payable to <span className="font-semibold text-ink">Following the Leader</span> and mail it to:
           </p>
           <p className="mt-3 font-display text-lg leading-snug text-ink">
             Following the Leader
@@ -98,10 +121,8 @@ export default function PartnerForm() {
             {SITE.address.city}, {SITE.address.state} {SITE.address.zip}
           </p>
           <p className="mt-4 text-sm leading-relaxed text-muted">
-            Following the Leader is a federally recognized 501(c)(3) nonprofit ministry. Gifts are
-            tax-deductible as allowed by law, and a receipt will be provided for every contribution.
-            If you&apos;d prefer to give through a donor-advised fund or appreciated securities, just
-            mention it when Joe reaches out.
+            A federally recognized 501(c)(3) nonprofit ministry. Gifts are tax-deductible as allowed
+            by law, and a receipt will be provided for every contribution.
           </p>
         </div>
       </div>
@@ -124,11 +145,7 @@ export default function PartnerForm() {
               <div className="flex items-center gap-2.5">
                 <span
                   className={`grid h-8 w-8 shrink-0 place-items-center rounded-full text-sm font-semibold transition-colors ${
-                    done
-                      ? "bg-dawn-deep text-white"
-                      : active
-                      ? "bg-dawn-deep/10 text-dawn-deep ring-2 ring-dawn-deep"
-                      : "bg-cream-2 text-muted"
+                    done ? "bg-dawn-deep text-white" : active ? "bg-dawn-deep/10 text-dawn-deep ring-2 ring-dawn-deep" : "bg-cream-2 text-muted"
                   }`}
                 >
                   {done ? (
@@ -139,66 +156,94 @@ export default function PartnerForm() {
                     n
                   )}
                 </span>
-                <span
-                  className={`hidden text-sm font-semibold sm:inline ${
-                    active || done ? "text-ink" : "text-muted"
-                  }`}
-                >
+                <span className={`hidden text-sm font-semibold sm:inline ${active || done ? "text-ink" : "text-muted"}`}>
                   {label}
                 </span>
               </div>
-              {i < STEPS.length - 1 && (
-                <span className={`mx-3 h-px flex-1 ${done ? "bg-dawn-deep" : "bg-hair"}`} />
-              )}
+              {i < STEPS.length - 1 && <span className={`mx-3 h-px flex-1 ${done ? "bg-dawn-deep" : "bg-hair"}`} />}
             </li>
           );
         })}
       </ol>
 
       <div className="mt-8">
-        {/* ---------- Step 1: contact ---------- */}
+        {/* Step 1 */}
         {step === 1 && (
-          <div className="space-y-3">
-            <div className="grid gap-3 sm:grid-cols-2">
-              <input
-                className={inputClass}
-                type="text"
-                placeholder="Your name *"
-                autoComplete="name"
-                value={form.name}
-                onChange={set("name")}
-              />
-              <input
-                className={inputClass}
-                type="email"
-                placeholder="Email address *"
-                autoComplete="email"
-                value={form.email}
-                onChange={set("email")}
-              />
-              <input
-                className={inputClass}
-                type="tel"
-                placeholder="Phone (optional)"
-                autoComplete="tel"
-                value={form.phone}
-                onChange={set("phone")}
-              />
-              <input
-                className={inputClass}
-                type="text"
-                placeholder="Church / organization (optional)"
-                autoComplete="organization"
-                value={form.org}
-                onChange={set("org")}
-              />
-            </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <input className={inputClass} type="text" placeholder="Your name *" autoComplete="name" value={form.name} onChange={set("name")} />
+            <input className={inputClass} type="email" placeholder="Email address *" autoComplete="email" value={form.email} onChange={set("email")} />
+            <input className={inputClass} type="tel" placeholder="Phone (optional)" autoComplete="tel" value={form.phone} onChange={set("phone")} />
+            <input className={inputClass} type="text" placeholder="Church / organization (optional)" autoComplete="organization" value={form.org} onChange={set("org")} />
           </div>
         )}
 
-        {/* ---------- Step 2: gift ---------- */}
+        {/* Step 2 */}
         {step === 2 && (
           <div className="space-y-6">
+            {/* Frequency — monthly emphasized */}
+            <div>
+              <p className="mb-2 text-sm font-semibold text-ink">How often?</p>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => patch({ frequency: "Monthly" })}
+                  className={`relative rounded-xl border p-4 text-left transition-colors ${
+                    form.frequency === "Monthly" ? "border-dawn-deep bg-dawn-deep/[0.06] ring-1 ring-dawn-deep" : "border-hair-2 hover:border-dawn-deep/50"
+                  }`}
+                >
+                  <span className="absolute right-3 top-3 rounded-full bg-dawn/20 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-dawn-deep">
+                    Most impact
+                  </span>
+                  <p className="font-display text-lg font-semibold text-ink">Monthly</p>
+                  <p className="mt-0.5 text-xs leading-snug text-muted">Steady support that sustains the ministry.</p>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => patch({ frequency: "One-time" })}
+                  className={`rounded-xl border p-4 text-left transition-colors ${
+                    form.frequency === "One-time" ? "border-dawn-deep bg-dawn-deep/[0.06] ring-1 ring-dawn-deep" : "border-hair-2 hover:border-dawn-deep/50"
+                  }`}
+                >
+                  <p className="font-display text-lg font-semibold text-ink">One-time</p>
+                  <p className="mt-0.5 text-xs leading-snug text-muted">A single gift, given once.</p>
+                </button>
+              </div>
+            </div>
+
+            {/* Amount */}
+            <div>
+              <p className="mb-2 text-sm font-semibold text-ink">
+                Amount {form.frequency === "Monthly" ? "per month" : ""}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {AMOUNT_PRESETS.map((a) => {
+                  const on = form.amount === a;
+                  return (
+                    <button
+                      key={a}
+                      type="button"
+                      onClick={() => patch({ amount: a })}
+                      className={`rounded-full border px-5 py-2 text-[0.95rem] font-semibold transition-colors ${
+                        on ? "border-dawn-deep bg-dawn-deep text-white" : "border-hair-2 text-body hover:border-dawn-deep/50"
+                      }`}
+                    >
+                      {a}
+                      {form.frequency === "Monthly" ? <span className="text-xs font-normal">/mo</span> : null}
+                    </button>
+                  );
+                })}
+              </div>
+              <input
+                className={`${inputClass} mt-3`}
+                type="text"
+                inputMode="decimal"
+                placeholder="Or enter an amount"
+                value={AMOUNT_PRESETS.includes(form.amount) ? "" : form.amount}
+                onChange={set("amount")}
+              />
+            </div>
+
+            {/* Interest */}
             <div>
               <p className="mb-2 text-sm font-semibold text-ink">How would you like to partner?</p>
               <div className="grid gap-2.5 sm:grid-cols-2">
@@ -210,9 +255,7 @@ export default function PartnerForm() {
                       type="button"
                       onClick={() => patch({ interest: o })}
                       className={`rounded-xl border px-4 py-3 text-left text-[0.95rem] font-medium transition-colors ${
-                        on
-                          ? "border-dawn-deep bg-dawn-deep/[0.06] text-ink"
-                          : "border-hair-2 text-body hover:border-dawn-deep/50"
+                        on ? "border-dawn-deep bg-dawn-deep/[0.06] text-ink" : "border-hair-2 text-body hover:border-dawn-deep/50"
                       }`}
                     >
                       {o}
@@ -221,57 +264,43 @@ export default function PartnerForm() {
                 })}
               </div>
             </div>
+          </div>
+        )}
 
-            <div>
-              <p className="mb-2 text-sm font-semibold text-ink">Gift amount you have in mind</p>
-              <div className="flex flex-wrap gap-2">
-                {AMOUNT_PRESETS.map((a) => {
-                  const on = form.amount === a;
-                  return (
-                    <button
-                      key={a}
-                      type="button"
-                      onClick={() => patch({ amount: a })}
-                      className={`rounded-full border px-5 py-2 text-[0.95rem] font-semibold transition-colors ${
-                        on
-                          ? "border-dawn-deep bg-dawn-deep text-white"
-                          : "border-hair-2 text-body hover:border-dawn-deep/50"
-                      }`}
-                    >
-                      {a}
-                    </button>
-                  );
-                })}
-              </div>
-              <input
-                className={`${inputClass} mt-3`}
-                type="text"
-                placeholder="Or enter another amount (optional)"
-                value={AMOUNT_PRESETS.includes(form.amount) ? "" : form.amount}
-                onChange={set("amount")}
-              />
+        {/* Step 3 */}
+        {step === 3 && (
+          <div className="space-y-4">
+            <p className="text-sm font-semibold text-ink">How would you like to give?</p>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <button
+                type="button"
+                onClick={() => patch({ method: "card" })}
+                className={`rounded-xl border p-5 text-left transition-colors ${
+                  form.method === "card" ? "border-dawn-deep bg-dawn-deep/[0.06]" : "border-hair-2 hover:border-dawn-deep/50"
+                }`}
+              >
+                <p className="font-display text-lg font-semibold text-ink">Give by card</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-body">
+                  Secure checkout{form.frequency === "Monthly" ? " — your monthly gift renews automatically." : "."}
+                </p>
+              </button>
+              <button
+                type="button"
+                onClick={() => patch({ method: "check" })}
+                className={`rounded-xl border p-5 text-left transition-colors ${
+                  form.method === "check" ? "border-dawn-deep bg-dawn-deep/[0.06]" : "border-hair-2 hover:border-dawn-deep/50"
+                }`}
+              >
+                <p className="font-display text-lg font-semibold text-ink">Mail a check</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-body">
+                  We&apos;ll show you where to send it and Joe will follow up.
+                </p>
+              </button>
             </div>
 
-            <div>
-              <p className="mb-2 text-sm font-semibold text-ink">How often?</p>
-              <div className="inline-flex rounded-full border border-hair-2 p-1">
-                {["One-time", "Monthly"].map((fq) => {
-                  const on = form.frequency === fq;
-                  return (
-                    <button
-                      key={fq}
-                      type="button"
-                      onClick={() => patch({ frequency: fq })}
-                      className={`rounded-full px-5 py-1.5 text-[0.9rem] font-semibold transition-colors ${
-                        on ? "bg-dawn-deep text-white" : "text-body hover:text-dawn-deep"
-                      }`}
-                    >
-                      {fq}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            {form.method === "card" && !hasAmount && (
+              <p className="text-sm text-dawn-deep">Go back and choose an amount to give by card.</p>
+            )}
 
             <textarea
               className={`${inputClass} min-h-[90px] resize-y`}
@@ -280,43 +309,32 @@ export default function PartnerForm() {
               onChange={set("message")}
             />
 
-            <p className="rounded-xl border border-hair bg-cream-2/50 px-4 py-3 text-sm leading-relaxed text-body">
-              Gifts are given by check. Once you send this, we&apos;ll show you exactly where to mail
-              it — and Joe will follow up with you personally.
-            </p>
-
+            {errorMsg && <p className="text-sm text-dawn-deep">{errorMsg}</p>}
             {status === "error" && (
               <p className="text-sm text-dawn-deep">
                 Something went wrong. Please try again, or email{" "}
-                <a href={`mailto:${SITE.email}`} className="underline">
-                  {SITE.email}
-                </a>
-                .
+                <a href={`mailto:${SITE.email}`} className="underline">{SITE.email}</a>.
               </p>
             )}
           </div>
         )}
       </div>
 
-      {/* ---------- Nav ---------- */}
+      {/* Nav */}
       <div className="mt-8 flex items-center justify-between gap-3">
         {step > 1 ? (
-          <button
-            type="button"
-            onClick={() => setStep((s) => s - 1)}
-            className="rounded-full px-5 py-3 text-[0.95rem] font-semibold text-ink transition-colors hover:text-dawn-deep"
-          >
+          <button type="button" onClick={() => setStep((s) => s - 1)} className="rounded-full px-5 py-3 text-[0.95rem] font-semibold text-ink transition-colors hover:text-dawn-deep">
             ← Back
           </button>
         ) : (
           <span />
         )}
 
-        {step < STEPS.length ? (
+        {step < 3 ? (
           <button
             type="button"
             onClick={() => setStep((s) => s + 1)}
-            disabled={!step1Ok}
+            disabled={step === 1 && !step1Ok}
             className="rounded-full bg-dawn-deep px-8 py-3 text-[0.95rem] font-semibold text-white shadow-lg shadow-dawn-deep/20 transition-all hover:bg-ink disabled:opacity-50"
           >
             Continue
@@ -325,17 +343,17 @@ export default function PartnerForm() {
           <button
             type="button"
             onClick={submit}
-            disabled={!step1Ok || status === "loading"}
+            disabled={!form.method || status === "loading"}
             className="rounded-full bg-dawn-deep px-8 py-3 text-[0.95rem] font-semibold text-white shadow-lg shadow-dawn-deep/20 transition-all hover:bg-ink disabled:opacity-50"
           >
-            {status === "loading" ? "Sending…" : "Send my interest to Joe"}
+            {status === "loading"
+              ? "Working…"
+              : form.method === "card"
+              ? "Continue to secure checkout"
+              : "Send to Joe"}
           </button>
         )}
       </div>
-
-      {step === 1 && !step1Ok && (
-        <p className="mt-3 text-right text-xs text-muted">Name and a valid email are required to continue.</p>
-      )}
     </div>
   );
 }
