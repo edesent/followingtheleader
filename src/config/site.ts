@@ -707,6 +707,8 @@ export const PARTNER = {
       {
         icon: "book",
         name: "Discipleship Partner",
+        featured: true,
+        badge: "Most Popular",
         price: "$50",
         cadence: "/ month",
         body: "Your partnership helps create Bible studies, books, and resources that equip pastors and strengthen local churches.",

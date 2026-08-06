@@ -96,13 +96,22 @@ export default function PartnerPage() {
       <section className="bg-cream py-20 sm:py-24">
         <div className="mx-auto max-w-4xl px-5 sm:px-8">
           <Reveal className="text-center">
-            <h2 className="font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
+            <p className="eyebrow text-gold">Monthly Partnership</p>
+            <h2 className="mt-4 font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
               {PARTNER.monthly.title}
             </h2>
             <SignatureRule className="mt-6" />
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-body">
               {PARTNER.monthly.intro}
             </p>
+            <a
+              href="#give"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/25 transition-colors hover:bg-ink"
+            >
+              Give monthly
+              <span aria-hidden>→</span>
+            </a>
+            <p className="mt-3 text-sm text-muted">Give securely by card, or by mail — any amount.</p>
           </Reveal>
         </div>
 
@@ -110,23 +119,51 @@ export default function PartnerPage() {
         <Reveal className="mt-12">
           <DragScroller className="pb-4">
             <ul className="flex w-max snap-x snap-mandatory gap-5 px-5 sm:px-8 lg:px-[max(2rem,calc((100vw-56rem)/2))]">
-              {PARTNER.monthly.tiers.map((tier) => (
-                <li key={tier.name} className="w-[270px] shrink-0 snap-start sm:w-[300px]">
-                  <div className="flex h-full flex-col rounded-2xl border border-hair bg-paper p-7 shadow-sm">
-                    <span className="grid h-14 w-14 place-items-center rounded-full bg-ink text-dawn">
-                      <TierIcon name={tier.icon} />
-                    </span>
-                    <h3 className="mt-5 font-display text-xl font-semibold uppercase tracking-[0.03em] text-ink">
-                      {tier.name}
-                    </h3>
-                    <p className="mt-1.5 font-display text-2xl font-semibold text-gold">
-                      {tier.price}
-                      <span className="text-sm font-normal text-muted"> {tier.cadence}</span>
-                    </p>
-                    <p className="mt-3 flex-1 text-[0.98rem] leading-relaxed text-body">{tier.body}</p>
-                  </div>
-                </li>
-              ))}
+              {PARTNER.monthly.tiers.map((tier) => {
+                const t = tier as typeof tier & { featured?: boolean; badge?: string };
+                return (
+                  <li key={tier.name} className="w-[270px] shrink-0 snap-start sm:w-[300px]">
+                    <div
+                      className={`flex h-full flex-col rounded-2xl border p-7 ${
+                        t.featured
+                          ? "border-dawn-deep bg-paper shadow-lg shadow-dawn-deep/15 ring-1 ring-dawn-deep"
+                          : "border-hair bg-paper shadow-sm"
+                      }`}
+                    >
+                      {t.badge && (
+                        <span className="mb-4 inline-flex self-start rounded-full bg-dawn-deep px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-white">
+                          {t.badge}
+                        </span>
+                      )}
+                      <span
+                        className={`grid h-14 w-14 place-items-center rounded-full ${
+                          t.featured ? "bg-dawn-deep text-white" : "bg-ink text-dawn"
+                        }`}
+                      >
+                        <TierIcon name={tier.icon} />
+                      </span>
+                      <h3 className="mt-5 font-display text-xl font-semibold uppercase tracking-[0.03em] text-ink">
+                        {tier.name}
+                      </h3>
+                      <p className="mt-1.5 font-display text-2xl font-semibold text-gold">
+                        {tier.price}
+                        <span className="text-sm font-normal text-muted"> {tier.cadence}</span>
+                      </p>
+                      <p className="mt-3 flex-1 text-[0.98rem] leading-relaxed text-body">{tier.body}</p>
+                      <a
+                        href={`?amount=${tier.price.replace(/[^0-9]/g, "")}&freq=monthly#give`}
+                        className={`mt-5 rounded-full px-5 py-2.5 text-center text-sm font-semibold transition-colors ${
+                          t.featured
+                            ? "bg-dawn-deep text-white hover:bg-ink"
+                            : "border border-ink/15 text-ink hover:border-dawn-deep hover:text-dawn-deep"
+                        }`}
+                      >
+                        Give {tier.price}/mo
+                      </a>
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </DragScroller>
           <p className="mt-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-muted">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SITE } from "@/config/site";
 
 type Status = "idle" | "loading" | "done" | "error";
@@ -38,6 +38,19 @@ export default function PartnerForm() {
     method: "" as "" | "card" | "check",
     message: "",
   });
+
+  // Prefill amount/frequency when arriving from a tier button (?amount=50&freq=monthly).
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    const amt = q.get("amount");
+    const freq = q.get("freq");
+    if (!amt && !freq) return;
+    setForm((f) => ({
+      ...f,
+      amount: amt ? `$${amt.replace(/[^0-9]/g, "")}` : f.amount,
+      frequency: freq === "monthly" ? "Monthly" : freq === "onetime" ? "One-time" : f.frequency,
+    }));
+  }, []);
 
   const set =
     (k: keyof typeof form) =>
