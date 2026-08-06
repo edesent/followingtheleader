@@ -9,7 +9,8 @@
  * Required env vars:
  *   CONSTANT_CONTACT_CLIENT_ID       — API Key from the CC developer portal
  *   CONSTANT_CONTACT_CLIENT_SECRET   — the app secret
- *   CONSTANT_CONTACT_LIST_ID         — list subscribers are added to
+ *   CONSTANT_CONTACT_LIST_ID         — list(s) subscribers are added to;
+ *                                      comma-separate to use more than one
  *   CC_TOKEN_SECRET                  — random string; encrypts the stored token
  *   BLOB_READ_WRITE_TOKEN            — (already set) stores the token blob
  * Optional:
@@ -29,11 +30,22 @@ type StoredToken = {
   expires_at: number; // epoch ms (already includes a safety margin)
 };
 
+/**
+ * CONSTANT_CONTACT_LIST_ID may name more than one list, comma-separated — a new
+ * subscriber is added to all of them in a single call.
+ */
+function listIds(): string[] {
+  return (process.env.CONSTANT_CONTACT_LIST_ID || "")
+    .split(",")
+    .map((id) => id.trim())
+    .filter(Boolean);
+}
+
 export function ccConfig() {
   return {
     clientId: process.env.CONSTANT_CONTACT_CLIENT_ID || "",
     clientSecret: process.env.CONSTANT_CONTACT_CLIENT_SECRET || "",
-    listId: process.env.CONSTANT_CONTACT_LIST_ID || "",
+    listIds: listIds(),
     redirectUri:
       process.env.CONSTANT_CONTACT_REDIRECT_URI ||
       "https://followingtheleader.elijahdesent.com/api/cc/callback",
@@ -194,7 +206,7 @@ export async function upsertContact(input: {
   city?: string;
 }): Promise<void> {
   const c = ccConfig();
-  if (!c.listId) throw new Error("CONSTANT_CONTACT_LIST_ID is not set");
+  if (c.listIds.length === 0) throw new Error("CONSTANT_CONTACT_LIST_ID is not set");
   const token = await getAccessToken();
 
   let address: { kind: string; city?: string; state?: string } | undefined;
@@ -215,7 +227,7 @@ export async function upsertContact(input: {
       first_name: input.firstName || undefined,
       last_name: input.lastName || undefined,
       street_address: address,
-      list_memberships: [c.listId],
+      list_memberships: c.listIds,
     }),
   });
   if (!res.ok) {
