@@ -124,14 +124,14 @@ export default function PartnerPage() {
                 return (
                   <li key={tier.name} className="w-[270px] shrink-0 snap-start sm:w-[300px]">
                     <div
-                      className={`flex h-full flex-col rounded-2xl border p-7 ${
+                      className={`relative flex h-full flex-col rounded-2xl border p-7 ${
                         t.featured
                           ? "border-dawn-deep bg-paper shadow-lg shadow-dawn-deep/15 ring-1 ring-dawn-deep"
                           : "border-hair bg-paper shadow-sm"
                       }`}
                     >
                       {t.badge && (
-                        <span className="mb-4 inline-flex self-start rounded-full bg-dawn-deep px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-white">
+                        <span className="absolute right-5 top-5 rounded-full bg-dawn-deep px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-white">
                           {t.badge}
                         </span>
                       )}
