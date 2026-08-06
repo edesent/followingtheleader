@@ -320,6 +320,44 @@ export default function PartnerPage() {
         </div>
       </section>
 
+      {/* The vision ahead */}
+      <section className="relative overflow-hidden bg-ink">
+        <Image
+          src="/images/ftl-path-sunrise.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-ink/88 via-ink/78 to-ink/93"
+          aria-hidden
+        />
+        <div className="relative mx-auto max-w-5xl px-5 py-20 text-center sm:px-8 sm:py-24">
+          <Reveal>
+            <p className="eyebrow text-dawn">The best is yet to come</p>
+            <h2 className="mt-4 font-display text-[2.1rem] font-semibold text-white sm:text-[2.85rem]">
+              {PARTNER.future.heading}
+            </h2>
+            <SignatureRule className="mt-6" />
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/75">
+              {PARTNER.future.lead}
+            </p>
+          </Reveal>
+          <div className="mt-12 grid gap-6 sm:grid-cols-3 lg:grid-cols-5">
+            {PARTNER.future.goals.map((g, i) => (
+              <Reveal key={g.label} delay={i * 80}>
+                <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-7 backdrop-blur-sm">
+                  <p className="font-display text-3xl font-semibold text-dawn">{g.value}</p>
+                  <p className="mt-2 text-sm leading-snug text-white/70">{g.label}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* The burden */}
       <section className="bg-cream">
         <div className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-24">
@@ -384,43 +422,6 @@ export default function PartnerPage() {
         </div>
       </section>
 
-      {/* The vision ahead */}
-      <section className="relative overflow-hidden bg-ink">
-        <Image
-          src="/images/ftl-path-sunrise.jpg"
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover object-center"
-          aria-hidden
-        />
-        <div
-          className="absolute inset-0 bg-gradient-to-b from-ink/88 via-ink/78 to-ink/93"
-          aria-hidden
-        />
-        <div className="relative mx-auto max-w-5xl px-5 py-20 text-center sm:px-8 sm:py-24">
-          <Reveal>
-            <p className="eyebrow text-dawn">The best is yet to come</p>
-            <h2 className="mt-4 font-display text-[2.1rem] font-semibold text-white sm:text-[2.85rem]">
-              {PARTNER.future.heading}
-            </h2>
-            <SignatureRule className="mt-6" />
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/75">
-              {PARTNER.future.lead}
-            </p>
-          </Reveal>
-          <div className="mt-12 grid gap-6 sm:grid-cols-3 lg:grid-cols-5">
-            {PARTNER.future.goals.map((g, i) => (
-              <Reveal key={g.label} delay={i * 80}>
-                <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-7 backdrop-blur-sm">
-                  <p className="font-display text-3xl font-semibold text-dawn">{g.value}</p>
-                  <p className="mt-2 text-sm leading-snug text-white/70">{g.label}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
 
       {/* Open door — a call to walk through it */}
