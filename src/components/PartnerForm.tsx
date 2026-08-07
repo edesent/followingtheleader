@@ -267,7 +267,7 @@ export default function PartnerForm() {
                     form.frequency === "Monthly" ? "border-dawn-deep bg-dawn-deep/[0.06] ring-1 ring-dawn-deep" : "border-hair-2 hover:border-dawn-deep/50"
                   }`}
                 >
-                  <span className="absolute right-3 top-3 rounded-full bg-dawn/20 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-dawn-deep">
+                  <span className="absolute right-3 top-3 hidden rounded-full bg-dawn/20 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-dawn-deep sm:block">
                     Most impact
                   </span>
                   <p className="font-display text-lg font-semibold text-ink">Monthly</p>
