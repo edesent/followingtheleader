@@ -166,6 +166,22 @@ export default function PartnerForm() {
 
   return (
     <div className="rounded-2xl border border-hair bg-paper p-6 shadow-sm sm:p-8">
+      {/* The gift they picked, kept in view the whole way through */}
+      {form.amount && (
+        <div className="mb-6 rounded-xl border border-dawn-deep/25 bg-dawn-deep/[0.06] px-4 py-4 text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-dawn-deep">Your gift</p>
+          <p className="mt-1 font-display text-2xl font-semibold text-ink">
+            {form.amount}
+            <span className="text-base font-normal text-muted">
+              {form.frequency === "Monthly" ? " a month" : " one time"}
+            </span>
+          </p>
+          {prefilled && step < 2 && (
+            <p className="mt-1.5 text-sm text-muted">You can change this on the next step.</p>
+          )}
+        </div>
+      )}
+
       {/* Stepper */}
       <ol className="flex items-center">
         {STEPS.map((label, i) => {
