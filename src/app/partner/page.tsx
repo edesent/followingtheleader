@@ -242,13 +242,13 @@ export default function PartnerPage() {
       <section id="give" className="scroll-mt-24 border-t border-hair bg-cream">
         <div className="mx-auto max-w-2xl px-5 py-20 sm:px-8 sm:py-24">
           <Reveal className="text-center">
-            <p className="eyebrow text-gold">Become a Partner</p>
+            <p className="eyebrow text-gold">Give Now</p>
             <h2 className="mt-4 font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
-              Take the first step
+              Enter your details to give
             </h2>
             <SignatureRule className="mt-6" />
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-body">
-              A few quick steps — tell us about you, choose your gift, then give securely by card or by mail.
+              Three quick steps — your details, your gift, then give securely by card or by mail.
               Joe will personally follow up either way.
             </p>
           </Reveal>
