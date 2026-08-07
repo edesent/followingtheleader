@@ -5,7 +5,24 @@ import { SITE } from "@/config/site";
 
 type Status = "idle" | "loading" | "done" | "error";
 
-const STEPS = ["Your info", "Your gift", "How to give"];
+const STEPS = ["Your details", "Your gift", "How to give"];
+
+// Plain-English heading shown above each step, so it's always clear what the
+// form is asking for — especially on a phone, where the step labels are hidden.
+const STEP_INTRO = [
+  {
+    title: "Enter your details to give",
+    hint: "Start with your name and email. Joe uses these to send your receipt and to follow up with you personally.",
+  },
+  {
+    title: "Choose your gift",
+    hint: "Tell us how often and how much you'd like to give.",
+  },
+  {
+    title: "Choose how to give",
+    hint: "Give securely by card, or mail a check — either way, Joe will follow up.",
+  },
+];
 
 const INTEREST_OPTIONS = [
   "Become a Founding Partner",
