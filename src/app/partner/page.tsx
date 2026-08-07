@@ -8,9 +8,9 @@ import DragScroller from "@/components/DragScroller";
 import { PARTNER, SITE } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "Become a Founding Partner",
+  title: "Become a Monthly Partner",
   description:
-    "Join Dr. Joe Pettigrew in strengthening the Church for eternity. Partner with Following the Leader to equip believers, encourage pastors, and make disciples who make disciples.",
+    "Partner monthly with Dr. Joe Pettigrew and Following the Leader — helping equip believers, encourage pastors, and make disciples who make disciples.",
 };
 
 const svgProps = {
