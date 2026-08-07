@@ -63,6 +63,7 @@ export default function PartnerForm() {
     const amt = q.get("amount");
     const freq = q.get("freq");
     if (!amt && !freq) return;
+    setPrefilled(true);
     setForm((f) => ({
       ...f,
       amount: amt ? `$${amt.replace(/[^0-9]/g, "")}` : f.amount,
