@@ -239,8 +239,8 @@ export default function PartnerPage() {
       </section>
 
       {/* Partnership signup form */}
-      <section id="give" className="scroll-mt-24 border-t border-hair bg-cream">
-        <div className="mx-auto max-w-2xl px-5 py-20 sm:px-8 sm:py-24">
+      <section className="border-t border-hair bg-cream">
+        <div className="mx-auto max-w-2xl px-5 py-14 sm:px-8 sm:py-24">
           <Reveal className="text-center">
             <p className="eyebrow text-gold">Give Now</p>
             <h2 className="mt-4 font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
