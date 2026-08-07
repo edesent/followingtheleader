@@ -162,7 +162,9 @@ export default function PartnerForm() {
   }
 
   const inputClass =
-    "w-full rounded-xl border border-hair-2 bg-paper px-4 py-3 text-ink placeholder:text-muted/70 outline-none transition-colors focus:border-dawn-deep";
+    "w-full rounded-xl border border-hair-2 bg-paper px-4 py-3.5 text-[1.05rem] text-ink placeholder:text-muted/70 outline-none transition-colors focus:border-dawn-deep";
+
+  const labelClass = "mb-1.5 block text-[0.95rem] font-semibold text-ink";
 
   return (
     <div className="rounded-2xl border border-hair bg-paper p-6 shadow-sm sm:p-8">
