@@ -252,9 +252,11 @@ export default function PartnerPage() {
               Joe will personally follow up either way.
             </p>
           </Reveal>
-          <Reveal delay={120} className="mt-10">
-            <PartnerForm />
-          </Reveal>
+          <div id="give" className="mt-8 scroll-mt-[84px] sm:mt-10">
+            <Reveal delay={120}>
+              <PartnerForm />
+            </Reveal>
+          </div>
         </div>
       </section>
 
