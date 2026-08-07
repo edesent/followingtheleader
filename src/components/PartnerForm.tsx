@@ -225,22 +225,31 @@ export default function PartnerForm() {
       <div className="mt-6">
         {/* Step 1 */}
         {step === 1 && (
-          <div className="space-y-4">
-            {prefilled && form.amount && (
-              <div className="rounded-xl border border-dawn-deep/25 bg-dawn-deep/[0.06] px-4 py-3 text-[0.95rem] leading-relaxed">
-                <span className="font-semibold text-ink">
-                  Your gift: {form.amount}
-                  {form.frequency === "Monthly" ? " a month" : " one time"}
-                </span>{" "}
-                <span className="text-muted">— you can change this on the next step.</span>
-              </div>
-            )}
-            <div className="grid gap-3 sm:grid-cols-2">
-            <input className={inputClass} type="text" placeholder="Your name *" autoComplete="name" value={form.name} onChange={set("name")} />
-            <input className={inputClass} type="email" placeholder="Email address *" autoComplete="email" value={form.email} onChange={set("email")} />
-            <input className={inputClass} type="tel" placeholder="Phone (optional)" autoComplete="tel" value={form.phone} onChange={set("phone")} />
-            <input className={inputClass} type="text" placeholder="Church / organization (optional)" autoComplete="organization" value={form.org} onChange={set("org")} />
-            </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <label className="block">
+              <span className={labelClass}>
+                Your name <span className="text-dawn-deep">(required)</span>
+              </span>
+              <input className={inputClass} type="text" autoComplete="name" value={form.name} onChange={set("name")} />
+            </label>
+            <label className="block">
+              <span className={labelClass}>
+                Email address <span className="text-dawn-deep">(required)</span>
+              </span>
+              <input className={inputClass} type="email" autoComplete="email" value={form.email} onChange={set("email")} />
+            </label>
+            <label className="block">
+              <span className={labelClass}>
+                Phone number <span className="font-normal text-muted">(optional)</span>
+              </span>
+              <input className={inputClass} type="tel" autoComplete="tel" value={form.phone} onChange={set("phone")} />
+            </label>
+            <label className="block">
+              <span className={labelClass}>
+                Church or organization <span className="font-normal text-muted">(optional)</span>
+              </span>
+              <input className={inputClass} type="text" autoComplete="organization" value={form.org} onChange={set("org")} />
+            </label>
           </div>
         )}
 
