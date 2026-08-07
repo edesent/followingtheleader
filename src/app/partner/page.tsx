@@ -259,6 +259,22 @@ export default function PartnerPage() {
       </section>
 
 
+      {/* Become a Founding Partner — opens the vision half of the page */}
+      <section className="border-t border-hair bg-cream-2/50">
+        <div className="mx-auto max-w-4xl px-5 py-20 text-center sm:px-8 sm:py-24">
+          <Reveal>
+            <p className="eyebrow text-gold">{PARTNER.founding.eyebrow}</p>
+            <h2 className="mt-4 font-display text-[2.1rem] font-semibold leading-[1.12] text-ink sm:text-[2.85rem]">
+              {PARTNER.founding.heading}
+            </h2>
+            <SignatureRule className="mt-6" />
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-body">
+              {PARTNER.founding.lead}
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Opening vision */}
       <section className="bg-cream">
         <div className="mx-auto max-w-4xl px-5 py-20 sm:px-8 sm:py-24">
