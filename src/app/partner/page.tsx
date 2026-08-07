@@ -93,14 +93,10 @@ export default function PartnerPage() {
       <PageHero eyebrow={PARTNER.eyebrow} title={PARTNER.title} intro={PARTNER.lead} />
 
       {/* Become a Monthly Partner */}
-      <section className="bg-cream py-20 sm:py-24">
+      <section className="bg-cream py-14 sm:py-16">
         <div className="mx-auto max-w-4xl px-5 sm:px-8">
           <Reveal className="text-center">
-            <p className="eyebrow text-gold">Monthly Partnership</p>
-            <h2 className="mt-4 font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
-              {PARTNER.monthly.title}
-            </h2>
-            <SignatureRule className="mt-6" />
+            <SignatureRule />
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-body">
               {PARTNER.monthly.intro}
             </p>
