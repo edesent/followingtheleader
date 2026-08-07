@@ -586,10 +586,21 @@ export const FAQ: { eyebrow: string; title: string; items: FaqItem[] } = {
 //  Adapted from the "Following the Leader" partnership portfolio — the ministry's
 //  invitation to underwrite initiatives, become a founding partner, or give.
 export const PARTNER = {
-  eyebrow: "Become a Founding Partner",
-  title: "Join us in strengthening the Church for eternity",
+  // The top of the Partner page. Monthly giving leads, because this is where
+  // the email "Give" button sends people.
+  eyebrow: "Monthly Partnership",
+  title: "Become a Monthly Partner",
   lead:
-    "God has given us the vision. We've seen the beginning. Now we invite you to be part of what He will do next.",
+    "Partner with Following the Leader each month and help more people begin their day with Jesus.",
+
+  // The Founding Partner invitation. This used to be at the very top; it now
+  // opens the second half of the page, after the monthly giving section.
+  founding: {
+    eyebrow: "Become a Founding Partner",
+    heading: "Join us in strengthening the Church for eternity",
+    lead:
+      "God has given us the vision. We've seen the beginning. Now we invite you to be part of what He will do next.",
+  },
 
   // Opening vision
   vision: {
