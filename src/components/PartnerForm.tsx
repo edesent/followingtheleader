@@ -222,6 +222,7 @@ export default function PartnerForm() {
             <input className={inputClass} type="email" placeholder="Email address *" autoComplete="email" value={form.email} onChange={set("email")} />
             <input className={inputClass} type="tel" placeholder="Phone (optional)" autoComplete="tel" value={form.phone} onChange={set("phone")} />
             <input className={inputClass} type="text" placeholder="Church / organization (optional)" autoComplete="organization" value={form.org} onChange={set("org")} />
+            </div>
           </div>
         )}
 
