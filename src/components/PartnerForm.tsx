@@ -44,6 +44,7 @@ export default function PartnerForm() {
   const [step, setStep] = useState(1);
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [prefilled, setPrefilled] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
