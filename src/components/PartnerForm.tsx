@@ -198,10 +198,26 @@ export default function PartnerForm() {
         })}
       </ol>
 
-      <div className="mt-8">
+      {/* What this step is asking for */}
+      <div className="mt-7 border-t border-hair pt-6">
+        <p className="font-display text-xl font-semibold text-ink">{STEP_INTRO[step - 1].title}</p>
+        <p className="mt-1.5 text-[0.95rem] leading-relaxed text-muted">{STEP_INTRO[step - 1].hint}</p>
+      </div>
+
+      <div className="mt-6">
         {/* Step 1 */}
         {step === 1 && (
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="space-y-4">
+            {prefilled && form.amount && (
+              <div className="rounded-xl border border-dawn-deep/25 bg-dawn-deep/[0.06] px-4 py-3 text-[0.95rem] leading-relaxed">
+                <span className="font-semibold text-ink">
+                  Your gift: {form.amount}
+                  {form.frequency === "Monthly" ? " a month" : " one time"}
+                </span>{" "}
+                <span className="text-muted">— you can change this on the next step.</span>
+              </div>
+            )}
+            <div className="grid gap-3 sm:grid-cols-2">
             <input className={inputClass} type="text" placeholder="Your name *" autoComplete="name" value={form.name} onChange={set("name")} />
             <input className={inputClass} type="email" placeholder="Email address *" autoComplete="email" value={form.email} onChange={set("email")} />
             <input className={inputClass} type="tel" placeholder="Phone (optional)" autoComplete="tel" value={form.phone} onChange={set("phone")} />
