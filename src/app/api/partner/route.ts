@@ -152,6 +152,7 @@ export async function POST(request: Request) {
     await send(key, {
       to,
       replyTo: email,
+      bcc: notifyBcc(),
       subject: `New partnership inquiry: ${name}${amount ? ` — ${gift}` : ""}`,
       text: [
         ...rows.map(([k, v]) => `${k}: ${v}`),
