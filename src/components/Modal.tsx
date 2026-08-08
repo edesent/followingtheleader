@@ -18,6 +18,7 @@ export default function ModalButton({
   className,
   children,
   label,
+  ariaLabel,
   eyebrow,
   title,
   intro,
@@ -28,6 +29,8 @@ export default function ModalButton({
   children: React.ReactNode;
   /** Accessible name for the dialog. */
   label: string;
+  /** Accessible name for the trigger, when its contents aren't plain text. */
+  ariaLabel?: string;
   eyebrow?: string;
   title?: string;
   intro?: string;
@@ -64,6 +67,7 @@ export default function ModalButton({
       <button
         type="button"
         className={className}
+        aria-label={ariaLabel}
         onClick={(e) => {
           openerRef.current = e.currentTarget;
           setOpen(true);

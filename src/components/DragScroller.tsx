@@ -28,14 +28,22 @@ export default function DragScroller({
     start.current = { x: e.clientX, scrollLeft: ref.current.scrollLeft };
     moved.current = false;
     setDragging(true);
-    e.currentTarget.setPointerCapture(e.pointerId);
+    // NB: capture is deliberately NOT taken here. While this element holds the
+    // pointer, the browser retargets the follow-up click to it, so a plain
+    // mouse click on a card would never reach the card itself. Capture is
+    // taken below, only once the pointer has actually travelled far enough to
+    // count as a pan.
   }
 
   function onPointerMove(e: React.PointerEvent<HTMLDivElement>) {
     if (!dragging || !ref.current) return;
     e.preventDefault(); // don't turn the drag into a text selection
     const dx = e.clientX - start.current.x;
-    if (Math.abs(dx) > 6) moved.current = true;
+    if (Math.abs(dx) > 6 && !moved.current) {
+      moved.current = true;
+      // Now it's a real pan — keep it alive if the cursor leaves the strip.
+      e.currentTarget.setPointerCapture(e.pointerId);
+    }
     ref.current.scrollLeft = start.current.scrollLeft - dx;
   }
 

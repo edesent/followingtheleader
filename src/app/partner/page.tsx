@@ -3,7 +3,7 @@ import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SignatureRule from "@/components/SignatureRule";
-import PartnerForm from "@/components/PartnerForm";
+import GiveButton from "@/components/GiveButton";
 import DragScroller from "@/components/DragScroller";
 import { PARTNER, SITE } from "@/config/site";
 
@@ -100,13 +100,10 @@ export default function PartnerPage() {
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-body">
               {PARTNER.monthly.intro}
             </p>
-            <a
-              href="#give"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/25 transition-colors hover:bg-ink"
-            >
+            <GiveButton className="mt-8 inline-flex items-center gap-2 rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/25 transition-colors hover:bg-ink">
               Give monthly
               <span aria-hidden>→</span>
-            </a>
+            </GiveButton>
             <p className="mt-3 text-sm text-muted">Give securely by card, or by mail — any amount.</p>
           </Reveal>
         </div>
@@ -119,10 +116,10 @@ export default function PartnerPage() {
                 const t = tier as typeof tier & { featured?: boolean; badge?: string };
                 return (
                   <li key={tier.name} className="w-[270px] shrink-0 snap-start sm:w-[300px]">
-                    <a
-                      href={`?amount=${tier.price.replace(/[^0-9]/g, "")}&freq=monthly#give`}
-                      aria-label={`Give ${tier.price} a month — ${tier.name}`}
-                      className={`group relative flex h-full flex-col rounded-2xl border p-7 transition-all ${
+                    <GiveButton
+                      amount={`$${tier.price.replace(/[^0-9]/g, "")}`}
+                      ariaLabel={`Give ${tier.price} a month — ${tier.name}`}
+                      className={`group relative flex h-full w-full flex-col rounded-2xl border p-7 text-left transition-all ${
                         t.featured
                           ? "border-dawn-deep bg-paper shadow-lg shadow-dawn-deep/15 ring-1 ring-dawn-deep hover:shadow-xl"
                           : "border-hair bg-paper shadow-sm hover:border-dawn-deep hover:shadow-md"
@@ -157,7 +154,7 @@ export default function PartnerPage() {
                       >
                         Give {tier.price}/mo
                       </span>
-                    </a>
+                    </GiveButton>
                   </li>
                 );
               })}
@@ -229,35 +226,35 @@ export default function PartnerPage() {
             <p className="mx-auto mt-2 max-w-2xl font-display text-lg italic leading-relaxed text-dawn-deep">
               {PARTNER.monthly.closing[1]}
             </p>
-            <a
-              href="#give"
-              className="mt-9 inline-block rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/20 transition-colors hover:bg-ink"
-            >
+            <GiveButton className="mt-9 inline-block rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/20 transition-colors hover:bg-ink">
               Become a partner
-            </a>
+            </GiveButton>
           </Reveal>
         </div>
       </section>
 
-      {/* Partnership signup form */}
-      <section className="border-t border-hair bg-cream">
-        <div className="mx-auto max-w-2xl px-5 py-14 sm:px-8 sm:py-24">
-          <Reveal className="text-center">
+      {/* Give Now — the form itself opens in a lightbox, so the page never
+          moves out from under someone who is mid-thought. */}
+      <section id="give" className="scroll-mt-[84px] border-t border-hair bg-cream">
+        <div className="mx-auto max-w-2xl px-5 py-14 text-center sm:px-8 sm:py-24">
+          <Reveal>
             <p className="eyebrow text-gold">Give Now</p>
             <h2 className="mt-4 font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
-              Enter your details to give
+              Ready to partner?
             </h2>
             <SignatureRule className="mt-6" />
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-body">
               Three quick steps — your details, your gift, then give securely by card or by mail.
               Joe will personally follow up either way.
             </p>
+            <GiveButton className="mt-8 inline-flex items-center gap-2 rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/25 transition-colors hover:bg-ink">
+              Give now
+              <span aria-hidden>→</span>
+            </GiveButton>
+            <p className="mt-3 text-sm text-muted">
+              Give securely by card, or by mail — any amount.
+            </p>
           </Reveal>
-          <div id="give" className="mt-8 scroll-mt-[84px] sm:mt-10">
-            <Reveal delay={120}>
-              <PartnerForm />
-            </Reveal>
-          </div>
         </div>
       </section>
 
@@ -464,12 +461,9 @@ export default function PartnerPage() {
               the rest of the world can see it. We&apos;re praying God will raise up a small group of Founding
               Partners to help establish Following the Leader for generations to come.
             </p>
-            <a
-              href="#give"
-              className="mt-9 inline-block rounded-full bg-white px-8 py-3.5 text-[0.98rem] font-semibold text-ink shadow-lg shadow-black/25 transition-colors hover:bg-dawn"
-            >
+            <GiveButton className="mt-9 inline-block rounded-full bg-white px-8 py-3.5 text-[0.98rem] font-semibold text-ink shadow-lg shadow-black/25 transition-colors hover:bg-dawn">
               Will you prayerfully consider it?
-            </a>
+            </GiveButton>
           </Reveal>
         </div>
       </section>
@@ -528,12 +522,9 @@ export default function PartnerPage() {
                 </figure>
 
                 <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
-                  <a
-                    href="#give"
-                    className="rounded-full bg-dawn-deep px-7 py-3.5 text-center text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/20 transition-colors hover:bg-ink"
-                  >
+                  <GiveButton className="rounded-full bg-dawn-deep px-7 py-3.5 text-center text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/20 transition-colors hover:bg-ink">
                     {PARTNER.invitation.cta}
-                  </a>
+                  </GiveButton>
                   <div className="text-sm text-muted">
                     <a
                       href={`mailto:${SITE.email}`}

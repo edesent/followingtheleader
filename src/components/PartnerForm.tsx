@@ -40,25 +40,37 @@ const amountCents = (a: string) => Math.round(parseFloat(a.replace(/[^0-9.]/g, "
  * Three-step partnership form: contact → gift → how to give.
  * Card gifts go to Stripe (monthly = recurring); checks show mailing details.
  */
-export default function PartnerForm() {
+export default function PartnerForm({
+  initialAmount = "",
+  initialFrequency,
+  bare = false,
+}: {
+  /** Pre-chosen gift, e.g. "$50" — set when a tier card opens the form. */
+  initialAmount?: string;
+  initialFrequency?: "Monthly" | "One-time";
+  /** Drop the card chrome — the lightbox supplies its own panel. */
+  bare?: boolean;
+} = {}) {
   const [step, setStep] = useState(1);
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
-  const [prefilled, setPrefilled] = useState(false);
+  const [prefilled, setPrefilled] = useState(Boolean(initialAmount || initialFrequency));
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
     org: "",
     interest: INTEREST_OPTIONS[0],
-    frequency: "Monthly",
-    amount: "",
+    frequency: initialFrequency ?? "Monthly",
+    amount: initialAmount,
     method: "" as "" | "card" | "check",
     message: "",
   });
 
-  // Prefill amount/frequency when arriving from a tier button (?amount=50&freq=monthly).
+  // Prefill amount/frequency when arriving from an old tier link
+  // (?amount=50&freq=monthly). Props win — they're the deliberate choice.
   useEffect(() => {
+    if (initialAmount || initialFrequency) return;
     const q = new URLSearchParams(window.location.search);
     const amt = q.get("amount");
     const freq = q.get("freq");
@@ -69,7 +81,7 @@ export default function PartnerForm() {
       amount: amt ? `$${amt.replace(/[^0-9]/g, "")}` : f.amount,
       frequency: freq === "monthly" ? "Monthly" : freq === "onetime" ? "One-time" : f.frequency,
     }));
-  }, []);
+  }, [initialAmount, initialFrequency]);
 
   const set =
     (k: keyof typeof form) =>
@@ -130,7 +142,13 @@ export default function PartnerForm() {
   if (status === "done") {
     const firstName = form.name.trim().split(/\s+/)[0];
     return (
-      <div className="rounded-2xl border border-hair bg-paper p-8 text-center shadow-sm">
+      <div
+        className={
+          bare
+            ? "text-center"
+            : "rounded-2xl border border-hair bg-paper p-8 text-center shadow-sm"
+        }
+      >
         <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-dawn/15 text-dawn-deep">
           <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M20 6 9 17l-5-5" />
@@ -167,7 +185,7 @@ export default function PartnerForm() {
   const labelClass = "mb-1.5 block text-[0.95rem] font-semibold text-ink";
 
   return (
-    <div className="rounded-2xl border border-hair bg-paper p-6 shadow-sm sm:p-8">
+    <div className={bare ? "" : "rounded-2xl border border-hair bg-paper p-6 shadow-sm sm:p-8"}>
       {/* The gift they picked, kept in view the whole way through */}
       {form.amount && (
         <div className="mb-6 rounded-xl border border-dawn-deep/25 bg-dawn-deep/[0.06] px-4 py-4 text-center">
