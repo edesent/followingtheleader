@@ -148,17 +148,16 @@ export default function PartnerPage() {
                         <span className="text-sm font-normal text-muted"> {tier.cadence}</span>
                       </p>
                       <p className="mt-3 flex-1 text-[0.98rem] leading-relaxed text-body">{tier.body}</p>
-                      <a
-                        href={`?amount=${tier.price.replace(/[^0-9]/g, "")}&freq=monthly#give`}
+                      <span
                         className={`mt-5 rounded-full px-5 py-2.5 text-center text-sm font-semibold transition-colors ${
                           t.featured
-                            ? "bg-dawn-deep text-white hover:bg-ink"
-                            : "border border-ink/15 text-ink hover:border-dawn-deep hover:text-dawn-deep"
+                            ? "bg-dawn-deep text-white group-hover:bg-ink"
+                            : "border border-ink/15 text-ink group-hover:border-dawn-deep group-hover:text-dawn-deep"
                         }`}
                       >
                         Give {tier.price}/mo
-                      </a>
-                    </div>
+                      </span>
+                    </a>
                   </li>
                 );
               })}
