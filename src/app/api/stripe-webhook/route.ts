@@ -160,6 +160,10 @@ async function handlePartnerGift(session: Stripe.Checkout.Session) {
 
   const key = process.env.RESEND_API_KEY;
   const to = process.env.PARTNER_NOTIFY_EMAIL || SITE.email;
+  const bcc = (process.env.PARTNER_NOTIFY_BCC || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
   if (key) {
     await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -167,6 +171,7 @@ async function handlePartnerGift(session: Stripe.Checkout.Session) {
       body: JSON.stringify({
         from: "Following the Leader <partner@elijahdesent.com>",
         to: [to],
+        ...(bcc.length ? { bcc } : {}),
         ...(email ? { reply_to: email } : {}),
         subject: `New card gift: ${amountLabel}${monthly ? " (monthly)" : ""} — ${name}`,
         text: [
