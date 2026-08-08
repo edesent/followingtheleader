@@ -42,9 +42,10 @@ type SendArgs = {
   text: string;
   html: string;
   replyTo?: string;
+  bcc?: string[];
 };
 
-async function send(key: string, { to, subject, text, html, replyTo }: SendArgs) {
+async function send(key: string, { to, subject, text, html, replyTo, bcc }: SendArgs) {
   const res = await fetch(RESEND_ENDPOINT, {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
@@ -55,9 +56,21 @@ async function send(key: string, { to, subject, text, html, replyTo }: SendArgs)
       text,
       html,
       ...(replyTo ? { reply_to: replyTo } : {}),
+      ...(bcc && bcc.length ? { bcc } : {}),
     }),
   });
   if (!res.ok) throw new Error(`Resend ${res.status}: ${await res.text()}`);
+}
+
+/**
+ * Extra addresses blind-copied on every partner notification.
+ * Set PARTNER_NOTIFY_BCC to one address, or several separated by commas.
+ */
+function notifyBcc(): string[] {
+  return (process.env.PARTNER_NOTIFY_BCC || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
 }
 
 export async function POST(request: Request) {
