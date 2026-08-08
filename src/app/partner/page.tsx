@@ -119,11 +119,13 @@ export default function PartnerPage() {
                 const t = tier as typeof tier & { featured?: boolean; badge?: string };
                 return (
                   <li key={tier.name} className="w-[270px] shrink-0 snap-start sm:w-[300px]">
-                    <div
-                      className={`relative flex h-full flex-col rounded-2xl border p-7 ${
+                    <a
+                      href={`?amount=${tier.price.replace(/[^0-9]/g, "")}&freq=monthly#give`}
+                      aria-label={`Give ${tier.price} a month — ${tier.name}`}
+                      className={`group relative flex h-full flex-col rounded-2xl border p-7 transition-all ${
                         t.featured
-                          ? "border-dawn-deep bg-paper shadow-lg shadow-dawn-deep/15 ring-1 ring-dawn-deep"
-                          : "border-hair bg-paper shadow-sm"
+                          ? "border-dawn-deep bg-paper shadow-lg shadow-dawn-deep/15 ring-1 ring-dawn-deep hover:shadow-xl"
+                          : "border-hair bg-paper shadow-sm hover:border-dawn-deep hover:shadow-md"
                       }`}
                     >
                       {t.badge && (
