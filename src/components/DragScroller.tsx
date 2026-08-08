@@ -19,12 +19,14 @@ export default function DragScroller({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const start = useRef({ x: 0, scrollLeft: 0 });
+  const moved = useRef(false);
   const [dragging, setDragging] = useState(false);
 
   function onPointerDown(e: React.PointerEvent<HTMLDivElement>) {
     // Leave touch and pen to the browser's native, momentum-having scrolling.
     if (e.pointerType !== "mouse" || !ref.current) return;
     start.current = { x: e.clientX, scrollLeft: ref.current.scrollLeft };
+    moved.current = false;
     setDragging(true);
     e.currentTarget.setPointerCapture(e.pointerId);
   }
@@ -32,7 +34,18 @@ export default function DragScroller({
   function onPointerMove(e: React.PointerEvent<HTMLDivElement>) {
     if (!dragging || !ref.current) return;
     e.preventDefault(); // don't turn the drag into a text selection
-    ref.current.scrollLeft = start.current.scrollLeft - (e.clientX - start.current.x);
+    const dx = e.clientX - start.current.x;
+    if (Math.abs(dx) > 6) moved.current = true;
+    ref.current.scrollLeft = start.current.scrollLeft - dx;
+  }
+
+  // Cards themselves are links. If the pointer travelled, this was a pan and
+  // not a click, so swallow the click before the link sees it.
+  function onClickCapture(e: React.MouseEvent<HTMLDivElement>) {
+    if (!moved.current) return;
+    e.preventDefault();
+    e.stopPropagation();
+    moved.current = false;
   }
 
   function endDrag(e: React.PointerEvent<HTMLDivElement>) {
