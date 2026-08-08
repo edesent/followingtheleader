@@ -63,6 +63,7 @@ export default function DragScroller({
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
       onPointerCancel={endDrag}
+      onClickCapture={onClickCapture}
       className={`no-scrollbar overflow-x-auto overscroll-x-contain ${
         dragging ? "cursor-grabbing select-none" : "cursor-grab"
       } ${className}`}
