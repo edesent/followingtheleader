@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { SITE } from "@/config/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -80,6 +81,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
