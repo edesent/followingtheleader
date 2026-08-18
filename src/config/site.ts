@@ -777,3 +777,241 @@ export const PARTNER = {
     cta: "Start the conversation",
   },
 };
+
+// ---------------------------------------------------------------------------
+// /partner/invest — the major-gift page for the $125,000 campaign to produce
+// the Following the Leader 40-day study.
+//
+// This page is the destination of Joe's personal letter, so it carries the
+// letter's arc and his voice rather than the monthly-partner pitch. It is
+// deliberately UNLISTED: not in NAV, not in PAGES (so it stays out of the
+// footer and sitemap), and marked noindex. People reach it from the letter.
+// ---------------------------------------------------------------------------
+
+export type LetterBlock = { p: string } | { emphasis: string };
+
+export const INVEST = {
+  hero: {
+    eyebrow: "A personal request from Dr. Joe Pettigrew",
+    title: "I don’t want to miss this opportunity",
+    lead: "Morning with Jesus was only the beginning.",
+  },
+
+  // The turn from devotional to discipleship — sets up everything below.
+  opening: {
+    heading: "Every morning, we encourage someone for a few minutes.",
+    body: [
+      "Morning with Jesus began very simply — a short, practical word from Scripture to help busy people begin their day with Jesus. I never imagined where God would take it, or how many people would eventually become part of it.",
+      "Now I believe God is giving us an opportunity to help people go deeper — to move beyond simply reading about Jesus to understanding what it means to faithfully follow Him every day.",
+    ],
+    pull: "Morning with Jesus was only the beginning.",
+  },
+
+  // What the money actually produces.
+  study: {
+    eyebrow: "Our next step",
+    heading: "Following the Leader — a 40-day study on what it means to follow Jesus",
+    body: [
+      "You may remember, or have taken part in, a similar 40-day study that was very popular around the world 24 years ago. We have developed ours for individuals, small groups, and entire churches to experience together.",
+      "It is built so a pastor can hand it to his people and preach alongside it — a complete campaign, not just a book.",
+    ],
+    includesTitle: "What the study includes",
+    includes: [
+      "A daily Bible study",
+      "A daily devotional",
+      "Teaching resources",
+      "Video content",
+      "A leader’s guide for small groups",
+      "Sermon outlines to emphasize the study",
+      "Tools to reenergize current members",
+      "Tools to evangelize the community",
+    ],
+    audiencesTitle: "Built to be used by",
+    audiences: [
+      { title: "Individuals", body: "Forty days of Scripture and reflection, one day at a time." },
+      { title: "Small groups", body: "A leader’s guide so any willing member can lead the discussion well." },
+      { title: "Entire churches", body: "Sermon outlines, video, and outreach tools for a church-wide campaign." },
+    ],
+  },
+
+  // The ask, stated as plainly as the letter states it.
+  need: {
+    eyebrow: "The need",
+    amount: "$125,000",
+    heading: "I need financial partners to make this happen",
+    lead: "Our immediate goal is to raise $125,000. Here is exactly what it does:",
+    uses: [
+      {
+        title: "Produce the study professionally",
+        body: "Write, edit, design, and publish the 40-day study and every supporting resource at a quality churches can trust and use.",
+      },
+      {
+        title: "Introduce it to churches",
+        body: "Put these materials in front of pastors and church leaders who are looking for a way to disciple their people.",
+      },
+      {
+        title: "Build the infrastructure",
+        body: "Establish what this ministry needs to go farther than I could ever take it alone.",
+      },
+      {
+        title: "Keep growing Morning with Jesus",
+        body: "The daily devotional does not pause while we build. It continues, and it continues to grow.",
+      },
+    ],
+  },
+
+  // The trust signal. This gets its own band because it is the single most
+  // important thing a major donor needs to hear, and Joe says it himself.
+  salary: {
+    heading: "I will receive no salary from Following the Leader or Morning with Jesus.",
+    body: [
+      "I am not asking you to support me financially. I am asking you to invest in building the Kingdom of God.",
+      "I want the resources entrusted to this ministry used to reach people, equip churches, develop resources, and help people become faithful followers of Jesus.",
+    ],
+  },
+
+  // Why this is not a cold start.
+  foundation: {
+    eyebrow: "We are not starting from nothing",
+    heading: "We are building on what God has already begun",
+    lead:
+      "God has already given me something extraordinary through Morning with Jesus. The door to share His Word is already open.",
+    stats: [
+      { value: "31,000+", label: "Pastors and church staff in a daily relationship with the ministry" },
+      { value: "8 years", label: "Of trust built with our readers, every weekday" },
+      { value: "60,000+", label: "Daily devotional subscribers" },
+      { value: "50 states", label: "& 36 countries reached" },
+    ],
+  },
+
+  // The request itself, with the letter's own gift levels.
+  ask: {
+    eyebrow: "The reason for this letter",
+    heading: "Would you prayerfully consider a significant one-time gift?",
+    lead:
+      "I could simply hope that people decide to help. But something this important deserves a direct and personal request.",
+    levels: [
+      {
+        amount: "$1,000",
+        body: "For some, this is the gift God has placed within reach. It is a real and meaningful part of the goal.",
+      },
+      {
+        amount: "$5,000",
+        body: "A gift at this level moves a whole piece of the study from an idea into something churches can hold.",
+        featured: true,
+      },
+      {
+        amount: "$25,000",
+        body: "A leadership gift. Gifts of this size are what make a goal like this reachable at all.",
+      },
+      {
+        amount: "More",
+        cta: "Another amount",
+        body: "Perhaps God has placed you in a position to do even more. Name the amount He puts on your heart.",
+      },
+    ],
+    note: "The amount is between you and God.",
+    closing:
+      "What I am asking is that you seriously consider whether He might be calling you to help build this next chapter.",
+  },
+
+  // A quiet band before the letter — the personal weight of the request.
+  urgency: {
+    body: [
+      "I realize I am asking for a substantial investment, and I do not make that request casually. But I am at a point in my life when I don’t want to simply have a vision for something that could make an eternal difference.",
+    ],
+    pull: "Instead, I want to do everything I can to see it become reality.",
+  },
+
+  // Joe's letter, in full, in his own words. Some people will arrive here
+  // without having read it, and for the ones who did, this is the record.
+  letter: {
+    eyebrow: "In Joe’s own words",
+    heading: "The letter",
+    lead: "If you would like to read the request in full, here it is exactly as Joe wrote it.",
+    salutation: "Dear friend,",
+    blocks: [
+      {
+        p: "A few days ago, I sent you something very important to me — the vision for Following the Leader. Since then, I have continued to pray about what God has placed before me, and I keep coming back to one thought:",
+      },
+      { emphasis: "I don’t want to miss this opportunity." },
+      {
+        p: "Morning with Jesus began very simply — a short, practical word from Scripture to help busy people begin their day with Jesus. I never imagined where God would take it or how many people would eventually become part of it. But I have become convinced of something else:",
+      },
+      { emphasis: "Morning with Jesus was only the beginning." },
+      {
+        p: "Every morning we try to encourage someone for a few minutes. Now I believe God is giving us an opportunity to help people go deeper — to move beyond simply reading about Jesus to understanding what it means to faithfully follow Him every day.",
+      },
+      {
+        p: "Our next step is Following the Leader — a 40-day study on what it means to follow Jesus. You may remember or have participated in a similar 40-day study that was very popular around the world 24 years ago. We also developed our study for individuals, small groups, and entire churches to experience together. Our study will include a daily Bible study, teaching resources, video content, a leader’s guide, a daily devotional, sermon outlines to emphasize the study, and other tools to help churches reenergize current members and evangelize within their community. I believe the opportunity is enormous. But I also need to tell you plainly what I perhaps did not say clearly enough in the booklet:",
+      },
+      { emphasis: "I need financial partners to make this happen." },
+      {
+        p: "Our immediate goal is to raise $125,000 to professionally produce this study and its supporting resources, introduce these materials to churches, build the infrastructure necessary to take this ministry farther than I could ever take it alone, all while continuing to grow Morning with Jesus. There is something else I want you to know.",
+      },
+      { emphasis: "I will receive no salary from Following the Leader or Morning with Jesus." },
+      {
+        p: "I am not asking you to support me financially. I am asking you to invest in building the Kingdom of God. I want the resources entrusted to this ministry used to reach people, equip churches, develop resources, and help people become faithful followers of Jesus.",
+      },
+      { p: "This brings me to the reason for this letter." },
+      {
+        p: "I could simply hope that people decide to help. But something this important deserves a direct and personal request. Would you prayerfully consider making a significant one-time gift toward our $125,000 goal?",
+      },
+      {
+        p: "For some, that might be $1,000. For someone else, $5,000 or $25,000. And perhaps God has placed you in a position to do even more. The amount is between you and God. What I am asking is that you seriously consider whether He might be calling you to help build this next chapter.",
+      },
+      {
+        p: "I realize I am asking for a substantial investment, and I do not make that request casually. But I am at a point in my life when I don’t want to simply have a vision for something that could make an eternal difference.",
+      },
+      { emphasis: "Instead, I want to do everything I can to see it become reality." },
+      {
+        p: "God has already given me something extraordinary through Morning with Jesus. The ministry is currently reaching thousands of people with the Word of Jesus. I now have a daily relationship with more than 31,000 pastors and church staff; we have built 8 years of trust with our readers, so the door to share His Word remains open. We are not starting from nothing.",
+      },
+      { emphasis: "We are building on what God has already begun." },
+      {
+        p: "Now we need the resources to take the next step. If Morning with Jesus has meant something to you over the years, would you help me make certain that what began as a simple morning devotional becomes something that reaches even farther, goes even deeper, and helps another generation faithfully follow Jesus?",
+      },
+      {
+        p: "Thank you for reading Morning with Jesus. Thank you for considering the vision for Following the Leader that I sent you. And thank you especially for praying about whether God might be asking you to become one of the people who helps make this next chapter possible.",
+      },
+    ] as LetterBlock[],
+    signature: {
+      name: "Joe Pettigrew",
+      title: "Founder & Executive Director",
+      org: "Following the Leader",
+    },
+  },
+
+  // Final call, then the practical giving details a major donor needs.
+  close: {
+    eyebrow: "Please consider making your donation today",
+    heading:
+      "Would you help make certain this reaches even farther, and goes even deeper?",
+    lead:
+      "If Morning with Jesus has meant something to you over the years, you are the reason this next step is possible.",
+    cta: "Make your gift",
+    verse: {
+      text: "For we are God’s fellow workers; you are God’s field, God’s building.",
+      ref: "1 Corinthians 3:9",
+    },
+  },
+
+  giving: {
+    title: "Giving Information",
+    points: [
+      "Following the Leader is a federally recognized 501(c)(3) nonprofit ministry.",
+      "Gifts are tax-deductible as allowed by law.",
+      "Gifts may be made by card, check, donor-advised fund, appreciated securities, or other charitable giving methods.",
+      "Receipts will be provided for all contributions.",
+    ],
+  },
+
+  // Joe wants these conversations to be personal, so the page ends with a way
+  // to talk to him rather than only a payment form.
+  talk: {
+    heading: "Would you rather talk it through with Joe?",
+    body:
+      "Every gift of this size begins with a conversation and a shared prayer. Joe would be honored to visit with you personally — call, write, or start the form and tell him you’d like to talk first.",
+    cta: "Start the conversation",
+  },
+};

@@ -44,12 +44,24 @@ export default function PartnerForm({
   initialAmount = "",
   initialFrequency,
   bare = false,
+  presets = AMOUNT_PRESETS,
+  interests = INTEREST_OPTIONS,
+  emphasizeMonthly = true,
 }: {
   /** Pre-chosen gift, e.g. "$50" — set when a tier card opens the form. */
   initialAmount?: string;
   initialFrequency?: "Monthly" | "One-time";
   /** Drop the card chrome — the lightbox supplies its own panel. */
   bare?: boolean;
+  /** Override the quick-pick amounts — the major-gift page passes its own. */
+  presets?: string[];
+  /** Override the "how would you like to partner?" choices. */
+  interests?: string[];
+  /**
+   * Badge Monthly as the strongest option. Off for the major-gift page, where
+   * the whole ask is a single one-time gift and the badge would contradict it.
+   */
+  emphasizeMonthly?: boolean;
 } = {}) {
   const [step, setStep] = useState(1);
   const [status, setStatus] = useState<Status>("idle");
@@ -60,7 +72,7 @@ export default function PartnerForm({
     email: "",
     phone: "",
     org: "",
-    interest: INTEREST_OPTIONS[0],
+    interest: interests[0],
     frequency: initialFrequency ?? "Monthly",
     amount: initialAmount,
     method: "" as "" | "card" | "check",
@@ -285,9 +297,11 @@ export default function PartnerForm({
                     form.frequency === "Monthly" ? "border-dawn-deep bg-dawn-deep/[0.06] ring-1 ring-dawn-deep" : "border-hair-2 hover:border-dawn-deep/50"
                   }`}
                 >
-                  <span className="absolute right-3 top-3 hidden rounded-full bg-dawn/20 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-dawn-deep sm:block">
-                    Most impact
-                  </span>
+                  {emphasizeMonthly && (
+                    <span className="absolute right-3 top-3 hidden rounded-full bg-dawn/20 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-dawn-deep sm:block">
+                      Most impact
+                    </span>
+                  )}
                   <p className="font-display text-lg font-semibold text-ink">Monthly</p>
                   <p className="mt-0.5 text-xs leading-snug text-muted">Steady support that sustains the ministry.</p>
                 </button>
@@ -310,7 +324,7 @@ export default function PartnerForm({
                 Amount {form.frequency === "Monthly" ? "per month" : ""}
               </p>
               <div className="flex flex-wrap gap-2">
-                {AMOUNT_PRESETS.map((a) => {
+                {presets.map((a) => {
                   const on = form.amount === a;
                   return (
                     <button
@@ -332,7 +346,7 @@ export default function PartnerForm({
                 type="text"
                 inputMode="decimal"
                 placeholder="Or enter an amount"
-                value={AMOUNT_PRESETS.includes(form.amount) ? "" : form.amount}
+                value={presets.includes(form.amount) ? "" : form.amount}
                 onChange={set("amount")}
               />
             </div>
@@ -341,7 +355,7 @@ export default function PartnerForm({
             <div>
               <p className="mb-2 text-sm font-semibold text-ink">How would you like to partner?</p>
               <div className="grid gap-2.5 sm:grid-cols-2">
-                {INTEREST_OPTIONS.map((o) => {
+                {interests.map((o) => {
                   const on = form.interest === o;
                   return (
                     <button

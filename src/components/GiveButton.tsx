@@ -17,6 +17,11 @@ export default function GiveButton({
   amount,
   frequency = "Monthly",
   ariaLabel,
+  presets,
+  interests,
+  eyebrow = "Give Now",
+  title = "Partner with Following the Leader",
+  emphasizeMonthly,
 }: {
   className?: string;
   children: React.ReactNode;
@@ -25,17 +30,33 @@ export default function GiveButton({
   frequency?: "Monthly" | "One-time";
   /** Accessible name for the trigger when its contents aren't plain text. */
   ariaLabel?: string;
+  /** Override the quick-pick amounts — the major-gift page passes its own. */
+  presets?: string[];
+  /** Override the "how would you like to partner?" choices. */
+  interests?: string[];
+  /** Lightbox heading, so the major-gift page can name its own campaign. */
+  eyebrow?: string;
+  title?: string;
+  /** Badge Monthly as the strongest option — off on the major-gift page. */
+  emphasizeMonthly?: boolean;
 }) {
   return (
     <ModalButton
       className={className}
       ariaLabel={ariaLabel}
-      label="Partner with Following the Leader"
-      eyebrow="Give Now"
-      title="Partner with Following the Leader"
+      label={title}
+      eyebrow={eyebrow}
+      title={title}
       maxWidth="max-w-2xl"
       render={() => (
-        <PartnerForm bare initialAmount={amount} initialFrequency={frequency} />
+        <PartnerForm
+          bare
+          initialAmount={amount}
+          initialFrequency={frequency}
+          presets={presets}
+          interests={interests}
+          emphasizeMonthly={emphasizeMonthly}
+        />
       )}
     >
       {children}
