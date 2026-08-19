@@ -19,7 +19,7 @@ import { INVEST, SITE } from "@/config/site";
  * footer and the sitemap) and marked noindex below. Only the letter links here.
  */
 export const metadata: Metadata = {
-  title: "I Don’t Want to Miss This Opportunity",
+  title: "I Don’t Want You to Miss This Opportunity",
   description:
     "A personal request from Dr. Joe Pettigrew — help produce Following the Leader, a 40-day study on what it means to follow Jesus.",
   robots: { index: false, follow: false },

@@ -793,7 +793,7 @@ export type LetterBlock = { p: string } | { emphasis: string };
 export const INVEST = {
   hero: {
     eyebrow: "A personal request from Dr. Joe Pettigrew",
-    title: "I don’t want to miss this opportunity",
+    title: "I don’t want you to miss this opportunity",
     lead: "Morning with Jesus was only the beginning.",
   },
 
