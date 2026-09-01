@@ -24,14 +24,18 @@ const STEP_INTRO = [
   },
 ];
 
+// Defaults for /partner, which now goes to the whole reader list. The old
+// options led with "Become a Founding Partner" — major-donor language sitting
+// pre-selected in front of someone giving $10 a month.
 const INTEREST_OPTIONS = [
-  "Become a Founding Partner",
-  "Underwrite an initiative",
-  "Support the mission",
+  "Support the mission wherever it's needed most",
+  "Support the daily devotional",
+  "Help equip pastors and churches",
   "I'm not sure yet — let's talk",
 ];
 
-const AMOUNT_PRESETS = ["$25", "$50", "$100", "$250", "$500"];
+// Starts at $10 so the partner page's headline amount is one tap away.
+const AMOUNT_PRESETS = ["$10", "$25", "$50", "$100", "$250"];
 
 const emailValid = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 const amountCents = (a: string) => Math.round(parseFloat(a.replace(/[^0-9.]/g, "")) * 100) || 0;

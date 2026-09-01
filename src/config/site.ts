@@ -700,6 +700,10 @@ export const PARTNER = {
     title: "Become a Monthly Partner",
     intro:
       "Your monthly partnership provides the steady foundation that allows Following the Leader to encourage more people each day, create powerful resources for the church, and help more people faithfully follow Jesus for generations to come.",
+    // Two amounts, plainly stated. This page goes to the whole reader list, so
+    // it asks the way you would ask 60,000 friends — not the way you ask a
+    // major donor. A third card keeps the door open for any other amount
+    // without putting a bigger number in front of everyone.
     tiers: [
       {
         icon: "cup",
@@ -711,34 +715,38 @@ export const PARTNER = {
       {
         icon: "people",
         name: "Compassion Partner",
+        featured: true,
+        badge: "Suggested",
         price: "$25",
         cadence: "/ month",
         body: "You help support daily devotionals and ministry outreach that encourage people in their walk with Jesus.",
       },
       {
-        icon: "book",
-        name: "Discipleship Partner",
-        featured: true,
-        badge: "Most Popular",
-        price: "$50",
-        cadence: "/ month",
-        body: "Your partnership helps create Bible studies, books, and resources that equip pastors and strengthen local churches.",
-      },
-      {
-        icon: "globe",
-        name: "Kingdom Impact Partner",
-        price: "$100",
-        cadence: "/ month",
-        body: "You help expand the reach of Following the Leader into more churches, communities, and lives around the world.",
-      },
-      {
         icon: "heart",
-        name: "Mission Advance Partner",
-        price: "$250+",
-        cadence: "/ month",
-        body: "Your leadership-level monthly giving provides vital support for new initiatives and future ministry growth.",
+        name: "Another Amount",
+        custom: true,
+        price: "You choose",
+        cadence: "",
+        cta: "Choose your amount",
+        body: "If God has put a different number on your heart, give whatever amount you decide — monthly or as a single gift.",
       },
     ],
+    tiersNote: "Every gift, at any amount, goes to the same work.",
+    // Plenty of readers would simply rather write a check, so the address goes
+    // under the give button — not three steps inside the form.
+    mail: {
+      eyebrow: "Or send your gift by mail",
+      payable: "Make your check payable to",
+      payee: "Following the Leader",
+      note:
+        "Checks may be sent monthly or as a single gift — whatever works best for you. A receipt is sent for every gift.",
+      or: "Would you rather talk with Joe first?",
+    },
+
+    // Said under the button, because a recurring gift is the thing people
+    // hesitate over. Joe can change or stop a monthly gift on request.
+    reassure: "Give securely by card. Change or stop your monthly gift any time — just tell Joe.",
+
     stewardship: {
       title: "Our Stewardship Commitment",
       body: "We are committed to being faithful stewards of every gift entrusted to this ministry. Your monthly partnership helps us encourage believers daily, strengthen churches, and create Christ-centered resources that make a lasting impact. Every gift is received with gratitude, managed with integrity, and invested to advance God's Kingdom.",

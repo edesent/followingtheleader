@@ -4,7 +4,6 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import SignatureRule from "@/components/SignatureRule";
 import GiveButton from "@/components/GiveButton";
-import DragScroller from "@/components/DragScroller";
 import { PARTNER, SITE } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -104,64 +103,110 @@ export default function PartnerPage() {
               Give monthly
               <span aria-hidden>→</span>
             </GiveButton>
-            <p className="mt-3 text-sm text-muted">Give securely by card, or by mail — any amount.</p>
+            <p className="mt-3 text-sm text-muted">{PARTNER.monthly.reassure}</p>
+          </Reveal>
+
+          {/* Give by mail, right under the button — a reader who would rather
+              write a check should never have to hunt for the address. */}
+          <Reveal delay={80}>
+            <div
+              id="by-mail"
+              className="mx-auto mt-8 max-w-xl scroll-mt-[84px] rounded-2xl border border-gold/40 bg-paper p-7 text-center shadow-sm sm:p-8"
+            >
+              <p className="eyebrow text-gold">{PARTNER.monthly.mail.eyebrow}</p>
+              <p className="mt-3.5 text-[0.95rem] text-body">
+                {PARTNER.monthly.mail.payable}{" "}
+                <span className="font-semibold text-ink">{PARTNER.monthly.mail.payee}</span>
+              </p>
+              <address className="mt-3 font-display text-xl not-italic leading-snug text-ink sm:text-[1.4rem]">
+                {PARTNER.monthly.mail.payee}
+                <br />
+                {SITE.address.line}
+                <br />
+                {SITE.address.city}, {SITE.address.state} {SITE.address.zip}
+              </address>
+              <p className="mt-5 border-t border-hair pt-4 text-sm leading-relaxed text-muted">
+                {PARTNER.monthly.mail.note}
+              </p>
+              <p className="mt-2 text-sm text-muted">
+                {PARTNER.monthly.mail.or}{" "}
+                <a
+                  href={`tel:${SITE.phoneHref}`}
+                  className="font-semibold text-ink hover:text-dawn-deep"
+                >
+                  {SITE.phone}
+                </a>
+              </p>
+            </div>
           </Reveal>
         </div>
 
-        {/* Tiers — full-width horizontal scroller (pan with mouse or thumb) */}
-        <Reveal className="mt-12">
-          <DragScroller className="pb-4">
-            <ul className="flex w-max snap-x snap-mandatory gap-5 px-5 sm:px-8 lg:px-[max(2rem,calc((100vw-56rem)/2))]">
-              {PARTNER.monthly.tiers.map((tier) => {
-                const t = tier as typeof tier & { featured?: boolean; badge?: string };
-                return (
-                  <li key={tier.name} className="w-[270px] shrink-0 snap-start sm:w-[300px]">
-                    <GiveButton
-                      amount={`$${tier.price.replace(/[^0-9]/g, "")}`}
-                      ariaLabel={`Give ${tier.price} a month — ${tier.name}`}
-                      className={`group relative flex h-full w-full flex-col rounded-2xl border p-7 text-left transition-all ${
-                        t.featured
-                          ? "border-dawn-deep bg-paper shadow-lg shadow-dawn-deep/15 ring-1 ring-dawn-deep hover:shadow-xl"
-                          : "border-hair bg-paper shadow-sm hover:border-dawn-deep hover:shadow-md"
+        {/* Tiers — two amounts and an open door, side by side. No scroller:
+            with three cards the whole ask is visible without swiping. */}
+        <Reveal className="mx-auto mt-12 max-w-5xl px-5 sm:px-8">
+          <ul className="grid gap-5 sm:grid-cols-3">
+            {PARTNER.monthly.tiers.map((tier) => {
+              const t = tier as typeof tier & {
+                featured?: boolean;
+                badge?: string;
+                custom?: boolean;
+                cta?: string;
+              };
+              return (
+                <li key={tier.name}>
+                  <GiveButton
+                    amount={t.custom ? undefined : `$${tier.price.replace(/[^0-9]/g, "")}`}
+                    ariaLabel={
+                      t.custom
+                        ? "Give another amount"
+                        : `Give ${tier.price} a month — ${tier.name}`
+                    }
+                    className={`group relative flex h-full w-full flex-col rounded-2xl border p-7 text-left transition-all ${
+                      t.featured
+                        ? "border-dawn-deep bg-paper shadow-lg shadow-dawn-deep/15 ring-1 ring-dawn-deep hover:shadow-xl"
+                        : "border-hair bg-paper shadow-sm hover:border-dawn-deep hover:shadow-md"
+                    }`}
+                  >
+                    {t.badge && (
+                      <span className="absolute right-5 top-5 rounded-full bg-dawn-deep px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-white">
+                        {t.badge}
+                      </span>
+                    )}
+                    <span
+                      className={`grid h-14 w-14 place-items-center rounded-full ${
+                        t.featured ? "bg-dawn-deep text-white" : "bg-ink text-dawn"
                       }`}
                     >
-                      {t.badge && (
-                        <span className="absolute right-5 top-5 rounded-full bg-dawn-deep px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-white">
-                          {t.badge}
-                        </span>
-                      )}
-                      <span
-                        className={`grid h-14 w-14 place-items-center rounded-full ${
-                          t.featured ? "bg-dawn-deep text-white" : "bg-ink text-dawn"
-                        }`}
-                      >
-                        <TierIcon name={tier.icon} />
-                      </span>
-                      <h3 className="mt-5 font-display text-xl font-semibold uppercase tracking-[0.03em] text-ink">
-                        {tier.name}
-                      </h3>
-                      <p className="mt-1.5 font-display text-2xl font-semibold text-gold">
-                        {tier.price}
+                      <TierIcon name={tier.icon} />
+                    </span>
+                    <h3 className="mt-5 font-display text-xl font-semibold uppercase tracking-[0.03em] text-ink">
+                      {tier.name}
+                    </h3>
+                    <p className="mt-1.5 font-display text-2xl font-semibold text-gold">
+                      {tier.price}
+                      {tier.cadence && (
                         <span className="text-sm font-normal text-muted"> {tier.cadence}</span>
-                      </p>
-                      <p className="mt-3 flex-1 text-[0.98rem] leading-relaxed text-body">{tier.body}</p>
-                      <span
-                        className={`mt-5 rounded-full px-5 py-2.5 text-center text-sm font-semibold transition-colors ${
-                          t.featured
-                            ? "bg-dawn-deep text-white group-hover:bg-ink"
-                            : "border border-ink/15 text-ink group-hover:border-dawn-deep group-hover:text-dawn-deep"
-                        }`}
-                      >
-                        Give {tier.price}/mo
-                      </span>
-                    </GiveButton>
-                  </li>
-                );
-              })}
-            </ul>
-          </DragScroller>
-          <p className="mt-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-muted">
-            Drag or swipe to see all levels →
+                      )}
+                    </p>
+                    <p className="mt-3 flex-1 text-[0.98rem] leading-relaxed text-body">
+                      {tier.body}
+                    </p>
+                    <span
+                      className={`mt-5 rounded-full px-5 py-2.5 text-center text-sm font-semibold transition-colors ${
+                        t.featured
+                          ? "bg-dawn-deep text-white group-hover:bg-ink"
+                          : "border border-ink/15 text-ink group-hover:border-dawn-deep group-hover:text-dawn-deep"
+                      }`}
+                    >
+                      {t.cta ?? `Give ${tier.price}/mo`}
+                    </span>
+                  </GiveButton>
+                </li>
+              );
+            })}
+          </ul>
+          <p className="mt-5 text-center text-[0.95rem] text-muted">
+            {PARTNER.monthly.tiersNote}
           </p>
         </Reveal>
 
@@ -252,7 +297,14 @@ export default function PartnerPage() {
               <span aria-hidden>→</span>
             </GiveButton>
             <p className="mt-3 text-sm text-muted">
-              Give securely by card, or by mail — any amount.
+              Give securely by card, or{" "}
+              <a
+                href="#by-mail"
+                className="font-semibold text-ink underline decoration-gold decoration-2 underline-offset-4 hover:text-dawn-deep"
+              >
+                by mail
+              </a>
+              . Joe follows up personally either way.
             </p>
           </Reveal>
         </div>
