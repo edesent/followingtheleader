@@ -997,17 +997,15 @@ export const INVEST = {
   },
 
   // Not everyone giving at this level wants to hand a card to a checkout page,
-  // so the mailing address is stated plainly ON the page — not only inside the
-  // form after a visitor has already committed to a gift.
+  // so the mailing address sits directly under the first give button — not at
+  // the foot of the page, and not three steps inside the form.
   mail: {
-    eyebrow: "Prefer not to use a card?",
-    heading: "You are welcome to mail your gift",
-    body:
-      "If you would rather write a check than use a card, that is entirely welcome. Everything you need is right here.",
+    eyebrow: "Or send your gift by mail",
+    payable: "Make your check payable to",
     payee: "Following the Leader",
     note:
-      "If you would like your gift applied to producing the Following the Leader study, just say so in the memo line or a short note. A receipt will be sent for every gift, and Joe will follow up with you personally.",
-    or: "You are also welcome to call Joe first and give however is easiest for you.",
+      "Add a note in the memo line to apply your gift to producing the study. A receipt is sent for every gift, and Joe will follow up with you personally.",
+    or: "Would you rather talk with Joe first?",
   },
 
   giving: {
