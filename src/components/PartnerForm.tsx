@@ -46,7 +46,7 @@ export default function PartnerForm({
   bare = false,
   presets = AMOUNT_PRESETS,
   interests = INTEREST_OPTIONS,
-  emphasizeMonthly = true,
+  oneTimeOnly = false,
 }: {
   /** Pre-chosen gift, e.g. "$50" — set when a tier card opens the form. */
   initialAmount?: string;
@@ -58,10 +58,11 @@ export default function PartnerForm({
   /** Override the "how would you like to partner?" choices. */
   interests?: string[];
   /**
-   * Badge Monthly as the strongest option. Off for the major-gift page, where
-   * the whole ask is a single one-time gift and the badge would contradict it.
+   * Drop the monthly option entirely. The major-gift page asks for a single
+   * significant gift, so a monthly toggle there offered major donors a
+   * $1,000/mo or $5,000/mo commitment nobody was asking them to make.
    */
-  emphasizeMonthly?: boolean;
+  oneTimeOnly?: boolean;
 } = {}) {
   const [step, setStep] = useState(1);
   const [status, setStatus] = useState<Status>("idle");
@@ -73,7 +74,7 @@ export default function PartnerForm({
     phone: "",
     org: "",
     interest: interests[0],
-    frequency: initialFrequency ?? "Monthly",
+    frequency: oneTimeOnly ? "One-time" : initialFrequency ?? "Monthly",
     amount: initialAmount,
     method: "" as "" | "card" | "check",
     message: "",
@@ -91,9 +92,15 @@ export default function PartnerForm({
     setForm((f) => ({
       ...f,
       amount: amt ? `$${amt.replace(/[^0-9]/g, "")}` : f.amount,
-      frequency: freq === "monthly" ? "Monthly" : freq === "onetime" ? "One-time" : f.frequency,
+      frequency: oneTimeOnly
+        ? "One-time"
+        : freq === "monthly"
+        ? "Monthly"
+        : freq === "onetime"
+        ? "One-time"
+        : f.frequency,
     }));
-  }, [initialAmount, initialFrequency]);
+  }, [initialAmount, initialFrequency, oneTimeOnly]);
 
   const set =
     (k: keyof typeof form) =>
@@ -191,6 +198,13 @@ export default function PartnerForm({
     );
   }
 
+  // With monthly off there is nothing to choose but the amount, so step 2 says so.
+  const stepIntro = oneTimeOnly
+    ? STEP_INTRO.map((s, i) =>
+        i === 1 ? { ...s, hint: "Tell us how much you'd like to give." } : s,
+      )
+    : STEP_INTRO;
+
   const inputClass =
     "w-full rounded-xl border border-hair-2 bg-paper px-4 py-3.5 text-[1.05rem] text-ink placeholder:text-muted/70 outline-none transition-colors focus:border-dawn-deep";
 
@@ -248,8 +262,8 @@ export default function PartnerForm({
 
       {/* What this step is asking for */}
       <div className="mt-7 border-t border-hair pt-6">
-        <p className="font-display text-xl font-semibold text-ink">{STEP_INTRO[step - 1].title}</p>
-        <p className="mt-1.5 text-[0.95rem] leading-relaxed text-muted">{STEP_INTRO[step - 1].hint}</p>
+        <p className="font-display text-xl font-semibold text-ink">{stepIntro[step - 1].title}</p>
+        <p className="mt-1.5 text-[0.95rem] leading-relaxed text-muted">{stepIntro[step - 1].hint}</p>
       </div>
 
       <div className="mt-6">
@@ -286,7 +300,9 @@ export default function PartnerForm({
         {/* Step 2 */}
         {step === 2 && (
           <div className="space-y-6">
-            {/* Frequency — monthly emphasized */}
+            {/* Frequency — monthly emphasized. Hidden entirely on a major-gift
+                ask, where the whole request is one significant gift. */}
+            {!oneTimeOnly && (
             <div>
               <p className="mb-2 text-sm font-semibold text-ink">How often?</p>
               <div className="grid grid-cols-2 gap-3">
@@ -297,11 +313,9 @@ export default function PartnerForm({
                     form.frequency === "Monthly" ? "border-dawn-deep bg-dawn-deep/[0.06] ring-1 ring-dawn-deep" : "border-hair-2 hover:border-dawn-deep/50"
                   }`}
                 >
-                  {emphasizeMonthly && (
-                    <span className="absolute right-3 top-3 hidden rounded-full bg-dawn/20 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-dawn-deep sm:block">
-                      Most impact
-                    </span>
-                  )}
+                  <span className="absolute right-3 top-3 hidden rounded-full bg-dawn/20 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-dawn-deep sm:block">
+                    Most impact
+                  </span>
                   <p className="font-display text-lg font-semibold text-ink">Monthly</p>
                   <p className="mt-0.5 text-xs leading-snug text-muted">Steady support that sustains the ministry.</p>
                 </button>
@@ -317,6 +331,7 @@ export default function PartnerForm({
                 </button>
               </div>
             </div>
+            )}
 
             {/* Amount */}
             <div>

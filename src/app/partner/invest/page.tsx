@@ -58,7 +58,7 @@ function InvestButton({
       interests={GIFT_INTERESTS}
       eyebrow="Toward the $125,000 goal"
       title="Invest in Following the Leader"
-      emphasizeMonthly={false}
+      oneTimeOnly
     >
       {children}
     </GiveButton>
@@ -110,7 +110,11 @@ export default function InvestPage() {
               <span aria-hidden>→</span>
             </InvestButton>
             <p className="mt-3 text-sm text-muted">
-              Give securely by card, or by mail. Joe follows up personally either way.
+              Give securely by card, or{" "}
+              <a href="#by-mail" className="font-semibold text-ink underline decoration-gold decoration-2 underline-offset-4 hover:text-dawn-deep">
+                by mail
+              </a>
+              . Joe follows up personally either way.
             </p>
           </Reveal>
         </div>
@@ -483,7 +487,62 @@ export default function InvestPage() {
       {/* Practical details, then a way to reach Joe directly */}
       <section className="border-t border-hair bg-cream-2/50">
         <div className="mx-auto max-w-4xl px-5 py-20 sm:px-8 sm:py-24">
+          {/* Give by mail — for donors who would rather write a check than use
+              a card. Stated here on the page, not only inside the form. */}
           <Reveal>
+            <div
+              id="by-mail"
+              className="scroll-mt-[84px] overflow-hidden rounded-2xl border border-hair bg-paper shadow-sm"
+            >
+              <div className="grid sm:grid-cols-[1.05fr_0.95fr]">
+                <div className="p-7 sm:p-9">
+                  <p className="eyebrow text-gold">{INVEST.mail.eyebrow}</p>
+                  <h3 className="mt-4 font-display text-[1.7rem] font-semibold leading-tight text-ink sm:text-[2rem]">
+                    {INVEST.mail.heading}
+                  </h3>
+                  <SignatureRule align="left" className="mt-5" />
+                  <p className="mt-5 leading-relaxed text-body">{INVEST.mail.body}</p>
+                  <p className="mt-5 text-[0.95rem] leading-relaxed text-muted">
+                    {INVEST.mail.note}
+                  </p>
+                </div>
+
+                <div className="flex flex-col justify-center gap-5 border-t border-hair bg-cream-2/60 p-7 sm:border-l sm:border-t-0 sm:p-9">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-dawn-deep">
+                      Make your check payable to
+                    </p>
+                    <p className="mt-1.5 font-display text-xl font-semibold text-ink">
+                      {INVEST.mail.payee}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-dawn-deep">
+                      Mail to
+                    </p>
+                    <address className="mt-1.5 font-display text-xl not-italic leading-snug text-ink">
+                      {INVEST.mail.payee}
+                      <br />
+                      {SITE.address.line}
+                      <br />
+                      {SITE.address.city}, {SITE.address.state} {SITE.address.zip}
+                    </address>
+                  </div>
+                  <p className="text-sm leading-relaxed text-muted">
+                    {INVEST.mail.or}{" "}
+                    <a
+                      href={`tel:${SITE.phoneHref}`}
+                      className="font-semibold text-ink hover:text-dawn-deep"
+                    >
+                      {SITE.phone}
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={80} className="mt-8">
             <div className="rounded-2xl border border-gold/30 bg-paper p-7 shadow-sm sm:p-9">
               <div className="flex flex-col gap-5 sm:flex-row">
                 <span className="shrink-0 text-dawn-deep">
@@ -509,7 +568,7 @@ export default function InvestPage() {
             </div>
           </Reveal>
 
-          <Reveal delay={100}>
+          <Reveal delay={140}>
             <div className="mt-8 text-center">
               <h3 className="font-display text-2xl font-semibold text-ink sm:text-3xl">
                 {INVEST.talk.heading}

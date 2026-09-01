@@ -996,6 +996,20 @@ export const INVEST = {
     },
   },
 
+  // Not everyone giving at this level wants to hand a card to a checkout page,
+  // so the mailing address is stated plainly ON the page — not only inside the
+  // form after a visitor has already committed to a gift.
+  mail: {
+    eyebrow: "Prefer not to use a card?",
+    heading: "You are welcome to mail your gift",
+    body:
+      "If you would rather write a check than use a card, that is entirely welcome. Everything you need is right here.",
+    payee: "Following the Leader",
+    note:
+      "If you would like your gift applied to producing the Following the Leader study, just say so in the memo line or a short note. A receipt will be sent for every gift, and Joe will follow up with you personally.",
+    or: "You are also welcome to call Joe first and give however is easiest for you.",
+  },
+
   giving: {
     title: "Giving Information",
     points: [

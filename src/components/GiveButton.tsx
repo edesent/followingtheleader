@@ -21,7 +21,7 @@ export default function GiveButton({
   interests,
   eyebrow = "Give Now",
   title = "Partner with Following the Leader",
-  emphasizeMonthly,
+  oneTimeOnly,
 }: {
   className?: string;
   children: React.ReactNode;
@@ -37,8 +37,8 @@ export default function GiveButton({
   /** Lightbox heading, so the major-gift page can name its own campaign. */
   eyebrow?: string;
   title?: string;
-  /** Badge Monthly as the strongest option — off on the major-gift page. */
-  emphasizeMonthly?: boolean;
+  /** Drop the monthly option — the major-gift page asks for one gift only. */
+  oneTimeOnly?: boolean;
 }) {
   return (
     <ModalButton
@@ -55,7 +55,7 @@ export default function GiveButton({
           initialFrequency={frequency}
           presets={presets}
           interests={interests}
-          emphasizeMonthly={emphasizeMonthly}
+          oneTimeOnly={oneTimeOnly}
         />
       )}
     >
