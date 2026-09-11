@@ -35,7 +35,9 @@ const INTEREST_OPTIONS = [
 ];
 
 // Starts at $10 so the partner page's headline amount is one tap away.
-const AMOUNT_PRESETS = ["$10", "$25", "$50", "$100", "$250"];
+// Match the amounts the partner page actually asks for, so a gift chosen on a
+// card lands on a highlighted pill instead of dropping into the "other" box.
+const AMOUNT_PRESETS = ["$10", "$20", "$50", "$100", "$250"];
 
 const emailValid = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 const amountCents = (a: string) => Math.round(parseFloat(a.replace(/[^0-9.]/g, "")) * 100) || 0;

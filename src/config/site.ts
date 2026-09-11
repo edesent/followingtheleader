@@ -586,12 +586,14 @@ export const FAQ: { eyebrow: string; title: string; items: FaqItem[] } = {
 //  Adapted from the "Following the Leader" partnership portfolio — the ministry's
 //  invitation to underwrite initiatives, become a founding partner, or give.
 export const PARTNER = {
-  // The top of the Partner page. Monthly giving leads, because this is where
-  // the email "Give" button sends people.
-  eyebrow: "Monthly Partnership",
-  title: "Become a Monthly Partner",
+  // The top of the Partner page. A SINGLE GIFT leads, because this is where
+  // the letter to the whole reader list sends people — ordinary readers being
+  // asked for $10 or $20, not major donors. Monthly is still offered, one
+  // section below. The major-gift ask lives on /partner/invest instead.
+  eyebrow: "Give Today",
+  title: "Your gift keeps Morning With Jesus going",
   lead:
-    "Partner with Following the Leader each month and help more people begin their day with Jesus.",
+    "Give once — $10, $20, whatever you decide — or set up a monthly gift instead. Every gift goes to the same work.",
 
   // The Founding Partner invitation. This used to be at the very top; it now
   // opens the second half of the page, after the monthly giving section.
@@ -696,42 +698,56 @@ export const PARTNER = {
   },
 
   // Become a Monthly Partner — the giving tiers
-  monthly: {
-    title: "Become a Monthly Partner",
+  give: {
+    title: "Give a gift today",
     intro:
-      "Your monthly partnership provides the steady foundation that allows Following the Leader to encourage more people each day, create powerful resources for the church, and help more people faithfully follow Jesus for generations to come.",
-    // Two amounts, plainly stated. This page goes to the whole reader list, so
-    // it asks the way you would ask 60,000 friends — not the way you ask a
-    // major donor. A third card keeps the door open for any other amount
-    // without putting a bigger number in front of everyone.
+      "Morning With Jesus goes out every weekday, and it is free to every person who reads it. Your gift is what keeps it that way — and what helps put real discipleship resources into the hands of local churches.",
+
+    // A SINGLE GIFT LEADS. These are the numbers you put in front of the whole
+    // reader list — small, specific, easy to say yes to — not the numbers you
+    // put in front of a major donor (that ask lives on /partner/invest). The
+    // last card keeps the door open for any other amount.
     tiers: [
       {
         icon: "cup",
-        name: "Daily Impact Partner",
         price: "$10",
-        cadence: "/ month",
-        body: "Your gift helps provide Morning With Jesus devotionals to thousands of readers every weekday.",
+        body: "Your gift helps provide Morning With Jesus to readers in all 50 states, every single weekday.",
       },
       {
         icon: "people",
-        name: "Compassion Partner",
         featured: true,
         badge: "Suggested",
-        price: "$25",
-        cadence: "/ month",
-        body: "You help support daily devotionals and ministry outreach that encourage people in their walk with Jesus.",
+        price: "$20",
+        body: "You help support the daily devotional and the outreach that encourages people in their walk with Jesus.",
+      },
+      {
+        icon: "book",
+        price: "$50",
+        body: "You help create the Bible studies and resources that equip pastors and strengthen local churches.",
       },
       {
         icon: "heart",
-        name: "Another Amount",
         custom: true,
         price: "You choose",
-        cadence: "",
         cta: "Choose your amount",
-        body: "If God has put a different number on your heart, give whatever amount you decide — monthly or as a single gift.",
+        body: "If God has put a different number on your heart, give whatever amount you decide.",
       },
     ],
+    tiersLabel: "One-time gift",
     tiersNote: "Every gift, at any amount, goes to the same work.",
+
+    // Monthly has NOT gone away — it just no longer leads. A reader who would
+    // rather give every month should find it immediately under the one-time
+    // amounts instead of having to hunt for it.
+    recurring: {
+      eyebrow: "Or give every month",
+      heading: "Would you rather give monthly?",
+      body:
+        "A monthly gift is the steadiest help of all — it lets Joe plan ahead instead of hoping. Pick an amount and we will set it up. You can change or stop it any time, just by telling Joe.",
+      amounts: ["$10", "$25"],
+      customLabel: "Another amount",
+    },
+
     // Plenty of readers would simply rather write a check, so the address goes
     // under the give button — not three steps inside the form.
     mail: {
@@ -739,17 +755,17 @@ export const PARTNER = {
       payable: "Make your check payable to",
       payee: "Following the Leader",
       note:
-        "Checks may be sent monthly or as a single gift — whatever works best for you. A receipt is sent for every gift.",
+        "Checks may be sent as a single gift or monthly — whatever works best for you. A receipt is sent for every gift.",
       or: "Would you rather talk with Joe first?",
     },
 
-    // Said under the button, because a recurring gift is the thing people
-    // hesitate over. Joe can change or stop a monthly gift on request.
-    reassure: "Give securely by card. Change or stop your monthly gift any time — just tell Joe.",
+    // Said under the button. A one-time gift is the easy yes, so the line
+    // leads with that and mentions monthly as the open door beside it.
+    reassure: "Give securely by card — once, or every month. It is your choice, and you can change it any time.",
 
     stewardship: {
       title: "Our Stewardship Commitment",
-      body: "We are committed to being faithful stewards of every gift entrusted to this ministry. Your monthly partnership helps us encourage believers daily, strengthen churches, and create Christ-centered resources that make a lasting impact. Every gift is received with gratitude, managed with integrity, and invested to advance God's Kingdom.",
+      body: "We are committed to being faithful stewards of every gift entrusted to this ministry. Your giving helps us encourage believers daily, strengthen churches, and create Christ-centered resources that make a lasting impact. Every gift is received with gratitude, managed with integrity, and invested to advance God's Kingdom.",
     },
     giving: {
       title: "Giving Information",

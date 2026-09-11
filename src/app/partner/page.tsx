@@ -7,9 +7,9 @@ import GiveButton from "@/components/GiveButton";
 import { PARTNER, SITE } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "Become a Monthly Partner",
+  title: "Give to Following the Leader",
   description:
-    "Partner monthly with Dr. Joe Pettigrew and Following the Leader — helping equip believers, encourage pastors, and make disciples who make disciples.",
+    "Give a gift to Dr. Joe Pettigrew and Following the Leader — once or every month — helping keep Morning With Jesus free and equipping churches to make disciples.",
 };
 
 const svgProps = {
@@ -91,61 +91,31 @@ export default function PartnerPage() {
     <>
       <PageHero eyebrow={PARTNER.eyebrow} title={PARTNER.title} intro={PARTNER.lead} />
 
-      {/* Become a Monthly Partner */}
+      {/* Give a gift today — a single gift leads; monthly follows below. */}
       <section className="bg-cream py-14 sm:py-16">
         <div className="mx-auto max-w-4xl px-5 sm:px-8">
           <Reveal className="text-center">
             <SignatureRule />
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-body">
-              {PARTNER.monthly.intro}
+              {PARTNER.give.intro}
             </p>
-            <GiveButton className="mt-8 inline-flex items-center gap-2 rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/25 transition-colors hover:bg-ink">
-              Give monthly
+            <GiveButton
+              frequency="One-time"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/25 transition-colors hover:bg-ink"
+            >
+              Give a gift now
               <span aria-hidden>→</span>
             </GiveButton>
-            <p className="mt-3 text-sm text-muted">{PARTNER.monthly.reassure}</p>
+            <p className="mt-3 text-sm text-muted">{PARTNER.give.reassure}</p>
           </Reveal>
 
-          {/* Give by mail, right under the button — a reader who would rather
-              write a check should never have to hunt for the address. */}
-          <Reveal delay={80}>
-            <div
-              id="by-mail"
-              className="mx-auto mt-8 max-w-xl scroll-mt-[84px] rounded-2xl border border-gold/40 bg-paper p-7 text-center shadow-sm sm:p-8"
-            >
-              <p className="eyebrow text-gold">{PARTNER.monthly.mail.eyebrow}</p>
-              <p className="mt-3.5 text-[0.95rem] text-body">
-                {PARTNER.monthly.mail.payable}{" "}
-                <span className="font-semibold text-ink">{PARTNER.monthly.mail.payee}</span>
-              </p>
-              <address className="mt-3 font-display text-xl not-italic leading-snug text-ink sm:text-[1.4rem]">
-                {PARTNER.monthly.mail.payee}
-                <br />
-                {SITE.address.line}
-                <br />
-                {SITE.address.city}, {SITE.address.state} {SITE.address.zip}
-              </address>
-              <p className="mt-5 border-t border-hair pt-4 text-sm leading-relaxed text-muted">
-                {PARTNER.monthly.mail.note}
-              </p>
-              <p className="mt-2 text-sm text-muted">
-                {PARTNER.monthly.mail.or}{" "}
-                <a
-                  href={`tel:${SITE.phoneHref}`}
-                  className="font-semibold text-ink hover:text-dawn-deep"
-                >
-                  {SITE.phone}
-                </a>
-              </p>
-            </div>
-          </Reveal>
         </div>
 
-        {/* Tiers — two amounts and an open door, side by side. No scroller:
-            with three cards the whole ask is visible without swiping. */}
+        {/* One-time amounts — the ask this page leads with. Amount-led cards,
+            four across, so the whole ladder is visible without swiping. */}
         <Reveal className="mx-auto mt-12 max-w-5xl px-5 sm:px-8">
-          <ul className="grid gap-5 sm:grid-cols-3">
-            {PARTNER.monthly.tiers.map((tier) => {
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {PARTNER.give.tiers.map((tier) => {
               const t = tier as typeof tier & {
                 featured?: boolean;
                 badge?: string;
@@ -153,13 +123,14 @@ export default function PartnerPage() {
                 cta?: string;
               };
               return (
-                <li key={tier.name}>
+                <li key={tier.price}>
                   <GiveButton
+                    frequency="One-time"
                     amount={t.custom ? undefined : `$${tier.price.replace(/[^0-9]/g, "")}`}
                     ariaLabel={
                       t.custom
                         ? "Give another amount"
-                        : `Give ${tier.price} a month — ${tier.name}`
+                        : `Give a one-time gift of ${tier.price}`
                     }
                     className={`group relative flex h-full w-full flex-col rounded-2xl border p-7 text-left transition-all ${
                       t.featured
@@ -179,16 +150,13 @@ export default function PartnerPage() {
                     >
                       <TierIcon name={tier.icon} />
                     </span>
-                    <h3 className="mt-5 font-display text-xl font-semibold uppercase tracking-[0.03em] text-ink">
-                      {tier.name}
-                    </h3>
-                    <p className="mt-1.5 font-display text-2xl font-semibold text-gold">
+                    <p className="mt-5 font-display text-3xl font-semibold text-gold">
                       {tier.price}
-                      {tier.cadence && (
-                        <span className="text-sm font-normal text-muted"> {tier.cadence}</span>
-                      )}
                     </p>
-                    <p className="mt-3 flex-1 text-[0.98rem] leading-relaxed text-body">
+                    <p className="mt-1 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">
+                      {t.custom ? "Any amount" : PARTNER.give.tiersLabel}
+                    </p>
+                    <p className="mt-3.5 flex-1 text-[0.98rem] leading-relaxed text-body">
                       {tier.body}
                     </p>
                     <span
@@ -198,7 +166,7 @@ export default function PartnerPage() {
                           : "border border-ink/15 text-ink group-hover:border-dawn-deep group-hover:text-dawn-deep"
                       }`}
                     >
-                      {t.cta ?? `Give ${tier.price}/mo`}
+                      {t.cta ?? `Give ${tier.price}`}
                     </span>
                   </GiveButton>
                 </li>
@@ -206,9 +174,79 @@ export default function PartnerPage() {
             })}
           </ul>
           <p className="mt-5 text-center text-[0.95rem] text-muted">
-            {PARTNER.monthly.tiersNote}
+            {PARTNER.give.tiersNote}
           </p>
         </Reveal>
+
+        {/* Monthly — still offered, immediately under the one-time amounts so
+            a reader who prefers to give every month never has to hunt. */}
+        <Reveal className="mx-auto mt-12 max-w-3xl px-5 sm:px-8" delay={80}>
+          <div className="rounded-2xl border border-dawn-deep/25 bg-cream-2/60 p-7 text-center sm:p-9">
+            <p className="eyebrow text-gold">{PARTNER.give.recurring.eyebrow}</p>
+            <h3 className="mt-3 font-display text-2xl font-semibold text-ink sm:text-[1.75rem]">
+              {PARTNER.give.recurring.heading}
+            </h3>
+            <p className="mx-auto mt-3.5 max-w-xl leading-relaxed text-body">
+              {PARTNER.give.recurring.body}
+            </p>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              {PARTNER.give.recurring.amounts.map((a) => (
+                <GiveButton
+                  key={a}
+                  frequency="Monthly"
+                  amount={a}
+                  ariaLabel={`Give ${a} a month`}
+                  className="rounded-full bg-dawn-deep px-6 py-3 text-[0.95rem] font-semibold text-white shadow-md shadow-dawn-deep/20 transition-colors hover:bg-ink"
+                >
+                  {a}/month
+                </GiveButton>
+              ))}
+              <GiveButton
+                frequency="Monthly"
+                ariaLabel="Give another amount every month"
+                className="rounded-full border border-ink/20 px-6 py-3 text-[0.95rem] font-semibold text-ink transition-colors hover:border-dawn-deep hover:text-dawn-deep"
+              >
+                {PARTNER.give.recurring.customLabel}
+              </GiveButton>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Give by mail — after the ask, not in front of it. Plenty of
+            readers would simply rather write a check. */}
+        <div className="mx-auto mt-12 max-w-4xl px-5 sm:px-8">
+          <Reveal delay={80}>
+            <div
+              id="by-mail"
+              className="mx-auto mt-8 max-w-xl scroll-mt-[84px] rounded-2xl border border-gold/40 bg-paper p-7 text-center shadow-sm sm:p-8"
+            >
+              <p className="eyebrow text-gold">{PARTNER.give.mail.eyebrow}</p>
+              <p className="mt-3.5 text-[0.95rem] text-body">
+                {PARTNER.give.mail.payable}{" "}
+                <span className="font-semibold text-ink">{PARTNER.give.mail.payee}</span>
+              </p>
+              <address className="mt-3 font-display text-xl not-italic leading-snug text-ink sm:text-[1.4rem]">
+                {PARTNER.give.mail.payee}
+                <br />
+                {SITE.address.line}
+                <br />
+                {SITE.address.city}, {SITE.address.state} {SITE.address.zip}
+              </address>
+              <p className="mt-5 border-t border-hair pt-4 text-sm leading-relaxed text-muted">
+                {PARTNER.give.mail.note}
+              </p>
+              <p className="mt-2 text-sm text-muted">
+                {PARTNER.give.mail.or}{" "}
+                <a
+                  href={`tel:${SITE.phoneHref}`}
+                  className="font-semibold text-ink hover:text-dawn-deep"
+                >
+                  {SITE.phone}
+                </a>
+              </p>
+            </div>
+          </Reveal>
+        </div>
 
         <div className="mx-auto mt-12 max-w-4xl px-5 sm:px-8">
           {/* Stewardship commitment */}
@@ -221,10 +259,10 @@ export default function PartnerPage() {
                   </span>
                   <div>
                     <h3 className="font-display text-xl font-semibold uppercase tracking-[0.04em] text-dawn">
-                      {PARTNER.monthly.stewardship.title}
+                      {PARTNER.give.stewardship.title}
                     </h3>
                     <p className="mt-3 leading-relaxed text-white/85">
-                      {PARTNER.monthly.stewardship.body}
+                      {PARTNER.give.stewardship.body}
                     </p>
                   </div>
                 </div>
@@ -241,10 +279,10 @@ export default function PartnerPage() {
                 </span>
                 <div className="flex-1">
                   <h3 className="font-display text-lg font-semibold uppercase tracking-[0.04em] text-ink">
-                    {PARTNER.monthly.giving.title}
+                    {PARTNER.give.giving.title}
                   </h3>
                   <ul className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
-                    {PARTNER.monthly.giving.points.map((p) => (
+                    {PARTNER.give.giving.points.map((p) => (
                       <li key={p} className="flex gap-2.5 leading-relaxed text-body">
                         <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden />
                         {p}
@@ -259,20 +297,23 @@ export default function PartnerPage() {
           {/* Verse + closing */}
           <Reveal className="mt-14 text-center">
             <p className="mx-auto max-w-2xl font-display text-xl italic leading-relaxed text-ink">
-              &ldquo;{PARTNER.monthly.verse.text}&rdquo;
+              &ldquo;{PARTNER.give.verse.text}&rdquo;
               <span className="mt-2 block text-sm font-semibold not-italic uppercase tracking-[0.16em] text-gold">
-                {PARTNER.monthly.verse.ref}
+                {PARTNER.give.verse.ref}
               </span>
             </p>
             <SignatureRule className="mt-7" />
             <p className="mx-auto mt-7 max-w-2xl font-display text-lg font-semibold leading-relaxed text-ink">
-              {PARTNER.monthly.closing[0]}
+              {PARTNER.give.closing[0]}
             </p>
             <p className="mx-auto mt-2 max-w-2xl font-display text-lg italic leading-relaxed text-dawn-deep">
-              {PARTNER.monthly.closing[1]}
+              {PARTNER.give.closing[1]}
             </p>
-            <GiveButton className="mt-9 inline-block rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/20 transition-colors hover:bg-ink">
-              Become a partner
+            <GiveButton
+              frequency="One-time"
+              className="mt-9 inline-block rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/20 transition-colors hover:bg-ink"
+            >
+              Give a gift
             </GiveButton>
           </Reveal>
         </div>
@@ -285,14 +326,17 @@ export default function PartnerPage() {
           <Reveal>
             <p className="eyebrow text-gold">Give Now</p>
             <h2 className="mt-4 font-display text-[2.1rem] font-semibold text-ink sm:text-[2.85rem]">
-              Ready to partner?
+              Ready to give?
             </h2>
             <SignatureRule className="mt-6" />
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-body">
               Three quick steps — your details, your gift, then give securely by card or by mail.
-              Joe will personally follow up either way.
+              Give once or every month, whichever you choose. Joe personally follows up either way.
             </p>
-            <GiveButton className="mt-8 inline-flex items-center gap-2 rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/25 transition-colors hover:bg-ink">
+            <GiveButton
+              frequency="One-time"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-dawn-deep px-8 py-3.5 text-[0.98rem] font-semibold text-white shadow-lg shadow-dawn-deep/25 transition-colors hover:bg-ink"
+            >
               Give now
               <span aria-hidden>→</span>
             </GiveButton>
