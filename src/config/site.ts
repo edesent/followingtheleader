@@ -225,17 +225,19 @@ export type Book = {
 export const BOOKS_INTRO_VIDEO = "efWJsx-4kxg";
 
 // ── New release ──────────────────────────────────────────────────────────────
-// Dr. Joe's newest book. Featured on the home page and atop the Books page.
+// Dr. Joe's upcoming book. Featured on the home page and atop the Books page.
+// NO cover image (Nov 2026): a national publisher is likely taking the book and
+// will change the cover, so Joe asked that no picture of it be on the site.
+// The text about it coming out stays.
 // The button opens the preorder form (PreorderButton → /api/preorder): there is
 // no payment step, the order is emailed to Joe and he follows up with the total.
 export const NEW_RELEASE = {
-  badge: "New Release",
+  badge: "Coming Soon",
   title: "Following the Leader",
   tagline: "A Forty-Day Journey with Jesus",
   author: "Dr. Joe Pettigrew",
-  image: "/images/following-the-leader.png",
   description: [
-    "Dr. Joe Pettigrew's newest book is a forty-day invitation to walk closely with Jesus — one day at a time. In the same warm, Scripture-rooted voice that reaches more than 60,000 readers every morning, each reading is short enough for a busy day yet meant to be carried with you long after you close the page.",
+    "Dr. Joe Pettigrew's upcoming book is a forty-day invitation to walk closely with Jesus — one day at a time. In the same warm, Scripture-rooted voice that reaches more than 60,000 readers every morning, each reading is short enough for a busy day yet meant to be carried with you long after you close the page.",
     "Perfect for personal devotion, a small group, or a church-wide journey through the season ahead.",
   ],
   cta: { label: "Preorder your copy" },

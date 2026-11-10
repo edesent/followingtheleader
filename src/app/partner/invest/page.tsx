@@ -177,20 +177,10 @@ export default function InvestPage() {
       {/* What the study is — the thing the money produces */}
       <section className="border-y border-hair bg-cream-2/50">
         <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
-          <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-16">
+          {/* No book cover here: Joe asked for it off the site (Nov 2026) — a
+              national publisher will redo the cover. Text only until then. */}
+          <div className="mx-auto max-w-3xl">
             <Reveal>
-              <div className="mx-auto max-w-xs lg:sticky lg:top-28">
-                <Image
-                  src="/images/following-the-leader.png"
-                  alt="Following the Leader — a forty-day journey with Jesus, by Dr. Joe Pettigrew"
-                  width={600}
-                  height={800}
-                  className="w-full rounded-xl shadow-xl shadow-ink/20"
-                />
-              </div>
-            </Reveal>
-
-            <Reveal delay={100}>
               <div>
                 <p className="eyebrow text-gold">{INVEST.study.eyebrow}</p>
                 <h2 className="mt-4 font-display text-[2.1rem] font-semibold leading-[1.12] text-ink sm:text-[2.6rem]">

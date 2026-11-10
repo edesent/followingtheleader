@@ -18,7 +18,6 @@ export async function POST(request: Request) {
   }
 
   const origin = request.headers.get("origin") || SITE.url;
-  const image = new URL(NEW_RELEASE.image, SITE.url).toString();
   const shippingFlatCents = Number(process.env.SHIPPING_FLAT_CENTS || 499);
 
   try {
@@ -35,7 +34,6 @@ export async function POST(request: Request) {
             product_data: {
               name: `${NEW_RELEASE.title} — ${NEW_RELEASE.tagline}`,
               description: `Paperback by ${NEW_RELEASE.author}. Printed to order and shipped to you.`,
-              images: [image],
             },
           },
         },
